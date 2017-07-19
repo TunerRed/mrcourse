@@ -1,4 +1,4 @@
-package ing.gzq.cache;
+package ing.gzq.base;
 
 
 import ing.gzq.base.Result;

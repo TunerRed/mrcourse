@@ -38,6 +38,7 @@ date
 
 共享文件
 id(自增)
+courseId
 uploaderId(上传者id)
 fileName(文件名)
 path(文件地址)

@@ -1,4 +1,4 @@
-package ing.gzq.base;
+package ing.gzq.model;
 
 import lombok.Data;
 

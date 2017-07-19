@@ -2,7 +2,7 @@ package ing.gzq.secyrity;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ing.gzq.cache.ResultCache;
+import ing.gzq.base.ResultCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
