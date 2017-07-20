@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="liveRTC.js"></script>
+</head>
+<body>
+<button id="start">开始上课</button>
+<br>
+<video id="me"></video>
+<script>
+    var startBtn = document.getElementById("start");
+    var name = "teacher";
+    var webSocket;
+    var rtcClient;
+
+    startBtn.addEventListener("click",function () {
+
+        webSocket = new WebSocket("wss://?room=1&uid="+name);
+        rtcClient = RtcRoom({
+            name: name
+        });
+        rtcClient.openUserMedia(document.getElementById("me"));
+        rtcClient.setWebSocketChannel(webSocket);
+
+    })
+
+</script>
+</body>
+</html>

@@ -2,9 +2,11 @@ websocket相关接口文档
 ====================
 包括**聊天、投票、信令服务器**
 
-url : wss://0.0.0.0?uid=username
+url : wss://0.0.0.0?uid=username&room=123
 
 uid : 用户唯一标识符
+
+room : 房间
 
 收发消息统一为**JSON**格式
 
@@ -19,7 +21,7 @@ uid : 用户唯一标识符
     "type" : "string",
     "name" : "string",
     "target":"string",
-    "data" : "object"
+    "data" : "whatever...."
 }
 ```
 *群发的消息，可以不指定target，（服务器不需要检查）*
@@ -32,7 +34,9 @@ uid : 用户唯一标识符
 "type":"new-ice-candidate",
 "name":"xiaoming",
 "target":"lihua",
-"data":"whatever..."
+    "data" : {
+      "candidate":"string"
+    }
 }
 ```
 
@@ -41,7 +45,9 @@ uid : 用户唯一标识符
 {
 "type":"video-offer",
 "name":"xiaoming",
-"data":"whatever..."
+    "data" : {
+      "sdp":"string"
+    }
 }
 ```
 
@@ -51,7 +57,9 @@ uid : 用户唯一标识符
 "type":"video-answer",
 "name":"lihua",
 "target":"xioaming",
-"data":"whatever..."
+"data" : {
+    "sdp":"string"
+}
 }
 ```
 

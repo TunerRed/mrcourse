@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testClient</title>
+</head>
+<body>
+<button id="start">进入课堂</button>
+<script>
+    var startBtn = document.getElementById("start");
+    var name = "client";
+    var webSocket;
+    var rtcClient;
+
+    startBtn.addEventListener("click",function () {
+
+        webSocket = new WebSocket("wss://?room=1&uid="+name);
+        rtcClient = RtcClient({
+            name: name,
+            videoSourceName:"teacher"
+        });
+        rtcClient.on("stream",function (stream) {
+            var videoElement = document.createElement("video");
+            videoElement.src = window.URL.createObjectURL(stream);
+            videoElement.autoplay = "autoplay";
+            document.body.appendChild(videoElement)
+        });
+        rtcClient.setWebSocketChannel(webSocket);
+
+    })
+
+</script>
+</body>
+</html>
