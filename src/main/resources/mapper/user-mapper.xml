@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ing.gzq.dao.UserDao">
-    <select id="getUserById" resultMap="userMap" parameterType="string">
-        SELECT id , password , `name`, `type`
+    <insert id="insertUser" parameterType="ing.gzq.model.User">
+        INSERT INTO user (username,name,type,password)
+        VALUES (#{username},#{name},#{type},#{password})
+    </insert>
+    <select id="getUserByUsername" resultMap="userMap" parameterType="string">
+        SELECT username , password , `name`, `type`
         FROM user
-        WHERE id = #{id}
+        WHERE username = #{username}
     </select>
     <select id="getAuthorities" resultMap="simpleGrantedAuthorityMap" parameterType="string">
         SELECT role
         FROM user_role
-        WHERE uid = #{id}
+        WHERE uid = #{username}
     </select>
     <resultMap id="userMap" type="ing.gzq.model.User">
-        <id property="id" column="id"/>
+        <id property="username" column="username"/>
         <result property="password" column="password"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <collection property="authorities" column="id" select="ing.gzq.dao.UserDao.getAuthorities"/>
+        <collection property="authorities" column="username" select="ing.gzq.dao.UserDao.getAuthorities"/>
     </resultMap>
     <resultMap id="simpleGrantedAuthorityMap" type="org.springframework.security.core.authority.SimpleGrantedAuthority">
         <constructor>

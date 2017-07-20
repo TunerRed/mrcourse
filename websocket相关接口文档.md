@@ -2,7 +2,7 @@ websocket相关接口文档
 ====================
 包括**聊天、投票、信令服务器**
 
-url : wss://0.0.0.0?uid=username&room=123
+url : wss://host+/mrcourse/websocket/username=gzq&room=123
 
 uid : 用户唯一标识符
 
@@ -45,9 +45,8 @@ room : 房间
 {
 "type":"video-offer",
 "name":"xiaoming",
-    "data" : {
-      "sdp":"string"
-    }
+"data" : "string"
+    
 }
 ```
 
@@ -57,9 +56,7 @@ room : 房间
 "type":"video-answer",
 "name":"lihua",
 "target":"xioaming",
-"data" : {
-    "sdp":"string"
-}
+"data" : "string"
 }
 ```
 

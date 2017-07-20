@@ -12,8 +12,9 @@ import java.util.List;
  */
 @Repository
 public interface UserDao {
-    User getUserById(String username);
+    User getUserByUsername(String username);
 
-    List<SimpleGrantedAuthority> getAuthorities(String id);
+    List<SimpleGrantedAuthority> getAuthorities(String username);
 
+    void insertUser(User user);
 }

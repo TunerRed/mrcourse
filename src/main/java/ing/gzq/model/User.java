@@ -13,7 +13,7 @@ import java.util.Collection;
 @Data
 public class User implements UserDetails {
 
-    private String id;
+    private String username;
 
     private String name;
     @JsonIgnore
@@ -42,7 +42,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return id;
+        return username;
     }
 
     @Override
