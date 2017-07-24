@@ -43,7 +43,6 @@ room : 房间
 "type":"video-offer",
 "name":"xiaoming",
 "data" : "string"
-    
 }
 ```
 
