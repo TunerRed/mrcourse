@@ -2,7 +2,7 @@ websocket相关接口文档
 ====================
 包括**聊天、投票、信令服务器**
 
-url : wss://host+/mrcourse/websocket/room=123
+
 
 room : 房间
 
@@ -107,5 +107,12 @@ room : 房间
 "type":"send-vote",
 "name":"string",
 "data":"string"
+}
+```
+返回错误信息
+```json
+{
+"type":"error",
+"data":"error message"
 }
 ```

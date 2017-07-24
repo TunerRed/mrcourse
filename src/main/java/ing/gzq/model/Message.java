@@ -6,7 +6,7 @@ import lombok.Data;
  * Created by gzq on 17-7-19.
  */
 @Data
-public class Meesage<T> {
+public class Message<T> {
 
     String type;
     String name;
