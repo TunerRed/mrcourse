@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ing.gzq.dao.FileDao">
+
+    <insert id="insertFile" parameterType="ing.gzq.model.SharedFile" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        INSERT INTO file (courseId, uploaderId, filename, `size`, `date`)
+        VALUES ( #{courseId} , #{uploaderId} , #{fileName} , #{size} , NOW())
+    </insert>
+</mapper>
