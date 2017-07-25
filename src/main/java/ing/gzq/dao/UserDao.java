@@ -3,6 +3,7 @@ package ing.gzq.dao;
 
 import ing.gzq.model.TeacherInfo;
 import ing.gzq.model.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,6 @@ public interface UserDao {
     void insertUser(User user);
 
     TeacherInfo getTeacherInfo(String teacherId);
+
+    void giveAuthority(@Param("username") String username,@Param("role") String role);
 }

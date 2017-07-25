@@ -2,6 +2,7 @@ package ing.gzq.controller;
 
 import ing.gzq.base.Result;
 import ing.gzq.model.Course;
+import ing.gzq.model.User;
 import ing.gzq.service.CourseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,10 @@ public class TeacherController {
     CourseService courseService;
 
 
-    @RequestMapping(value = "/createCourse", method = RequestMethod.POST)
+    @RequestMapping(value = "/course", method = RequestMethod.POST)
     public Result createCourse(Authentication auth, Course course) {
-        return courseService.insertCourse(auth, course);
+        course.setTeacherId(((User) auth.getPrincipal()).getUsername());
+        return courseService.insertCourse(course);
     }
 
 

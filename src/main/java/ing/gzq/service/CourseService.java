@@ -23,9 +23,8 @@ public class CourseService {
     CourseDao courseDao;
 
 
-    public Result insertCourse(Authentication auth , Course course) {
+    public Result insertCourse(Course course) {
         try {
-            course.setTeacherId(((User)auth.getPrincipal()).getUsername());
             courseDao.insertCourse(course);
             HashMap map = new HashMap<>();
             map.put("courseId",course.getId());

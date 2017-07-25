@@ -1,11 +1,11 @@
 package ing.gzq.service;
 
+import com.sun.org.apache.bcel.internal.util.ClassPath;
 import ing.gzq.base.Result;
 import ing.gzq.base.ResultCache;
 import ing.gzq.dao.FileDao;
 import ing.gzq.model.SharedFile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

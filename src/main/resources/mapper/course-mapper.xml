@@ -3,8 +3,8 @@
 <mapper namespace="ing.gzq.dao.CourseDao">
     <insert id="insertCourse" parameterType="ing.gzq.model.Course" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id">
-         INSERT INTO course (teacherId,name, introduce)
-         VALUES (#{teacherId},#{name},#{introduce})
+         INSERT INTO course (teacherId,name, introduce,`date`)
+         VALUES (#{teacherId},#{name},#{introduce},NOW())
     </insert>
     <select id="getCourseByTeacherId" parameterType="string" resultMap="courseMap">
         select `id` , teacherId , `name` , introduce , `date`

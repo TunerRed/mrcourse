@@ -42,7 +42,6 @@ create table file
 	courseId bigint not null,
 	uploaderId varchar(255) not null,
 	filename varchar(255) not null,
-	path varchar(255) not null,
 	size bigint not null,
 	date datetime not null
 )

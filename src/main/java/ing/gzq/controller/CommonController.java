@@ -17,8 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-
-import static org.springframework.http.HttpStatus.CREATED;
+import java.net.URLEncoder;
 
 @RestController
 @RequestMapping("/common")
@@ -48,7 +47,8 @@ public class CommonController {
     }
 
     @RequestMapping(value = "/file/{courseId}", method = RequestMethod.POST)
-    public Result uploadFile(@PathVariable("courseId") Long courseId, MultipartFile file) {
+    public Result uploadFile(@PathVariable("courseId") Long courseId,
+                             MultipartFile file) {
         return fileService.uploadfile(courseId, file);
     }
 
@@ -56,12 +56,12 @@ public class CommonController {
     public ResponseEntity<byte[]> download(@PathVariable Long fileId) {
         try {
             SharedFile sharedFile = fileService.getFileById(fileId);
-            ClassPathResource resource = new ClassPathResource("static/file" +
+            ClassPathResource resource = new ClassPathResource("static/file" + File.separator +
                     sharedFile.getCourseId() + File.separator + sharedFile.getId());
             File file = resource.getFile();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            headers.setContentDispositionFormData("attachment", sharedFile.getFileName());
+            headers.setContentDispositionFormData("attachment", URLEncoder.encode(sharedFile.getFileName(), "UTF-8"));
             return new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.CREATED);
         } catch (IOException e) {
             e.printStackTrace();

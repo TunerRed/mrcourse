@@ -5,6 +5,10 @@
         INSERT INTO user (username,name,type,password)
         VALUES (#{username},#{name},#{type},#{password})
     </insert>
+    <insert id="giveAuthority" parameterType="ing.gzq.model.User">
+        INSERT INTO user_role
+        VALUES (#{username},#{role})
+    </insert>
     <select id="getUserByUsername" resultMap="userMap" parameterType="string">
         SELECT username , password , `name`, `type`
         FROM user
