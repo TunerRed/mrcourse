@@ -28,7 +28,7 @@ String room = courseId+"&"+lessonId
 **老师断开后,群体转发**
 ```json
 {
-"type":"request-close"
+"type":"inform-close"
 }
 ```
 
