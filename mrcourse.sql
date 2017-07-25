@@ -54,7 +54,7 @@ create table lesson
 		primary key,
 	courseId bigint not null,
 	introduce varchar(255) null,
-	data datetime not null,
+	date datetime not null,
 	state int(1) null
 )
 ;

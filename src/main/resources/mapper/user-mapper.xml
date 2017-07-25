@@ -15,6 +15,11 @@
         FROM user_role
         WHERE uid = #{username}
     </select>
+    <select id="getTeacherInfo" parameterType="string" resultType="ing.gzq.model.TeacherInfo">
+        SELECT `name` , introduce
+        FROM user
+        where username = #{teacherId} AND `type` = "teacher"
+    </select>
     <resultMap id="userMap" type="ing.gzq.model.User">
         <id property="username" column="username"/>
         <result property="password" column="password"/>

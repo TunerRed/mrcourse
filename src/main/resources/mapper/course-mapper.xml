@@ -6,4 +6,30 @@
          INSERT INTO course (teacherId,name, introduce)
          VALUES (#{teacherId},#{name},#{introduce})
     </insert>
+    <select id="getCourseByTeacherId" parameterType="string" resultMap="courseMap">
+        select `id` , teacherId , `name` , introduce , `date`
+        from course
+        where teacherId = #{teacherId};
+    </select>
+    <select id="getLessons" parameterType="string" resultType="ing.gzq.model.Lesson">
+        SELECT id , courseId , introduce , `date` , state
+        FROM lesson
+        WHERE courseId = #{courseId}
+    </select>
+    <select id="getCourseByStudentId" parameterType="string" resultMap="courseMap">
+        select c.id , c.teacherId , c.name , c.introduce , c.date
+        from course_student cs
+        left join course c
+        on cs.courseId = c.id
+        WHERE cs.studentId = #{studentId}
+    </select>
+    <resultMap id="courseMap" type="ing.gzq.model.Course">
+        <id property="id" column="id"/>
+        <result property="teacherId" column="teacherId"/>
+        <result property="name" column="name"/>
+        <result property="introduce" column="introduce"/>
+        <result property="date" column="date"/>
+        <association property="teacherInfo" column="teacherId" select="ing.gzq.dao.UserDao.getTeacherInfo"/>
+        <collection property="lessons" column="id" select="ing.gzq.dao.CourseDao.getLessons"/>
+    </resultMap>
 </mapper>

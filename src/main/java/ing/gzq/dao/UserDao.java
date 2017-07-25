@@ -1,6 +1,7 @@
 package ing.gzq.dao;
 
 
+import ing.gzq.model.TeacherInfo;
 import ing.gzq.model.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,6 @@ public interface UserDao {
     List<SimpleGrantedAuthority> getAuthorities(String username);
 
     void insertUser(User user);
+
+    TeacherInfo getTeacherInfo(String teacherId);
 }
