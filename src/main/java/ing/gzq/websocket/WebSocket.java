@@ -13,11 +13,11 @@ import java.util.Map;
 
 public class WebSocket implements WebSocketHandler {
 
-    static HashMap<Long, Room> roomMap = new HashMap<>();
+    static HashMap<String, Room> roomMap = new HashMap<>();
 
     String username;
     String type;
-    long roomId;
+    String roomId;
     Room room;
 
     @Override
@@ -25,7 +25,7 @@ public class WebSocket implements WebSocketHandler {
         Map<String, Object> attributes = webSocketSession.getAttributes();
         username = (String) attributes.get("username");
         type = (String) attributes.get("type");
-        roomId = (long) attributes.get("room");
+        roomId = (String) attributes.get("room");
         if ("student".equals(type)) {
             if (roomMap.containsKey(roomId)) {
                 room = roomMap.get(roomId);

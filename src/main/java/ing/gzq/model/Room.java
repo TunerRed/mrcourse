@@ -11,7 +11,7 @@ import java.util.HashMap;
 @Data
 public class Room {
 
-    Long id;
+    String id;
 
     String teacherId;
 
@@ -19,7 +19,7 @@ public class Room {
 
     HashMap<String, WebSocketSession> students;
 
-    public Room(Long id, String teacherId, WebSocketSession teacherSession) {
+    public Room(String id, String teacherId, WebSocketSession teacherSession) {
         this.id = id;
         this.teacherId = teacherId;
         this.teacherSession = teacherSession;

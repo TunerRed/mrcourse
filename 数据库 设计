@@ -10,13 +10,14 @@ uid
 role(ROLE_STUDENT|ROLE_TEACHER)
 
 
-课程表
+course课程表
 id(自增)
 teacherId
 name(课程名)
 introduce（课程介绍）
+date (创建时间)
 
-课堂表
+lesson课堂表
 id(自增)
 courseId
 introduce:课堂内容介绍
@@ -24,25 +25,25 @@ date: 开始上课时间
 state:"1|0" (1 正在进行 0 已结束)
 
 
-签到表：
+sign签到表：
 课程id
 课堂id
 学生id
 
 
-公告
+notice公告
 id(自增)
 courseId所属课程
 content
 date
 
-共享文件
+file共享文件
 id(自增)
 courseId
 uploaderId(上传者id)
 fileName(文件名)
 path(文件地址)
-length(文件大小)
+size(文件大小)
 date：上传时间
 
 course_student

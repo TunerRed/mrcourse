@@ -14,7 +14,7 @@ public class WebSocketInterceptor implements HandshakeInterceptor{
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long room = Long.valueOf(((ServletServerHttpRequest)serverHttpRequest).getServletRequest().getParameter("room"));
+        String room = ((ServletServerHttpRequest)serverHttpRequest).getServletRequest().getParameter("room");
         if(user == null || room == null){
             return false;
         }
