@@ -38,6 +38,9 @@ public class WebSocket implements WebSocketHandler {
                 room = roomMap.get(roomId);
                 room.setTeacherId(username);
                 room.setTeacherSession(webSocketSession);
+                Message<String> message = new Message<>();
+                message.setType("inform-open");
+                room.sendToStudents(JSON.toJSONString(message));
             } else {
                 room = new Room(roomId, username, webSocketSession);
                 roomMap.put(roomId, room);
@@ -77,25 +80,29 @@ public class WebSocket implements WebSocketHandler {
     @Override
     public void handleTransportError(WebSocketSession webSocketSession, Throwable throwable) throws Exception {
         throwable.printStackTrace();
-        logout();
+        handleLogout();
         webSocketSession.close();
-        System.out.println(username + " disconnect ");
+        System.err.println(username + " disconnect  error");
     }
+
+    private void handleLogout() throws IOException {
+        if ("teacher".equals(type)) {
+            room.setTeacherId(null);
+            room.setTeacherSession(null);
+            Message<String> message = new Message();
+            message.setType("inform-close");
+            room.sendToStudents(JSON.toJSONString(message));
+        } else if ("student".equals(type)) {
+            room.removeStudent(username);
+        }
+    }
+
 
     @Override
     public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
-        logout();
+        handleLogout();
         webSocketSession.close();
         System.out.println(username + " disconnect ");
-    }
-
-    private void logout() {
-        if ("student".equals(type)) {
-            room.removeStudent(username);
-        } else if ("teacher".equals(type)) {
-            room.setTeacherId(null);
-            room.setTeacherSession(null);
-        }
     }
 
     @Override
