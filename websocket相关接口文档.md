@@ -25,6 +25,13 @@ String room = courseId+"&"+lessonId
 ```
 *群发的消息，可以不指定target，（服务器不需要检查）*
 
+**老师断开后,群体转发**
+```json
+{
+"type":"request-close"
+}
+```
+
 信令服务器
 --------
 交换ice候选信息（指定转发）
@@ -110,6 +117,8 @@ String room = courseId+"&"+lessonId
 "data":"string"
 }
 ```
+
+
 返回错误信息
 ```json
 {
