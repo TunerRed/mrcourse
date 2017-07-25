@@ -1,19 +1,24 @@
 package ing.gzq.controller;
 
+import ing.gzq.exception.FileNotFoundException;
 import ing.gzq.base.Result;
 import ing.gzq.base.ResultCache;
+import ing.gzq.model.SharedFile;
 import ing.gzq.model.User;
 import ing.gzq.service.CourseService;
 import ing.gzq.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("/common")
@@ -37,13 +42,32 @@ public class CommonController {
         return ResultCache.FAILURE;
     }
 
-    @RequestMapping(value = "/file", method = RequestMethod.GET)
-    public Result getFiles(Long courseId) {
-        return null;
+    @RequestMapping(value = "/file/{courseId}", method = RequestMethod.GET)
+    public Result getFiles(@PathVariable("courseId") Long courseId) {
+        return fileService.getFiles(courseId);
     }
 
-    @RequestMapping(value = "/file", method = RequestMethod.POST)
-    public Result uploadFile(Long courseId, MultipartFile file)  {
-        return fileService.uploadfile(courseId , file);
+    @RequestMapping(value = "/file/{courseId}", method = RequestMethod.POST)
+    public Result uploadFile(@PathVariable("courseId") Long courseId, MultipartFile file) {
+        return fileService.uploadfile(courseId, file);
     }
+
+    @RequestMapping(value = "/file/download/{fileId}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> download(@PathVariable Long fileId) {
+        try {
+            SharedFile sharedFile = fileService.getFileById(fileId);
+            ClassPathResource resource = new ClassPathResource("static/file" +
+                    sharedFile.getCourseId() + File.separator + sharedFile.getId());
+            File file = resource.getFile();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", sharedFile.getFileName());
+            return new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.CREATED);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new FileNotFoundException("文件不存在");
+        }
+    }
+
+
 }

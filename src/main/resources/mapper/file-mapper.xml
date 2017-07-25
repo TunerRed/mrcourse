@@ -7,4 +7,16 @@
         INSERT INTO file (courseId, uploaderId, filename, `size`, `date`)
         VALUES ( #{courseId} , #{uploaderId} , #{fileName} , #{size} , NOW())
     </insert>
+    <select id="getFileList" resultType="ing.gzq.model.SharedFile">
+        select f.id , f.courseId , f.uploaderId , f.fileName , f.size , f.date , u.name as uploaderName
+        from file f
+        left join user u
+        on f.uploaderId = u.username
+        where f.courseId = #{courseId}
+    </select>
+    <select id="getFileById" resultType="ing.gzq.model.SharedFile">
+        SELECT id , courseId , uploaderId , filename , `size` , `date`
+        from file
+        WHERE id = #{fileId}
+    </select>
 </mapper>
