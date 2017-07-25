@@ -31,6 +31,12 @@ String room = courseId+"&"+lessonId
 "type":"inform-close"
 }
 ```
+**老师连接后,群体转发**
+```json
+{
+"type":"inform-open"
+}
+```
 
 信令服务器
 --------
