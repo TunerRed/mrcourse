@@ -1,8 +1,14 @@
 /**
  * Created by Liu Penghao on 2017/7/19.
  */
-
-(function () {
+(function (global,document,factoryFunc){
+    if (global.define) {
+        global.define(factoryFunc)
+    } else {
+        global.utils = global.utils || {};
+        global.utils.liveRTC = factoryFunc();
+    }
+}(window,null, function () {
 
     /***
      * 事件触发器
@@ -30,8 +36,6 @@
 
         return new emit();
     }
-
-
 
 
 
@@ -310,7 +314,9 @@
         }
     }
 
-
-    window.RtcRoom = RtcRoom;
-    window.RtcClient = RtcClient;
-}());
+    return{
+        RtcRoom:RtcRoom,
+        RtcClient:RtcClient,
+        Emit:Emit
+    }
+}))

@@ -1,18 +1,18 @@
 (function API(global, document, factoryFn) {
 
     if (global.define) {
-        //提供CommonJS规范的接口
+        //CMD接口
         define(factoryFn);
     } else {
-        //提供window.UI的接口
+        //window.UI的接口
         global.utils = global.utils || {};
         global.utils.API = factoryFn();
     }
 
 }
-(global, null, function () {
+(window, null, function () {
 
-    var HOST = "guozhuoqiang.top:8443";
+    var HOST = "guozhuoqiang.top:8443/mrcourse";
     var HTTPS_ADDRESS = "https://" + HOST;
     var WSS_ADDRESS = "wss://" + HOST;
 
@@ -25,12 +25,12 @@
         downloadCourseFile:match(HTTPS_ADDRESS+"/common/file/download/${fileId}"),
         getNotice:match(HTTPS_ADDRESS+"/common/notice/${courseId}"),
         createCourse:HTTPS_ADDRESS+"/teacher/course",
-        uploadNotice:HTTPS_ADDRESS+"/teacher/notice/${courseId}",
+        uploadNotice:match(HTTPS_ADDRESS+"/teacher/notice/${courseId}"),
         startLesson:HTTPS_ADDRESS+"/teacher/lesson/start",
         endLesson:HTTPS_ADDRESS+"/teacher/lesson/end",
-        searchCourse:HTTPS_ADDRESS+"/student/search/${keyWord}",
-        joinCourse:HTTPS_ADDRESS+"/student/course/join/${courseId}",
-        webSocketServer:WSS_ADDRESS + "/?room=${courseId}&${lessonId}"
+        searchCourse:match(HTTPS_ADDRESS+"/student/search/${keyWord}"),
+        joinCourse:match(HTTPS_ADDRESS+"/student/course/join/${courseId}"),
+        webSocketServer:match(WSS_ADDRESS + "/?room=${courseId}&${lessonId}")
     }
 
     // curry参数模板替换
