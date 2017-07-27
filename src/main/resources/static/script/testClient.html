@@ -11,10 +11,11 @@
     var name = "client";
     var webSocket;
     var rtcClient;
+    var HOST = "guozhuoqiang.top:8443"
 
     startBtn.addEventListener("click",function () {
 
-        webSocket = new WebSocket("wss://?room=1&uid="+name);
+        webSocket = new WebSocket("wss://"+HOST+"?room=1&uid="+name);
         rtcClient = RtcClient({
             name: name,
             videoSourceName:"teacher"

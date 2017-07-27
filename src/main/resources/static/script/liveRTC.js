@@ -4,11 +4,43 @@
 
 (function () {
 
+    /***
+     * 事件触发器
+     * @returns {emit}
+     * @constructor
+     */
+    function Emit() {
+        var events = {};
+
+
+        function emit() {
+
+        }
+        emit.prototype = {
+            on:function (eventName, eventFn) {
+                events[eventName] = events[eventName] || [];
+                events[eventName].push(eventFn);
+            },
+            trigger:function (eventName,_) {
+                for(var fn in events[eventName]){
+                    fn.call(null,arguments.slice(1));
+                }
+            }
+        }
+
+        return new emit();
+    }
+
+
+
+
+
+
 
     //直播端
     /**
      * 首先需要打开摄像头，然后添加websocket
-     * @param config 配置参数(必须有name、可包含iceConfig)
+     * @param config 配置参数(必须有name(唯一标志符)、可包含iceConfig)
      * @returns {rtcRoom}RtcRoom对象
      * @constructor
      */
@@ -26,6 +58,9 @@
         var pcPool = [];
 
         var name = null;
+
+        // 事件集合
+        var events = {}
 
 
         /****************************************************************/
@@ -49,6 +84,7 @@
         /****************************************************************/
         /*                           成员变量、方法                       */
         /****************************************************************/
+        rtcRoom.prototype = Emit();
         rtcRoom.prototype.openUserMedia = function (videoElement, config) {
 
             // 默认配置，以后可能添加修改的接口
@@ -101,7 +137,7 @@
             if (pc === null) {
                 return;
             }
-            pc.addIceCandidate(new RTCIceCandidate(message.data.candidate));
+            pc.addIceCandidate(new RTCIceCandidate(message.data));
         }
 
         function handleVideoOffer(message) {
@@ -109,22 +145,20 @@
 
             var pc = new RTCPeerConnection(config.iceConfig);
             pc.onicecandidate = function (e) {
-                if (e.candidate === null){
+                if (e.candidate === null) {
                     return;
                 }
                 webSocket.send(JSON.stringify({
-                    type:"new-ice-candidate",
-                    name:name,
-                    target:message.name,
-                    data:{
-                        candidate:e.candidate
-                    }
+                    type: "new-ice-candidate",
+                    name: name,
+                    target: message.name,
+                    data: e.candidate
                 }))
             };
             pc.onclose = function () {
-                for (var peer in pcPool) {
-                    if (peer === pc){
-                        pcPool.splice(Number(peer));
+                for (var obj in pcPool) {
+                    if (pcPool[obj].peer === pc) {
+                        pcPool.splice(Number(obj));
                     }
                 }
             };
@@ -132,7 +166,7 @@
             if (mediaStream !== null) {
                 pc.addStream(mediaStream);
             }
-            pc.setRemoteDescription(message.data.sdp);
+            pc.setRemoteDescription(message.data);
             pc.createAnswer(
                 function (desc) {
                     pc.setLocalDescription(desc);
@@ -140,19 +174,18 @@
                         type: "video-answer",
                         name: name,
                         target: message.name,
-                        data: {
-                            sdp: desc
-                        }
+                        data: desc
                     }));
                 },
                 function (error) {
                     console.log(error)
-                });
+                }
+            );
 
             pcPool.push({
                 name: message.name,
                 peer: pc
-            })
+            });
         }
     }
 
@@ -216,19 +249,21 @@
 
             pc = new RTCPeerConnection(config.iceConfig);
             pc.onicecandidate = function (e) {
-                if (e.candidate === null) {return;}
+                if (e.candidate === null) {
+                    return;
+                }
                 webSocket.send(JSON.stringify({
-                    type:"new-ice-candidate",
-                    name:name,
-                    target:videoSourceName,
-                    data:{
-                        candidate:e.candidate
+                    type: "new-ice-candidate",
+                    name: name,
+                    target: videoSourceName,
+                    data: {
+                        candidate: e.candidate
                     }
                 }));
             };
             pc.onaddStream = function (mediaStream) {
                 for (var fn in events["stream"]) {
-                    fn.call(null,mediaStream);
+                    fn.call(null, mediaStream);
                 }
             };
 
@@ -274,8 +309,6 @@
             pc.setRemoteDescription(message.data.sdp);
         }
     }
-
-
 
 
     window.RtcRoom = RtcRoom;
