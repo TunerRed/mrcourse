@@ -1,18 +1,10 @@
-(function (global, document, factoryFunc) {
-    if (global.define) {
-        global.define(factoryFunc)
-    } else {
-        global.utils = global.utils || {};
-        global.utils.Ajax = Ajax;
-    }
-}(window, null, function () {
+define(function (require) {
     function Ajax(method, url, success, error) {
         var isPromise = typeof success === "function"?false:true;
         var request = new XMLHttpRequest();
 
 
         function ajax() {
-            console.log(url)
             request.open(method, url);
             request.onreadystatechange = function () {
                 if (this.request.readyState === 4) {
@@ -72,4 +64,4 @@
     return {
         Ajax:Ajax
     }
-}))
+})
