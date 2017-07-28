@@ -1,16 +1,4 @@
-(function API(global, document, factoryFn) {
-
-    if (global.define) {
-        //CMD接口
-        define(factoryFn);
-    } else {
-        //window.UI的接口
-        global.utils = global.utils || {};
-        global.utils.API = factoryFn();
-    }
-
-}
-(window, null, function () {
+define(function (require) {
 
     var HOST = "guozhuoqiang.top:8443/mrcourse";
     var HTTPS_ADDRESS = "https://" + HOST;
@@ -19,7 +7,7 @@
     return {
         login: HTTPS_ADDRESS + "/login",
         register: HTTPS_ADDRESS + "/register",
-        
+
         //common
         getCourse: HTTPS_ADDRESS + "/common/course",
         getCourseFile: match(HTTPS_ADDRESS + "/common/file/${courseId}"),
@@ -29,8 +17,9 @@
         // teacher
         createCourse:HTTPS_ADDRESS+"/teacher/course",
         uploadNotice:match(HTTPS_ADDRESS+"/teacher/notice/${courseId}"),
-        startLesson:HTTPS_ADDRESS+"/teacher/lesson/start",
-        endLesson:HTTPS_ADDRESS+"/teacher/lesson/end",
+        startLesson:match(HTTPS_ADDRESS+"/teacher/start/${courseid}"),
+        continueLesson:match(HTTPS_ADDRESS+"/teacher/continue/${courseid}/${lessonId}"),
+        endLesson:match(HTTPS_ADDRESS+"/teacher/end/${courseId}/${lessonId}"),
         // student
         searchCourse:match(HTTPS_ADDRESS+"/student/search/${keyWord}"),
         joinCourse:match(HTTPS_ADDRESS+"/student/course/join/${courseId}"),
@@ -62,4 +51,4 @@
 
         return _match.apply(null,Array.prototype.slice.call(arguments,1));
     }
-}))
+})

@@ -1,15 +1,4 @@
-(function (global, document, factoryFunc) {
-
-    if (global.define) {
-        //CMD接口
-        define(factoryFunc);
-    } else {
-        //window.UI的接口
-        global.utils = global.utils || {};
-        global.utils.userHandler = factoryFunc();
-    }
-
-}(window, null, function (require) {
+define(function (require) {
 
     var API = require("API");
     var Ajax = require("ajax").Ajax;
@@ -35,7 +24,7 @@
             },
             trigger: function (eventName, _) {
                 for (var fn in events[eventName]) {
-                    fn.call(null, Array.prototype.slice.call(arguments, 1));
+                    events[eventName][fn].call(null, Array.prototype.slice.call(arguments, 1));
                 }
             }
         }
@@ -240,6 +229,16 @@
      *
      * uploadnoticesuccess  call()
      * uploadnoticefailed   call(message)
+     *
+     * startlessonsuccess   call(json)
+     * startlessonfailed    call(message)
+     *
+     * continuelessonsuccess    call()
+     * continuelessonfailed     call(message)
+     *
+     * endlessonsuccess     call()
+     * endlessonfailed      call(message)
+     *
      * @returns {teacherHandler}
      * @constructor
      */
@@ -306,11 +305,66 @@
                 })
         };
 
-        teacherHandler.prototype.startLesson = function () {
+        teacherHandler.prototype.startLesson = function (courseId) {
+
+            var that = this;
+
+            var request = new Ajax("POST",API.startLesson(courseId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success startlesson");
+                        that.trigger("startlessonsuccess", response.data);
+                    } else {
+                        console.log("failed startleson");
+                        that.trigger("startlessonfailed", response.message);
+                    }
+
+                });
 
         };
 
-        teacherHandler.prototype.endLesson = function () {
+        teacherHandler.prototype.continueLesson = function (courseId,lessonId) {
+
+            var that = this;
+
+            var request = new Ajax("POST",API.continueLesson(courseId,lessonId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success continuelesson");
+                        that.trigger("continuelessonsuccess");
+                    } else {
+                        console.log("failed continueleson");
+                        that.trigger("continuelessonfailed", response.message);
+                    }
+
+                });
+
+        };
+
+        teacherHandler.prototype.endLesson = function (courseId,lessonId) {
+
+            var that = this;
+
+            var request = new Ajax("POST",API.endLesson(courseId,lessonId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success endlesson");
+                        that.trigger("endlessonsuccess");
+                    } else {
+                        console.log("failed endleson");
+                        that.trigger("endlessonfailed", response.message);
+                    }
+
+                });
 
         };
 
@@ -318,7 +372,17 @@
         return new teacherHandler();
     }
 
-
+    /***
+     * Events
+     * searchcoursesuccess  call(json)
+     * searchcoursefailed   call(message)
+     *
+     * joincoursesuccess    call()
+     * joincoursefailed     call(message)
+     *
+     * @returns {studentHandler}
+     * @constructor
+     */
     function StudentHandler() {
 
         /****************************************************************/
@@ -335,11 +399,47 @@
 
         studentHandler.prototype = new UserHandler();
 
-        studentHandler.prototype.searchCourse = function () {
+        studentHandler.prototype.searchCourse = function (keyWord) {
+
+            var that = this;
+
+            var request = new Ajax("GET",API.searchCourse(keyWord));
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success searchcourse");
+                        that.trigger("searchcoursesuccess",response.data);
+                    } else {
+                        console.log("failed searchcourse");
+                        that.trigger("searchcoursefailed", response.message);
+                    }
+
+                })
 
         };
 
-        studentHandler.prototype.joinCourse = function () {
+        studentHandler.prototype.joinCourse = function (courseId) {
+
+            var that = this;
+
+            var request = new Ajax("POST",API.joinCourse(courseId));
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success joincourse");
+                        that.trigger("joincoursesuccess");
+                    } else {
+                        console.log("failed joincourse");
+                        that.trigger("joincoursefailed", response.message);
+                    }
+
+                })
 
         };
 
@@ -361,4 +461,4 @@
         StudentHandler: StudentHandler,
         Emit: Emit
     }
-}))
+})

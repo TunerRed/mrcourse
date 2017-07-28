@@ -29,7 +29,7 @@
             },
             trigger:function (eventName,_) {
                 for(var fn in events[eventName]){
-                    fn.call(null,arguments.slice(1));
+                    events[eventName][fn].call(null, Array.prototype.slice.call(arguments, 1));
                 }
             }
         }
