@@ -1,9 +1,11 @@
 /**
- * Created by Administrator on 2017/7/27.
+ * Created by Administrator on 2017/7/28.
  */
 require.config({
     baseUrl:"script/module"
 })
+
+
 require(["userHandler"],function (userHandler) {
 
     var UserHandler = userHandler.UserHandler;

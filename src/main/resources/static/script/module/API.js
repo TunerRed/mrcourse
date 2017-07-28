@@ -19,17 +19,22 @@
     return {
         login: HTTPS_ADDRESS + "/login",
         register: HTTPS_ADDRESS + "/register",
+        
+        //common
         getCourse: HTTPS_ADDRESS + "/common/course",
-        getCourseFile: HTTPS_ADDRESS + "/common/file",
+        getCourseFile: match(HTTPS_ADDRESS + "/common/file/${courseId}"),
         postCourseFile: match(HTTPS_ADDRESS + "/common/file/${courseId}"),
         downloadCourseFile:match(HTTPS_ADDRESS+"/common/file/download/${fileId}"),
         getNotice:match(HTTPS_ADDRESS+"/common/notice/${courseId}"),
+        // teacher
         createCourse:HTTPS_ADDRESS+"/teacher/course",
         uploadNotice:match(HTTPS_ADDRESS+"/teacher/notice/${courseId}"),
         startLesson:HTTPS_ADDRESS+"/teacher/lesson/start",
         endLesson:HTTPS_ADDRESS+"/teacher/lesson/end",
+        // student
         searchCourse:match(HTTPS_ADDRESS+"/student/search/${keyWord}"),
         joinCourse:match(HTTPS_ADDRESS+"/student/course/join/${courseId}"),
+        // websocket
         webSocketServer:match(WSS_ADDRESS + "/?room=${courseId}&${lessonId}")
     }
 
