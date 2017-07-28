@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ing.gzq.dao.NoticeDao">
+
+    <insert id="insertNotice" parameterType="ing.gzq.model.Notice">
+        INSERT INTO notice (courseId , content ,`date`)
+        VALUES (#{courseId},#{content},NOW())
+    </insert>
+</mapper>
