@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -32,22 +33,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Autowired
+    AccessDeniedHandler accessDeniedHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().
-                loginProcessingUrl("/login")
+        http.formLogin()
+                .loginPage("/nologin")
+                .loginProcessingUrl("/login")
                 .successHandler(successHandler)
                 .failureHandler(failureHandler)
                 .permitAll()
                 .and()
                 .httpBasic()
                 .and()
-                .logout();
-        http.csrf().disable();
-        http.authorizeRequests()
-                .antMatchers("/teacher").hasRole("TEACHER")
-                .antMatchers("/student").hasRole("STUDENT")
-                .antMatchers("/common").hasAnyRole("STUDENT","TEACHER")
+                .logout()
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .and()
+                .csrf().disable()
+                .authorizeRequests()
+//                .antMatchers("/teacher/**").hasRole("TEACHER")
+//                .antMatchers("/student/**").hasRole("STUDENT")
+//                .antMatchers("/common/**").hasAnyRole("STUDENT", "TEACHER")
                 .anyRequest().permitAll();
     }
 

@@ -2,6 +2,7 @@ package ing.gzq.controller;
 
 import ing.gzq.base.Result;
 import ing.gzq.model.Course;
+import ing.gzq.model.Lesson;
 import ing.gzq.model.Notice;
 import ing.gzq.model.User;
 import ing.gzq.service.CourseService;
@@ -30,12 +31,21 @@ public class TeacherController {
         return courseService.insertCourse(course);
     }
 
-
     @RequestMapping(value = "/notice/{courseId}", method = RequestMethod.POST)
-    public Result uploadNotice(@PathVariable(value = "courseId" ) Long courseId ,Notice notice) {
+    public Result uploadNotice(@PathVariable Long courseId, Notice notice) {
         notice.setCourseId(courseId);
         return noticeService.uploadNotice(notice);
     }
 
+    @RequestMapping(value = "/start/{courseId}", method = RequestMethod.POST)
+    public Result startNewLesson(@PathVariable Long courseId, Lesson lesson) {
+        lesson.setCourseId(courseId);
+        return courseService.startNewLesson(lesson);
+    }
+
+    @RequestMapping(value = "/end/{lessonId}", method = RequestMethod.POST)
+    public Result endLesson(@PathVariable Long lessonId) {
+        return courseService.endLesson(lessonId);
+    }
 
 }

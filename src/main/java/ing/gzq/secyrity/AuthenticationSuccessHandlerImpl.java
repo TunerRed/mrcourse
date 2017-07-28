@@ -1,9 +1,8 @@
 package ing.gzq.secyrity;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSON;
 import ing.gzq.base.ResultCache;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -18,12 +17,11 @@ import java.io.IOException;
  */
 @Component
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
-    @Autowired
-    ObjectMapper mapper;
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.setContentType("application/json; charset=utf-8");
-        httpServletResponse.getWriter().write(mapper.writeValueAsString(ResultCache.OK));
+        httpServletResponse.getWriter().write(JSON.toJSONString(ResultCache.OK));
     }
 }

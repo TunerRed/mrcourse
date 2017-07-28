@@ -1,5 +1,6 @@
 package ing.gzq.model;
 
+import ing.gzq.base.Result;
 import lombok.Data;
 
 import java.util.List;
@@ -17,6 +18,4 @@ public class Course {
     String introduce;
     List<Lesson> lessons;
     String date;
-    boolean state = false;
-
 }

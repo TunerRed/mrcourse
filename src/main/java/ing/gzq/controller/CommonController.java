@@ -42,12 +42,12 @@ public class CommonController {
     }
 
     @RequestMapping(value = "/file/{courseId}", method = RequestMethod.GET)
-    public Result getFiles(@PathVariable("courseId") Long courseId) {
+    public Result getFiles(@PathVariable Long courseId) {
         return fileService.getFiles(courseId);
     }
 
     @RequestMapping(value = "/file/{courseId}", method = RequestMethod.POST)
-    public Result uploadFile(@PathVariable("courseId") Long courseId,
+    public Result uploadFile(@PathVariable Long courseId,
                              MultipartFile file) {
         return fileService.uploadfile(courseId, file);
     }

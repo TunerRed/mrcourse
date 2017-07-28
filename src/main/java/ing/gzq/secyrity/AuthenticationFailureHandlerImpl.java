@@ -1,6 +1,7 @@
 package ing.gzq.secyrity;
 
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ing.gzq.base.ResultCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,10 @@ import java.io.IOException;
 @Component
 public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHandler {
 
-    @Autowired
-    ObjectMapper mapper;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         httpServletResponse.setContentType("application/json; charset=utf-8");
-        httpServletResponse.getWriter().write(mapper.writeValueAsString(ResultCache.getFailureDetail("用户名或密码错误")));
+        httpServletResponse.getWriter().write(JSON.toJSONString(ResultCache.getFailureDetail("用户名或密码错误")));
     }
 }

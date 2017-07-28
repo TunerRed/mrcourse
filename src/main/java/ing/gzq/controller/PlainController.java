@@ -30,4 +30,9 @@ public class PlainController {
         }
         return userService.insertUser(user);
     }
+
+    @RequestMapping(value = "/nologin", method = RequestMethod.GET)
+    public Result nologin() {
+        return ResultCache.PERMISSION_DENIED;
+    }
 }
