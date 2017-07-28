@@ -3,7 +3,6 @@ package ing.gzq.service;
 import ing.gzq.base.Result;
 import ing.gzq.base.ResultCache;
 import ing.gzq.dao.UserDao;
-import ing.gzq.model.TeacherInfo;
 import ing.gzq.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,21 +24,18 @@ public class UserService {
 
     @Transactional
     public Result insertUser(User user) {
-        try {
-            if (!user.getType().equals("student") && !user.getType().equals("teacher")) {
-                return ResultCache.getFailureDetail("用户类型只能为student or teacher");
-            }
-            userDao.insertUser(user);
-            if ("student".equals(user.getType())) {
-                userDao.giveAuthority(user.getUsername(), STUDENT_ROLE);
-            } else {
-                userDao.giveAuthority(user.getUsername(), TEACHER_ROLE);
-            }
-            return ResultCache.OK;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultCache.getFailureDetail("操作失败 部分用户信息为空");
+
+        if (!"student".equals(user.getType()) && !"teacher".equals(user.getType())) {
+            return ResultCache.getFailureDetail("用户类型只能为student or teacher");
         }
+        userDao.insertUser(user);
+        if ("student".equals(user.getType())) {
+            userDao.giveAuthority(user.getUsername(), STUDENT_ROLE);
+        } else {
+            userDao.giveAuthority(user.getUsername(), TEACHER_ROLE);
+        }
+        return ResultCache.OK;
+
     }
 
     public User getUserInSecurityContext() {

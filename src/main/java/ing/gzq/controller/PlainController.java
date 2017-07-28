@@ -2,7 +2,6 @@ package ing.gzq.controller;
 
 import ing.gzq.base.Result;
 import ing.gzq.base.ResultCache;
-import ing.gzq.dao.UserDao;
 import ing.gzq.model.User;
 import ing.gzq.service.MyUserDetailsServiceImpl;
 import ing.gzq.service.UserService;
@@ -27,9 +26,8 @@ public class PlainController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result register(User user) {
         if (anthService.loadUserByUsername(user.getUsername()) != null) {
-            ResultCache.getFailureDetail("该账号已经被注册");
+            return ResultCache.getFailureDetail("该账号已经被注册");
         }
         return userService.insertUser(user);
     }
-
 }
