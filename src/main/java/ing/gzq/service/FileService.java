@@ -32,8 +32,13 @@ public class FileService {
             sharedFile.setUploaderId(userService.getUserInSecurityContext().getUsername());
             fileDao.insertFile(sharedFile);
             ClassPathResource resource = new ClassPathResource("static/file");
-            file.transferTo(new File(resource.getFile().getAbsolutePath() + File.separator +
-                    sharedFile.getCourseId() + File.separator + sharedFile.getId()));
+            File fileDir = resource.getFile();
+            fileDir = new File(fileDir.getAbsolutePath() + File.separator + courseId);
+            if (!fileDir.exists()) {
+                fileDir.mkdir();
+            }
+            file.transferTo(new File(fileDir.getAbsolutePath() + File.separator +
+                    File.separator + sharedFile.getId()));
             return ResultCache.OK;
         } catch (IOException e) {
             e.printStackTrace();
