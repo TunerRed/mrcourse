@@ -6,4 +6,9 @@
         INSERT INTO notice (courseId , content ,`date`)
         VALUES (#{courseId},#{content},NOW())
     </insert>
+    <select id="getNotice" resultType="ing.gzq.model.Notice">
+        SELECT id , courseId , content , `date`
+        FROM notice
+        where courseId = #{courseId}
+    </select>
 </mapper>

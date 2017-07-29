@@ -7,6 +7,7 @@ import ing.gzq.model.SharedFile;
 import ing.gzq.model.User;
 import ing.gzq.service.CourseService;
 import ing.gzq.service.FileService;
+import ing.gzq.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
@@ -29,6 +30,9 @@ public class CommonController {
     @Autowired
     FileService fileService;
 
+    @Autowired
+    NoticeService noticeService;
+
     @RequestMapping(value = "/course", method = RequestMethod.GET)
     public Result getCourse(Authentication auth) {
         User user = (User) auth.getPrincipal();
@@ -39,6 +43,11 @@ public class CommonController {
             return courseService.getCourseByStudentId(user.getUsername());
         }
         return ResultCache.FAILURE;
+    }
+
+    @RequestMapping(value = "/notice/{courseId}", method = RequestMethod.GET)
+    public Result getNotice(@PathVariable Long courseId) {
+        return noticeService.getNotice(courseId);
     }
 
     @RequestMapping(value = "/file/{courseId}", method = RequestMethod.GET)
