@@ -78,7 +78,7 @@ require(['userHandler'],function (userHandlerModule) {
         /*                       开始上课部分                          */
         /****************************************************************/
 
-        teacherClient.endLesson(5);
+        // teacherClient.endLesson(8,5);
     })
 
 
