@@ -1,7 +1,7 @@
 require.config({
     baseUrl:"script/module"
 })
-require(['userHandler'],function (userHandlerModule) {
+require(['userHandler','API'],function (userHandlerModule,API) {
     var TeacherHandler = userHandlerModule.TeacherHandler;
 
     var teacherClient = new TeacherHandler();
@@ -13,6 +13,11 @@ require(['userHandler'],function (userHandlerModule) {
 
     teacherClient.login(info);
     teacherClient.on("loginsuccess",function () {
+
+        var webSocket = new WebSocket(API.webSocketServer(8,8));
+        webSocket.onopen = function () {
+            console.log("OK")
+        }
 
 
         // window.console.log = function () {
@@ -44,7 +49,7 @@ require(['userHandler'],function (userHandlerModule) {
         teacherClient.getCourse();
         teacherClient.on("getcoursesuccess",function (data) {
             console.log(typeof data,data)
-        })
+        });
 
 
         /****************************************************************/
@@ -65,20 +70,19 @@ require(['userHandler'],function (userHandlerModule) {
         /*                       文件上上传下载                          */
         /****************************************************************/
         //****!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        var fileInput = document.getElementById("file-input");
-        var fileBtn = document.getElementById("file-btn");
-        fileBtn.onclick = function () {
-            if (fileInput.files[0]) {
-                teacherClient.uploadCourseFile(8, fileInput.files[0])
-            }
-        }
+        // var fileInput = document.getElementById("file-input");
+        // var fileBtn = document.getElementById("file-btn");
+        // fileBtn.onclick = function () {
+        //     if (fileInput.files[0]) {
+        //         teacherClient.uploadCourseFile(8, fileInput.files[0])
+        //     }
+        // }
 
 
         /****************************************************************/
         /*                       开始上课部分                          */
         /****************************************************************/
 
-        // teacherClient.endLesson(8,5);
     })
 
 

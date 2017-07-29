@@ -5,7 +5,7 @@ websocket相关接口文档
 
 
 room : 房间
-String room = courseId+"&"+lessonId
+String room = courseId+"+"+lessonId
 
 收发消息统一为**JSON**格式
 

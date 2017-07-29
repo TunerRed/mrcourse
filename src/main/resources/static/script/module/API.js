@@ -23,7 +23,7 @@ define(function (require) {
         searchCourse:match(HTTPS_ADDRESS+"/student/search/${keyWord}"),
         joinCourse:match(HTTPS_ADDRESS+"/student/course/join/${courseId}"),
         // websocket
-        webSocketServer:match(WSS_ADDRESS + "/?room=${courseId}&${lessonId}")
+        webSocketServer:match(WSS_ADDRESS + "?room=${courseId}%2B${lessonId}")
     }
 
     // curry参数模板替换

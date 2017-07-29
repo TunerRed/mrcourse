@@ -311,7 +311,7 @@ define(function (require) {
 
             var request = new Ajax("POST",API.startLesson(courseId));
             request.send(objectToFormData({
-                introduce:bundle.introduce
+                introduce:bundle?bundle.introduce:""
             }))
                 .then(function (response) {
                     response = JSON.parse(response);
