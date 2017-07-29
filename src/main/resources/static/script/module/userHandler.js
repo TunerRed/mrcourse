@@ -165,14 +165,14 @@ define(function (require) {
 
         };
 
-        userHandler.prototype.postCourseFile = function (courseId, file) {
+        userHandler.prototype.uploadCourseFile = function (courseId, file) {
 
             var that = this;
 
             var formdata = new FormData();
             formdata.append("file", file);
 
-            var request = new Ajax("POST", API.postCourseFile(courseId));
+            var request = new Ajax("POST", API.uploadCourseFile(courseId));
 
             request.send(formdata)
                 .then(function (response) {
@@ -305,12 +305,14 @@ define(function (require) {
                 })
         };
 
-        teacherHandler.prototype.startLesson = function (courseId) {
+        teacherHandler.prototype.startLesson = function (courseId,bundle) {
 
             var that = this;
 
             var request = new Ajax("POST",API.startLesson(courseId));
-            request.send()
+            request.send(objectToFormData({
+                introduce:bundle.introduce
+            }))
                 .then(function (response) {
                     response = JSON.parse(response);
 
@@ -347,11 +349,11 @@ define(function (require) {
 
         };
 
-        teacherHandler.prototype.endLesson = function (courseId,lessonId) {
+        teacherHandler.prototype.endLesson = function (lessonId) {
 
             var that = this;
 
-            var request = new Ajax("POST",API.endLesson(courseId,lessonId));
+            var request = new Ajax("POST",API.endLesson(lessonId));
             request.send()
                 .then(function (response) {
                     response = JSON.parse(response);
