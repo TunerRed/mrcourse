@@ -11,15 +11,14 @@ define(function (require) {
         //common
         getCourse: HTTPS_ADDRESS + "/common/course",
         getCourseFile: match(HTTPS_ADDRESS + "/common/file/${courseId}"),
-        postCourseFile: match(HTTPS_ADDRESS + "/common/file/${courseId}"),
+        uploadCourseFile: match(HTTPS_ADDRESS + "/common/file/${courseId}"),
         downloadCourseFile:match(HTTPS_ADDRESS+"/common/file/download/${fileId}"),
         getNotice:match(HTTPS_ADDRESS+"/common/notice/${courseId}"),
         // teacher
         createCourse:HTTPS_ADDRESS+"/teacher/course",
         uploadNotice:match(HTTPS_ADDRESS+"/teacher/notice/${courseId}"),
-        startLesson:match(HTTPS_ADDRESS+"/teacher/start/${courseid}"),
-        continueLesson:match(HTTPS_ADDRESS+"/teacher/continue/${courseid}/${lessonId}"),
-        endLesson:match(HTTPS_ADDRESS+"/teacher/end/${courseId}/${lessonId}"),
+        startLesson:match(HTTPS_ADDRESS+"/teacher/start/${courseId}"),
+        endLesson:match(HTTPS_ADDRESS+"/teacher/end/${lessonId}"),
         // student
         searchCourse:match(HTTPS_ADDRESS+"/student/search/${keyWord}"),
         joinCourse:match(HTTPS_ADDRESS+"/student/course/join/${courseId}"),
