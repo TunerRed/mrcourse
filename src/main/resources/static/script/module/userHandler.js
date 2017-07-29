@@ -458,7 +458,6 @@ define(function (require) {
     }
 
     return {
-        UserHandler: UserHandler,
         TeacherHandler: TeacherHandler,
         StudentHandler: StudentHandler,
         Emit: Emit
