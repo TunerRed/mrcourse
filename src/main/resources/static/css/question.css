@@ -1,0 +1,18 @@
+.nav-bar{
+    text-align: center;
+    font-size: 1.6rem;
+    line-height:3rem;
+    color: #7c7c7c;
+    background-color: #e7e7e7;
+    display: flex;
+    justify-content: space-around;
+
+}
+.nav-bar div{
+    display: inline-block;
+    width: 20vw;
+
+}
+.nav-bar div:nth-child(2){
+    width: 40vw;
+}
