@@ -49,3 +49,86 @@ p#ktzs_Eng {
     color: rgba(255, 255, 255, 0.78);
     letter-spacing: 1px;
 }
+
+div#BagOfInput_login {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    /* position: absolute; */
+    padding-top: 40px;
+    /* border-radius: 70px; */
+}
+
+div#logininDiv {
+    width: 450px;
+    margin: 0 auto;
+    background-color: rgba(223, 245, 218, 0.79);
+    border-radius: 10px;
+    position: relative;
+    top: 17%;
+}
+#littleDiv_class{
+    font-size: 25px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #367679;
+    line-height: 40px;
+}
+#littleDiv_Assi{
+    font-size: 25px;
+    letter-spacing: 1px;
+    color: #367679;
+    line-height: 40px;
+}
+
+img#close_loginIn {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    cursor: pointer;
+}
+
+#littleDiv_regiest_Chinese{
+    font-size: 40px;
+    color: #367679;
+    /* padding-bottom: 12px; */
+    /* margin-bottom: 23px; */
+    /* line-height: 60px; */
+}
+
+.input_login_div {
+    width: 100%;
+    /* border-bottom-color: white; */
+    background-color: #ecf9e9;
+    font-size: 20px;
+    color: #367679;
+    /* padding-top: 5px; */
+    margin-top: 17px;
+    padding: 10px 0;
+    letter-spacing: 7px;
+}
+
+input.input_login {
+    font-size: 20px;
+    border: 0;
+    background-color: #ecf9e9;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+div#loginIn_Button {
+    width: 100%;
+    background-color: #4bb0ab;
+    font-size: 25px;
+    padding: 7px 0;
+    margin-top: 40px;
+    color: #ecf9e9;
+    letter-spacing: 20px;
+    cursor: pointer;
+}
+#goRegiestDiv {
+    color: #4bb0ab;
+    /* padding: 65px; */
+    padding: 20px 15px 20px 0px;
+    letter-spacing: 3px;
+}
