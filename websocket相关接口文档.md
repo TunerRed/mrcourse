@@ -72,15 +72,27 @@ String room = courseId+"+"+lessonId
 }
 ```
 
-聊天
+签到(只发给教师就是了)
 ---
-开启聊天（只能老师开启）（群体转发）
 ```json
 {
-"type":"open-chat",
-"name":"lihua"
+"type":"new-check-in",
+"data":{
+    "name":"xxxx",
+    "id":"xxxx"
+}
 }
 ```
+```json
+{
+"type":"new-check-out",
+"data":{
+    "name":"xxxx",
+    "id":"Xxxxx"
+}
+}
+```
+
 
 关闭聊天（只能老师关闭）（群体转发）
 ```json
