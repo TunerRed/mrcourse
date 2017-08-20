@@ -47,28 +47,6 @@ public class CourseService {
     }
 
 
-    public Result startNewLesson(Lesson lesson) {
-        try {
-            courseDao.insertLesson(lesson);
-            Map<String, Object> map = new HashMap<>();
-            map.put("lessonId", lesson.getId());
-            return ResultCache.getDataOk(map);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultCache.getFailureDetail(e.getMessage());
-        }
-    }
-
-    public Result endLesson(Long lessonId) {
-        try {
-            courseDao.updateLessonStateToZero(lessonId);
-            return ResultCache.OK;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultCache.getFailureDetail(e.getMessage());
-        }
-    }
-
     public Result search(String keyWord) {
         List<Course> courseList = courseDao.search("%" + keyWord + "%");
         return ResultCache.getDataOk(courseList);
