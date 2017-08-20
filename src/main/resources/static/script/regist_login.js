@@ -54,7 +54,7 @@ var timer = null;
                 clearInterval(timer);
             }
         },5)
-    };
+    }
 
 
 
