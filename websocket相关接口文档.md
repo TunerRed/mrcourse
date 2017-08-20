@@ -6,6 +6,7 @@ websocket相关接口文档
 
 room : 房间
 String room = courseId+"+"+lessonId
+只要上课状态为/上课/就可以开启.教师无需在线
 
 收发消息统一为**JSON**格式
 
@@ -37,6 +38,7 @@ String room = courseId+"+"+lessonId
 "type":"inform-open"
 }
 ```
+
 
 信令服务器
 --------
@@ -70,15 +72,27 @@ String room = courseId+"+"+lessonId
 }
 ```
 
-聊天
+签到(只发给教师就是了)
 ---
-开启聊天（只能老师开启）（群体转发）
 ```json
 {
-"type":"open-chat",
-"name":"lihua"
+"type":"new-check-in",
+"data":{
+    "name":"xxxx",
+    "id":"xxxx"
+}
 }
 ```
+```json
+{
+"type":"new-check-out",
+"data":{
+    "name":"xxxx",
+    "id":"Xxxxx"
+}
+}
+```
+
 
 关闭聊天（只能老师关闭）（群体转发）
 ```json
