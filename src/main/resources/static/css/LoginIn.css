@@ -59,13 +59,30 @@ div#BagOfInput_login {
     /* border-radius: 70px; */
 }
 
+div#BagOfInput_regiest {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    /* position: absolute; */
+    padding-top: 40px;
+    /* border-radius: 70px; */
+}
+
 div#logininDiv {
     width: 450px;
     margin: 0 auto;
     background-color: rgba(223, 245, 218, 0.79);
-    border-radius: 10px;
+    border-radius: 25px;
     position: relative;
     top: 17%;
+}
+div#regiestDiv {
+    width: 450px;
+    margin: 0 auto;
+    background-color: rgba(223, 245, 218, 0.79);
+    border-radius: 25px;
+    position: relative;
+    top: 10%;
 }
 #littleDiv_class{
     font-size: 25px;
@@ -88,30 +105,58 @@ img#close_loginIn {
     cursor: pointer;
 }
 
-#littleDiv_regiest_Chinese{
+img#close_regiest{
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    cursor: pointer;
+}
+
+#littleDiv_loginin_Chinese{
     font-size: 40px;
     color: #367679;
     /* padding-bottom: 12px; */
     /* margin-bottom: 23px; */
     /* line-height: 60px; */
 }
+#littleDiv_regiest_Chinese{
+    font-size: 40px;
+    color: #367679;
+}
 
 .input_login_div {
     width: 100%;
     /* border-bottom-color: white; */
-    background-color: #ecf9e9;
+    /* background-color: #ecf9e9; */
+    background-color: rgba(236, 249, 233, 0.65);
     font-size: 20px;
     color: #367679;
     /* padding-top: 5px; */
     margin-top: 17px;
-    padding: 10px 0;
+    padding: 8px 0;
     letter-spacing: 7px;
+    border-radius: 10px;
+}
+.input_regist_div{
+    width: 100%;
+    /* border-bottom-color: white; */
+    background-color: rgba(236, 249, 233, 0.65);
+    font-size: 20px;
+    color: #367679;
+    /* padding-top: 5px; */
+    margin-top: 17px;
+    padding: 8px 0;
+    letter-spacing: 7px;
+    border-radius: 10px;
 }
 
 input.input_login {
     font-size: 20px;
     border: 0;
-    background-color: #ecf9e9;
+    /* background-color: #ecf9e9; */
+    background-color: rgba(236, 249, 233, 0);
+    /* color: green; */
+    color: #367679;
     padding-left: 5px;
     cursor: pointer;
 }
@@ -125,10 +170,95 @@ div#loginIn_Button {
     color: #ecf9e9;
     letter-spacing: 20px;
     cursor: pointer;
+    border-radius: 10px;
 }
 #goRegiestDiv {
     color: #4bb0ab;
     /* padding: 65px; */
     padding: 20px 15px 20px 0px;
     letter-spacing: 3px;
+}
+
+
+
+
+/*ÃƒÆ’Ã‚Â§Ãƒâ€šÃ‚Â»ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢placeholderÃƒÆ’Ã‚Â¨Ãƒâ€šÃ‚Â®Ãƒâ€šÃ‚Â¾ÃƒÆ’Ã‚Â§Ãƒâ€šÃ‚Â½Ãƒâ€šÃ‚Â®ÃƒÆ’Ã‚Â©Ãƒâ€šÃ‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¨ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°Ãƒâ€šÃ‚Â²*/
+.input_login::-webkit-input-placeholder{
+    color:#c5c5c5;
+    font-weight: 200;
+}    /* ÃƒÆ’Ã‚Â¤Ãƒâ€šÃ‚Â½Ãƒâ€šÃ‚Â¿ÃƒÆ’Ã‚Â§ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â¨webkitÃƒÆ’Ã‚Â¥ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã‚Â¦Ãƒâ€šÃ‚Â Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â§Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¦Ãƒâ€šÃ‚ÂµÃƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¨Ãƒâ€šÃ‚Â§Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¥ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢Ãƒâ€šÃ‚Â¨ */
+.input_login:-moz-placeholder{
+    color:#c5c5c5;
+    font-weight: 200;
+}                  /* FirefoxÃƒÆ’Ã‚Â§ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¦Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¬4-18 */
+.input_login::-moz-placeholder{
+    color:#c5c5c5;
+    font-weight: 200;
+}                  /* FirefoxÃƒÆ’Ã‚Â§ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¦Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¬19+ */
+.input_login:-ms-input-placeholder{
+    color: #c5c5c5;
+    font-weight: 200;
+}           /* IEÃƒÆ’Ã‚Â¦Ãƒâ€šÃ‚ÂµÃƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¨Ãƒâ€šÃ‚Â§Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¥ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢Ãƒâ€šÃ‚Â¨ */
+
+div#regist_Button {
+    width: 100%;
+    background-color: #4bb0ab;
+    font-size: 25px;
+    padding: 7px 0;
+    margin-top: 24px;
+    color: #ecf9e9;
+    letter-spacing: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+div#slide_outDiv {
+    width: 56%;
+    /* border-bottom-color: white; */
+    background-color: rgba(236, 249, 233, 0.65);
+    font-size: 20px;
+    /* color: #367679; */
+    /* padding-top: 5px; */
+    margin-top: 17px;
+    /* padding: 8px 0; */
+    height: 35px;
+    color: rgba(227, 234, 225, 0.91);
+    line-height: 35px;
+    letter-spacing: 7px;
+    margin: 0 auto;
+    margin-top: 30px;
+    z-index: 5;
+    border-radius: 30px;
+    /* display: inline-block; */
+    position: relative;
+    border: 1px solid #4bb0ab;
+}
+
+div#slide_inDiv {
+    /* display: inline-block; */
+    z-index: -1;
+    background-color: #48aba7;
+    width: 53%;
+    height: 37px;
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    /* float: right; */
+    /* right: 0; */
+    left: 0px;
+}
+
+span#teacher_slide {
+    /* display: inline-block; */
+    /* z-index: 2; */
+    cursor: pointer;
+}
+
+span#student_slide {
+    /* display: inline-block; */
+    /* z-index: 4; */
+    cursor: pointer;
+}
+
+span#teacher_slide {
+    color: #4bb0ab;
 }
