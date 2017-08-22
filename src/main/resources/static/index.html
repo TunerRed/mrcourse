@@ -10,11 +10,23 @@
 <body>
 <header>
     <h1>CLASSROOM ASSISTANT</h1>
-    <a href="#" class="self-info">
+    <div class="self-info">
         <img src="image/profile_tch.png" class="profile">
         <span class="type">Tch</span>
         <span class="name">戴红军</span>
-    </a>
+        <ul class="hover-box">
+            <li>
+                <a href="#">
+                    <img src="image/self.png">
+                    <span>个人信息</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"><img src="image/logout.png">
+                <span>注销账号</span></a>
+            </li>
+        </ul>
+    </div>
 </header>
 <nav>
     <ul>
@@ -22,12 +34,12 @@
             <div class="nav__title">课堂</div>
             <div class="nav__content drag-box__scene">高级程序语言</div>
             <ul class="drag-box__container">
-                <li class="drag-box__item">计算机引论</li>
-                <li class="drag-box__item">高级程序语言</li>
-                <li class="drag-box__item">高等数学</li>
-                <li class="drag-box__item">Test1</li>
-                <li class="drag-box__item">Test2</li>
-                <div class="drag-box__bottom-bar">+添加课程</div>
+                <li class="drag-box__item"><a href="#">计算机引论</a></li>
+                <li class="drag-box__item"><a href="#">高级程序语言</a></li>
+                <li class="drag-box__item on"><a href="#">高等数学</a></li>
+                <li class="drag-box__item"><a href="#">Test1</a></li>
+                <li class="drag-box__item"><a href="#">Test2</a></li>
+                <a href="#" class="drag-box__bottom-bar">+添加课程</a>
             </ul>
         </li>
         <li>
