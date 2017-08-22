@@ -15,20 +15,17 @@ id(自增)
 teacherId
 name(课程名)
 introduce（课程介绍）
+state
+teacherOnline
+chat
+vote
 date (创建时间)
 
-lesson课堂表
-id(自增)
-courseId
-introduce:课堂内容介绍
-date: 开始上课时间
-state:"1|0" (1 正在进行 0 已结束)
 
-
-sign签到表：
-课程id
-课堂id
-学生id
+        sign签到表：
+        课程id
+        课堂id
+        学生id
 
 
 notice公告
@@ -45,6 +42,7 @@ fileName(文件名)
 path(文件地址)
 size(文件大小)
 date：上传时间
+
 
 course_student
 courseId
