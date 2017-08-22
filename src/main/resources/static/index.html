@@ -2,9 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HelloWorld</title>
+    <title>课堂助手</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index_tch.css">
 </head>
 <body>
-<h1>HelloWorld</h1>
+<header>
+    <h1>CLASSROOM ASSISTANT</h1>
+    <a href="#" class="self-info">
+        <img src="image/profile_tch.png" class="profile">
+        <span class="type">Tch</span>
+        <span class="name">戴红军</span>
+    </a>
+</header>
+<nav>
+    <ul>
+        <li class="drag-box">
+            <div class="nav__title">课堂</div>
+            <div class="nav__content drag-box__scene">高级程序语言</div>
+            <ul class="drag-box__container">
+                <li class="drag-box__item">计算机引论</li>
+                <li class="drag-box__item">高级程序语言</li>
+                <li class="drag-box__item">高等数学</li>
+                <li class="drag-box__item">Test1</li>
+                <li class="drag-box__item">Test2</li>
+                <div class="drag-box__bottom-bar">+添加课程</div>
+            </ul>
+        </li>
+        <li>
+            <div class="nav__title">课堂状态</div>
+            <div class="nav__content switcher">
+                <a href="#" class="switcher__on">开启</a>
+                <a href="#" class="switcher__off">关闭</a>
+            </div>
+        </li>
+        <li>
+            <div class="nav__title">视频直播</div>
+            <div class="nav__content switcher">
+                <a href="#" class="switcher__on">开启</a>
+                <a href="#" class="switcher__off">关闭</a>
+            </div>
+        </li>
+        <li>
+            <div class="nav__title">实时讨论</div>
+            <div class="nav__content switcher">
+                <a href="#" class="switcher__on">开启</a>
+                <a href="#" class="switcher__off">关闭</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<section class="bottom-bar">
+    <div class="bottom-bar__left">学生管理 视频直播 课程介绍 实时讨论</div>
+    <div class="bottom-bar__right">课程问题 课程公告 课程资料</div>
+</section>
 </body>
 </html>
