@@ -54,7 +54,51 @@ var timer = null;
                 clearInterval(timer);
             }
         },5)
+    };
+
+//    以下是对首页两个图片  注册登录的 显示
+var firstViewDiv = document.getElementById("firstViewDiv");
+var logininDiv = document.getElementById("logininDiv");
+var registDiv = document.getElementById("regiestDiv")
+var input_login = document.getElementsByClassName("input_login");
+var input_regist = document.getElementsByClassName("input_regist");
+
+function showLoginDiv() {
+        // console.log("show Login")
+    firstViewDiv.style.display = "none";
+    logininDiv.style.display = "block"
+}
+function showRegistDiv() {
+    // console.log("show Register")
+    firstViewDiv.style.display = "none";
+    registDiv.style.display = "block";
+}
+
+//对关闭图标的显示
+function Login_close() {
+    logininDiv.style.display = "none";
+    firstViewDiv.style.display = "block";
+    //当退出登录界面时 清空信息
+    for(var i = 0;i<input_login.length;i++){
+        // console.log(input_login[i].value)
+        input_login[i].value = null;
     }
+
+
+}
+function Regist_close() {
+    registDiv.style.display = "none";
+    firstViewDiv.style.display = "block";
+    //当退出注册界面时 清空信息
+    for(var i = 0;i<input_regist.length;i++){
+        // console.log(input_login[i].value)
+        input_regist[i].value = null;
+    }
+}
+function goRegist() {
+    logininDiv.style.display = "none";
+    registDiv.style.display = "block";
+}
 
 
 

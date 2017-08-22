@@ -15,14 +15,16 @@ body{
 }
 img#LoginLogo {
     position: absolute;
-    left: 33%;
-    top: 36%;
+    left: 28%;
+    top: 40%;
+    cursor: pointer;
 }
 
 img#RegiestLogo {
     position: absolute;
-    left: 65%;
+    left: 62%;
     top: 26%;
+    cursor: pointer;
 }
 
 div#firstView_p_Div {
@@ -160,6 +162,16 @@ input.input_login {
     padding-left: 5px;
     cursor: pointer;
 }
+input.input_regist {
+    font-size: 20px;
+    border: 0;
+    /* background-color: #ecf9e9; */
+    background-color: rgba(236, 249, 233, 0);
+    /* color: green; */
+    color: #367679;
+    padding-left: 5px;
+    cursor: pointer;
+}
 
 div#loginIn_Button {
     width: 100%;
@@ -199,6 +211,24 @@ div#loginIn_Button {
     color: #c5c5c5;
     font-weight: 200;
 }           /* IEÃƒÆ’Ã‚Â¦Ãƒâ€šÃ‚ÂµÃƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¨Ãƒâ€šÃ‚Â§Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¥ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢Ãƒâ€šÃ‚Â¨ */
+
+
+.input_regist::-webkit-input-placeholder{
+    color:#c5c5c5;
+    font-weight: 200;
+}    /* ÃƒÆ’Ã‚Â¤Ãƒâ€šÃ‚Â½Ãƒâ€šÃ‚Â¿ÃƒÆ’Ã‚Â§ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â¨webkitÃƒÆ’Ã‚Â¥ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã‚Â¦Ãƒâ€šÃ‚Â Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â§Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¦Ãƒâ€šÃ‚ÂµÃƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¨Ãƒâ€šÃ‚Â§Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¥ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢Ãƒâ€šÃ‚Â¨ */
+.input_regist:-moz-placeholder{
+    color:#c5c5c5;
+    font-weight: 200;
+}                  /* FirefoxÃƒÆ’Ã‚Â§ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¦Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¬4-18 */
+.input_regist::-moz-placeholder{
+    color:#c5c5c5;
+    font-weight: 200;
+}                  /* FirefoxÃƒÆ’Ã‚Â§ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¦Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¬19+ */
+.input_regist:-ms-input-placeholder{
+    color: #c5c5c5;
+    font-weight: 200;
+}
 
 div#regist_Button {
     width: 100%;
