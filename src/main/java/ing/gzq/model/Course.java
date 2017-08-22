@@ -16,9 +16,6 @@ public class Course {
     TeacherInfo teacherInfo;
     String name;
     String introduce;
-    Boolean state;
-    Boolean teacherOnline;
-    Boolean chat;
-    Boolean vote;
+    List<Lesson> lessons;
     String date;
 }
