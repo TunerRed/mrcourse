@@ -11,7 +11,7 @@
 <header>
     <h1>CLASSROOM ASSISTANT</h1>
     <div class="self-info">
-        <img src="image/profile_tch.png" class="profile">
+        <img src="image/portrait_tch.png" class="portrait">
         <span class="type">Tch</span>
         <span class="name">戴红军</span>
         <ul class="hover-box">
@@ -23,7 +23,7 @@
             </li>
             <li>
                 <a href="#"><img src="image/logout.png">
-                <span>注销账号</span></a>
+                    <span>注销账号</span></a>
             </li>
         </ul>
     </div>
@@ -65,9 +65,82 @@
         </li>
     </ul>
 </nav>
-<section class="bottom-bar">
+<section class="main" id="main" style="background-color: lightsalmon">
+    <div class="page-1">
+        <div class="row1">
+            <div class="tab-switcher">
+                <ul class="tab-switcher__title">
+                    <li>课堂学生</li>
+                    <li>签到学生</li>
+                </ul>
+                <ul class="tab-switcher__content">
+                    <li>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                        <a href="javascript:void(0)">郭卓强</a>
+                    </li>
+                </ul>
+            </div>
+            <video class="live-area" poster="image/live_poster_tch.jpg"></video>
+            <div class="course-introduce">
+                <h1>课程介绍<a href="javascript:void(0)" id="edit-course">修改</a></h1>
+                <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+            </div>
+            <div class="chat-area">
+                <div class="arrow-left"></div>
+                <div class="message-block">
+                    <div class="person-message">
+                        <div class="person-message__info">
+                            <img src="image/portrait.png" class="portrait">
+                            <span class="name">翁清涛</span>
+                        </div>
+                        <div class="person-message__content">我来啦</div>
+                    </div>
+                    <div class="system-message">
+                        <p>已关闭实时讨论</p>
+                        <p>请在上方开启</p>
+                    </div>
+                </div>
+                <div class="arrow-right"></div>
+            </div>
+        </div>
+        <div class="row2">
+
+        </div>
+    </div>
+</section>
+<section class="bottom-bar" id="bottom-bar">
     <div class="bottom-bar__left">学生管理 视频直播 课程介绍 实时讨论</div>
     <div class="bottom-bar__right">课程问题 课程公告 课程资料</div>
 </section>
+<script>
+    //    计算主体部分高度
+    function windownResizeHandler() {
+        var mainSection = document.getElementById("main");
+        var bottomBarSection = document.getElementById("bottom-bar");
+        mainSection.style.height = window.innerHeight - mainSection.offsetTop - bottomBarSection.offsetHeight + "px";
+    }
+    window.addEventListener("resize", windownResizeHandler)
+    windownResizeHandler()
+</script>
 </body>
 </html>
