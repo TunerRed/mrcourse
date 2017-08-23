@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index_tch.css">
     <link rel="stylesheet" href="css/question.css">
 </head>
 <body>
+<header id="header">
+    <h1>CLASSROOM ASSISTANT</h1>
+    <div class="self-info">
+        <img src="image/portrait_tch.png" class="portrait">
+        <span class="type">Tch</span>
+        <span class="name">戴红军</span>
+        <ul class="hover-box">
+            <li>
+                <a href="#">
+                    <img src="image/self.png">
+                    <span>个人信息</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"><img src="image/logout.png">
+                    <span>注销账号</span></a>
+            </li>
+        </ul>
+    </div>
+</header>
 <div class="nav-bar" id="bar">
     <div>公告栏
         <img class="icon" src="image/bulletin-icon.png" alt="点击添加公告" >
@@ -121,16 +144,23 @@
     </div>
 </div>
 
-
+<section class="bottom-bar" id="bottom-bar">
+    <div class="bottom-bar__left">学生管理 视频直播 课程介绍 实时讨论</div>
+    <div class="bottom-bar__right">课程问题 课程公告 课程资料</div>
+</section>
 
 </body>
 <script>
     var list_column = document.getElementsByClassName('list');
     var h = window.innerHeight;
     var bar = document.getElementById('bar');
+    var header = document.getElementById('header');
+    var b_bar = document.getElementById('bottom-bar');
     var bar_h = bar.offsetHeight;
+    var b_bar_h = b_bar.offsetHeight;
+    var header_h = header.offsetHeight;
     for(var i = 0 ;i<list_column.length;i++){
-        list_column[i].style.height = h-bar_h+'px';
+        list_column[i].style.height = h-bar_h-header_h-b_bar_h+'px';
     }
 
 </script>

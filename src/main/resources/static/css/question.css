@@ -130,6 +130,7 @@
     flex-direction: row;
     box-sizing: border-box;
 
+
 }
 .card{
     background-color: #f3f3f3;
@@ -223,6 +224,7 @@
     position: absolute;
     bottom: -2rem;
     margin-left: 1rem;
+    z-index: 0;
 }
 .mode{
     width: 40vw;
@@ -240,21 +242,21 @@
 }
 .mode-head{
     text-align: center;
-    line-height: 4rem;
-    height: 4rem;
+    line-height: 3rem;
+    height: 3rem;
     font-size: 2rem;
     color: #7c7c7c;
-    padding: 2.5rem 0 1.5rem 0;
+    padding: 10% 0 3% 0;
 }
 .mode-content{
     background-color: transparent;
     width: 80%;
-    height: 50%;
-    margin:0 auto;
+    height: 40%;
+    margin:3% auto;
     border:0;
     font-size: 1.3rem;
     color: #7c7c7c;
-    line-height: 1.5rem;
+    /*line-height: 1.5rem;*/
     /*text-align: center;*/
     margin-left: 10%;
 }
@@ -299,7 +301,7 @@
     clear: both;
     line-height: 1.8rem;
     vertical-align: text-bottom;
-    padding: 20px 0;
+    /*padding: 3% 0;*/
     text-align: center;
 }
 .mode-name span{
@@ -328,4 +330,9 @@
 .options-s input{
     width: 60%;
     font-size: 1.2rem;
+}
+@media screen and (max-width: 787px){
+    body{
+        width: 100%;
+    }
 }
