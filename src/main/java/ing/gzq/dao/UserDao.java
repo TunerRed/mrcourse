@@ -23,4 +23,6 @@ public interface UserDao {
     TeacherInfo getTeacherInfo(String teacherId);
 
     void giveAuthority(@Param("username") String username,@Param("role") String role);
+
+    void updateUserName(User u);
 }

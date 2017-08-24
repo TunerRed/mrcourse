@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 /**
  * Created by gzq on 17-7-19.
@@ -36,32 +37,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AccessDeniedHandler accessDeniedHandler;
 
+    @Autowired
+    LogoutSuccessHandler logoutSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/nologin")
-                .loginProcessingUrl("/login")
-                .successHandler(successHandler)
-                .failureHandler(failureHandler)
-                .permitAll()
+                .loginPage("/nologin").loginProcessingUrl("/login").successHandler(successHandler).failureHandler(failureHandler).permitAll()
                 .and()
                 .httpBasic()
-                .and()
-                .logout()
+                .and().logout().logoutUrl("/logout").invalidateHttpSession(true).clearAuthentication(true).logoutSuccessHandler(logoutSuccessHandler).permitAll()
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-//                .antMatchers("/teacher/**").hasRole("TEACHER")
-//                .antMatchers("/student/**").hasRole("STUDENT")
-//                .antMatchers("/common/**").hasAnyRole("STUDENT", "TEACHER")
+                .antMatchers("/teacher/**").hasRole("TEACHER")
+                .antMatchers("/student/**").hasRole("STUDENT")
+                .antMatchers("/common/**").hasAnyRole("STUDENT", "TEACHER")
+                .antMatchers("/websocket/**").hasAnyRole("STUDENT", "TEACHER")
                 .anyRequest().permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(bcryptEncoder());
     }
 
     @Bean

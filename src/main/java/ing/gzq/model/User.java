@@ -13,9 +13,11 @@ import java.util.Collection;
 @Data
 public class User implements UserDetails {
 
+
     private String username;
 
     private String name;
+
     @JsonIgnore
     private String password;
 

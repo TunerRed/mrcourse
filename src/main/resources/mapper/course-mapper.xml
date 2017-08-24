@@ -6,39 +6,39 @@
          INSERT INTO course (teacherId,name, introduce,`date`)
          VALUES (#{teacherId},#{name},#{introduce},NOW())
     </insert>
-    <insert id="insertLesson" parameterType="ing.gzq.model.Notice" useGeneratedKeys="true" keyProperty="id"
-            keyColumn="id">
-        INSERT INTO lesson (courseId, introduce, `date`, state)
-        VALUES (#{courseId},#{introduce},now(),1)
-    </insert>
+    <!--<insert id="insertLesson" parameterType="ing.gzq.model.Notice" useGeneratedKeys="true" keyProperty="id"-->
+            <!--keyColumn="id">-->
+        <!--INSERT INTO lesson (courseId, introduce, `date`, state)-->
+        <!--VALUES (#{courseId},#{introduce},now(),1)-->
+    <!--</insert>-->
     <insert id="insertStudentToCourse">
         INSERT INTO course_student
         VALUES (#{courseId},#{studentId})
     </insert>
-    <update id="updateLessonStateToZero" parameterType="long">
-        UPDATE lesson
-        SET state = 0
-        WHERE id = #{lessonId}
-    </update>
+    <!--<update id="updateLessonStateToZero" parameterType="long">-->
+        <!--UPDATE lesson-->
+        <!--SET state = 0-->
+        <!--WHERE id = #{lessonId}-->
+    <!--</update>-->
     <select id="getCourseByTeacherId" parameterType="string" resultMap="courseMap">
-        select `id` , teacherId , `name` , introduce , `date`
+        select `id` , teacherId , `name` , introduce , state,teacherOnline,chat,vote,`date`
         from course
         where teacherId = #{teacherId};
     </select>
-    <select id="getLessons" parameterType="string" resultType="ing.gzq.model.Lesson">
-        SELECT id , courseId , introduce , `date` , state
-        FROM lesson
-        WHERE courseId = #{courseId}
-    </select>
+    <!--<select id="getLessons" parameterType="string" resultType="ing.gzq.model.Lesson">-->
+        <!--SELECT id , courseId , introduce , `date` , state-->
+        <!--FROM lesson-->
+        <!--WHERE courseId = #{courseId}-->
+    <!--</select>-->
     <select id="getCourseByStudentId" parameterType="string" resultMap="courseMap">
-        select c.id , c.teacherId , c.name , c.introduce , c.date
+        select c.id , c.teacherId , c.name , c.introduce ,c.state,c.teacherOnline,c.chat,c.vote, c.date
         from course_student cs
         left join course c
         on cs.courseId = c.id
         WHERE cs.studentId = #{studentId}
     </select>
-    <select id="search" resultMap="courseMap2" parameterType="string">
-        SELECT id , teacherId , `name` ,introduce , `date`
+    <select id="search" resultMap="courseMap" parameterType="string">
+        SELECT id , teacherId , `name` ,introduce ,state,teacherOnline,chat,vote, `date`
         from course
         WHERE name LIKE #{regex}
     </select>
@@ -47,16 +47,12 @@
         <result property="teacherId" column="teacherId"/>
         <result property="name" column="name"/>
         <result property="introduce" column="introduce"/>
+        <result property="state" column="state"/>
+        <result property="teacherOnline" column="teacherOnline"/>
+        <result property="chat" column="chat"/>
+        <result property="vote" column="vote"/>
         <result property="date" column="date"/>
         <association property="teacherInfo" column="teacherId" select="ing.gzq.dao.UserDao.getTeacherInfo"/>
-        <collection property="lessons" column="id" select="ing.gzq.dao.CourseDao.getLessons"/>
-    </resultMap>
-    <resultMap id="courseMap2" type="ing.gzq.model.Course">
-        <id property="id" column="id"/>
-        <result property="teacherId" column="teacherId"/>
-        <result property="name" column="name"/>
-        <result property="introduce" column="introduce"/>
-        <result property="date" column="date"/>
-        <association property="teacherInfo" column="teacherId" select="ing.gzq.dao.UserDao.getTeacherInfo"/>
+        <!--<collection property="lessons" column="id" select="ing.gzq.dao.CourseDao.getLessons"/>-->
     </resultMap>
 </mapper>

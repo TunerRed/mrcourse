@@ -9,6 +9,11 @@
         INSERT INTO user_role
         VALUES (#{username},#{role})
     </insert>
+    <update id="updateUserName">
+        UPDATE user
+        SET name = #{name}
+        WHERE username = #{username}
+    </update>
     <select id="getUserByUsername" resultMap="userMap" parameterType="string">
         SELECT username , password , `name`, `type`
         FROM user

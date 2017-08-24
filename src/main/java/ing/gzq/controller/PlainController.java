@@ -3,7 +3,6 @@ package ing.gzq.controller;
 import ing.gzq.base.Result;
 import ing.gzq.base.ResultCache;
 import ing.gzq.model.User;
-import ing.gzq.service.MyUserDetailsServiceImpl;
 import ing.gzq.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

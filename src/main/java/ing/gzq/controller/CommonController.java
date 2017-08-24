@@ -8,11 +8,13 @@ import ing.gzq.model.User;
 import ing.gzq.service.CourseService;
 import ing.gzq.service.FileService;
 import ing.gzq.service.NoticeService;
+import ing.gzq.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,6 +34,9 @@ public class CommonController {
 
     @Autowired
     NoticeService noticeService;
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/course", method = RequestMethod.GET)
     public Result getCourse(Authentication auth) {
@@ -76,6 +81,18 @@ public class CommonController {
             e.printStackTrace();
             throw new FileNotFoundException("文件不存在");
         }
+    }
+
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    public Result getProfile(@PathVariable String userId) {
+        return ResultCache.getDataOk(userService.loadUserByUsername(userId));
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public Result modifyName(User user) {
+        if(StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getName()))
+            return ResultCache.getFailureDetail("昵称 或 密码 为空");
+        return userService.modifyName(user);
     }
 
 

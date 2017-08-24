@@ -24,6 +24,10 @@ create table course
 	teacherId varchar(255) not null,
 	name varchar(255) not null,
 	introduce varchar(255) not null,
+	state TINYINT(1) DEFAULT FALSE,
+	teacherOnline TINYINT(1) DEFAULT FALSE,
+	chat TINYINT(1) DEFAULT FALSE,
+	vote TINYINT(1) DEFAULT FALSE,
 	date datetime not null
 )
 ;
@@ -46,16 +50,16 @@ create table file
 	date datetime not null
 )
 ;
-DROP TABLE IF EXISTS lesson;
-create table lesson
-(
-	id bigint auto_increment
-		primary key,
-	courseId bigint not null,
-	introduce varchar(255) null,
-	date datetime not null,
-	state int(1) null
-)
+# DROP TABLE IF EXISTS lesson;
+# create table lesson
+# (
+# 	id bigint auto_increment
+# 		primary key,
+# 	courseId bigint not null,
+# 	introduce varchar(255) null,
+# 	date datetime not null,
+# 	state int(1) null
+# )
 ;
 DROP TABLE IF EXISTS notice;
 create table notice
