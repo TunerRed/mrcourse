@@ -37,15 +37,15 @@ public class TeacherController {
         return noticeService.uploadNotice(notice);
     }
 
-    @RequestMapping(value = "/start/{courseId}", method = RequestMethod.POST)
-    public Result startNewLesson(@PathVariable Long courseId, Lesson lesson) {
-        lesson.setCourseId(courseId);
-        return courseService.startNewLesson(lesson);
-    }
-
-    @RequestMapping(value = "/end/{lessonId}", method = RequestMethod.POST)
-    public Result endLesson(@PathVariable Long lessonId) {
-        return courseService.endLesson(lessonId);
-    }
+//    @RequestMapping(value = "/start/{courseId}", method = RequestMethod.POST)
+//    public Result startNewLesson(@PathVariable Long courseId, Lesson lesson) {
+//        lesson.setCourseId(courseId);
+//        return courseService.startNewLesson(lesson);
+//    }
+//
+//    @RequestMapping(value = "/end/{lessonId}", method = RequestMethod.POST)
+//    public Result endLesson(@PathVariable Long lessonId) {
+//        return courseService.endLesson(lessonId);
+//    }
 
 }
