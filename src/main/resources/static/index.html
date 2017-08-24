@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/index_tch.css">
+    <link rel="stylesheet" href="css/perinfo.css">
 </head>
 <body>
 <header>
@@ -66,7 +67,7 @@
     </ul>
 </nav>
 <section class="main" id="main">
-    <div class="page-1">
+    <div style="display:none" class="page-1">
         <div class="row1">
             <div class="tab-switcher left">
                 <ul class="tab-switcher__title">
@@ -151,6 +152,50 @@
                     </div>
                 </div>
                 <div class="arrow-right"></div>
+            </div>
+        </div>
+    </div>
+    <div id="perinfo_out">
+        <div id="perinfo_middle">
+            <div id="perinfo_in_up">
+                <div id="perinfo_little_name"  class="perInfo_little_div">
+                    真实姓名：<input type="text"  class="perInfo_input" id="perInfo_input_name" value="戴红军">
+                    <span id="perInfo_name">戴红军</span>
+                    <img src="image/perInfoPenlogo.png" class="penLogo">
+                </div>
+
+                <div id="perinfo_little_position"  class="perInfo_little_div">
+                    身份：<span id="perInfo_position">教师</span>
+                </div>
+
+                <div id="perinfo_little_Id"  class="perInfo_little_div">
+                    账号：<span id="perInfo_ID">123456789</span>
+                </div>
+
+                <div id="perinfo_little_password" class="perInfo_little_div">
+                    密码：<input type="password" id="perInfo_password" class="perInfo_input">
+                    <img src="image/perInfoPenlogo.png" class="penLogo">
+                </div>
+
+                <div id="perinfo_little_passwordIdentify" class="perInfo_little_div">
+                    确认密码：<input type="password" id="perInfo_passwordIdentify" class="perInfo_input">
+                </div>
+            </div>
+            <div id="perinfo_in_bottom">
+                <div class="perInfo_image_1">
+                     <div class="perInfo_image_2" style="color: #f97e99">
+                        <img id="back_img"  class="perInfo_logo"src="image/back.png">
+                        <br>
+                        返回首页
+                    </div>
+                </div>
+                <div  class="perInfo_image_1">
+                    <div class="perInfo_image_2" style="color: #5ccbbb">
+                        <img id="right_img" class="perInfo_logo" src="image/right_perInfo.png">
+                        <br>
+                        提交修改
+                    </div>
+                </div>
             </div>
         </div>
     </div>
