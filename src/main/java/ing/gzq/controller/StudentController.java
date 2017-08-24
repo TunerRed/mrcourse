@@ -29,4 +29,9 @@ public class StudentController {
     public Result join(@PathVariable  Long courseId) {
         return courseService.joinCourse(courseId);
     }
+
+    @RequestMapping(value = "/course/quit/{courseId}", method = RequestMethod.POST)
+    public Result quitCourse(@PathVariable  Long courseId) {
+        return courseService.quitCourse(courseId);
+    }
 }

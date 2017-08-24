@@ -21,12 +21,22 @@ public class NoticeService {
             return ResultCache.OK;
         }catch (Exception e){
             e.printStackTrace();
-            return ResultCache.getFailureDetail("参数不能为空");
+            return ResultCache.getFailureDetail(e.getMessage());
         }
     }
 
     public Result getNotice(Long courseId) {
         List<Notice> noticeList = noticeDao.getNotice(courseId);
         return ResultCache.getDataOk(noticeList);
+    }
+
+    public Result deleteNotice(Long noticeId) {
+        try{
+            noticeDao.deleteNotice(noticeId);
+            return ResultCache.OK;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultCache.getFailureDetail(e.getMessage());
+        }
     }
 }

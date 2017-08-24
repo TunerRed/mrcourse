@@ -2,6 +2,7 @@ package ing.gzq.dao;
 
 import ing.gzq.model.Course;
 import ing.gzq.model.Lesson;
+import ing.gzq.model.StudentInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,12 @@ public interface CourseDao {
     List<Course> search(String regex);
 
     void insertStudentToCourse(@Param("courseId") Long courseId,@Param("studentId") String studentId);
+
+    void modifyCourse(Course course);
+
+    List<StudentInfo> getStudentsByCourseId(Long courseId);
+
+    void deleteStudent(@Param("courseId") Long courseId,@Param("studentId") String studentId);
+
+    void modifyCourseState(Course course);
 }

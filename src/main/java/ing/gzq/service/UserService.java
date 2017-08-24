@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public User getUserInSecurityContext() {
+    public static User getUserInSecurityContext() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 

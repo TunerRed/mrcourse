@@ -11,4 +11,6 @@ public interface NoticeDao {
     void insertNotice(Notice notice);
 
     List<Notice> getNotice(Long courseId);
+
+    void deleteNotice(Long noticeId);
 }
