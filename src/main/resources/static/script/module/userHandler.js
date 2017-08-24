@@ -4,58 +4,6 @@ define(function (require) {
     var Ajax = require("ajax").Ajax;
 
 
-    /***
-     * 事件触发器
-     * @returns {emit}
-     * @constructor
-     */
-    function Emit() {
-        var events = {};
-
-
-        function emit() {
-
-        }
-
-        emit.prototype = {
-            on: function (eventName, eventFn) {
-                events[eventName] = events[eventName] || [];
-                events[eventName].push(eventFn);
-            },
-            trigger: function (eventName, _) {
-                for (var fn in events[eventName]) {
-                    events[eventName][fn].call(null, Array.prototype.slice.call(arguments, 1));
-                }
-            }
-        }
-
-        return new emit();
-    }
-
-
-    /***
-     * Events:
-     * error            call()
-     *
-     * registersuccess  call()
-     * registerfailed   call(message)
-     *
-     * loginsuccess     call()
-     * loginfaild       call(message)
-     *
-     * getcoursesuccess call(json)
-     * getcoursefailed  call(message)
-     *
-     * getcoursefilesuccess     call(json)
-     * getcoursefilefailed      call(message)
-     *
-     * postcoursefilesuccess    call()
-     * postcoursefilefailed     call(message)
-     *
-     * getnoticesuccess call(json)
-     * getnoticefailed  call(message)
-     * @constructor
-     */
     function UserHandler() {
 
         /****************************************************************/
@@ -70,9 +18,7 @@ define(function (require) {
 
         }
 
-        userHandler.prototype = new Emit();
-        userHandler.prototype.register = function (bundle) {
-            var that = this;
+        userHandler.prototype.register = function (bundle,success,failed) {
 
             var request = new Ajax("POST", API.register);
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded")
@@ -84,20 +30,20 @@ define(function (require) {
 
                         response = JSON.parse(response);
                         if (response.status === 200) {
-                            console.log("sucess register");
-                            that.trigger("registersuccess");
+                            console.log("success register");
+                            // that.trigger("registersuccess");
+                            success()
                         } else {
                             console.log("failed register");
-                            that.trigger("registerfailed", response.message);
+                            // that.trigger("registerfailed", response.message);
+                            failed(response.message)
                         }
                     });
 
 
         };
 
-        userHandler.prototype.login = function (bundle) {
-
-            var that = this;
+        userHandler.prototype.login = function (bundle,success,failed) {
 
             var request = new Ajax("POST", API.login);
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded")
@@ -108,22 +54,100 @@ define(function (require) {
                     response = JSON.parse(response);
                     if (response.status === 200) {
                         console.log("success login");
-                        that.trigger("loginsuccess");
+                        // that.trigger("registersuccess");
+                        success()
                     } else {
                         console.log("failed login");
-                        that.trigger("loginfailed", response.message);
+                        // that.trigger("registerfailed", response.message);
+                        failed(response.message)
                     }
                 });
 
 
         };
 
-        userHandler.prototype.logout = function () {
+        userHandler.prototype.logout = function (success,failed) {
+
+            var request = new Ajax("POST", API.logout);
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+                    if (response.status === 200) {
+                        console.log("success login");
+                        // that.trigger("registersuccess");
+                        success()
+                    } else {
+                        console.log("failed login");
+                        // that.trigger("registerfailed", response.message);
+                        failed(response.message)
+                    }
+                });
 
         };
 
-        userHandler.prototype.getCourse = function () {
-            var that = this;
+        userHandler.prototype.getUserInfo = function (username,success,failed) {
+
+            var request = new Ajax("GET", API.getUserInfo(username));
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+                    if (response.status === 200) {
+                        console.log("success getUSerInfo");
+                        // that.trigger("registersuccess");
+                        success(response.data)
+                    } else {
+                        console.log("failed getUserInfo");
+                        // that.trigger("registerfailed", response.message);
+                        failed(response.message)
+                    }
+                });
+
+        };
+
+        userHandler.prototype.updateUserInfo = function (bundle,success,failed) {
+
+            var request = new Ajax("POST", API.updateUserInfo);
+            request.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+
+            request.send(objectToFormData(bundle))
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+                    if (response.status === 200) {
+                        console.log("success updateInfo");
+                        success();
+                    } else {
+                        console.log("failed updateInfo");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        userHandler.prototype.getCourse = function (courseId,success,failed) {
+
+            var request = new Ajax("GET", API.getCourse(courseId));
+
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+                    if (response.status === 200) {
+                        console.log("success getcourse");
+                        success(response.data);
+                    } else {
+                        console.log("failed getcourse");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        userHandler.prototype.getAllCourse = function (success,failed) {
 
             var request = new Ajax("GET", API.getCourse);
 
@@ -133,19 +157,17 @@ define(function (require) {
                     response = JSON.parse(response);
                     if (response.status === 200) {
                         console.log("success getcourse");
-                        that.trigger("getcoursesuccess", response.data);
+                        success(response.data);
                     } else {
                         console.log("failed getcourse");
-                        that.trigger("getcoursefailed", response.message);
+                        failed(response.message);
                     }
 
                 });
 
         };
 
-        userHandler.prototype.getCourseFile = function (courseId) {
-
-            var that = this;
+        userHandler.prototype.getCourseFile = function (courseId,success,failed) {
 
             var request = new Ajax("GET", API.getCourseFile(courseId));
 
@@ -155,19 +177,17 @@ define(function (require) {
                     response = JSON.parse(response);
                     if (response.status === 200) {
                         console.log("success getcoursefile");
-                        that.trigger("getcoursefilesuccess", response.data);
+                        success(response.data);
                     } else {
                         console.log("failed getcoursefile");
-                        that.trigger("getcoursefilefailed", response.message);
+                        failed(response.message);
                     }
 
                 });
 
         };
 
-        userHandler.prototype.uploadCourseFile = function (courseId, file) {
-
-            var that = this;
+        userHandler.prototype.uploadCourseFile = function (courseId, file,success,failed) {
 
             var formdata = new FormData();
             formdata.append("file", file);
@@ -180,10 +200,10 @@ define(function (require) {
                     response = JSON.parse(response);
                     if (response.status === 200) {
                         console.log("success uploadfile");
-                        that.trigger("uploadfilesuccess");
+                        success()
                     } else {
                         console.log("failed uploadfile");
-                        that.trigger("uploadfilefailed", response.message);
+                        failed(response.message);
                     }
 
                 });
@@ -195,8 +215,7 @@ define(function (require) {
 
         };
 
-        userHandler.prototype.getNotice = function (courseId) {
-            var that = this;
+        userHandler.prototype.getNotice = function (courseId,success,failed) {
 
             var request = new Ajax("GET", API.getNotice(courseId));
 
@@ -206,10 +225,10 @@ define(function (require) {
                     response = JSON.parse(response);
                     if (response.status === 200) {
                         console.log("success getNotice");
-                        that.trigger("getnoticesuccess", response.data);
+                        success(response.data);
                     } else {
                         console.log("failed getnotice");
-                        that.trigger("getnoticefailed", response.message);
+                        failed(response.message);
                     }
 
                 });
@@ -221,27 +240,6 @@ define(function (require) {
 
     }
 
-    /***
-     * Events
-     *
-     * createcoursesuccess  call(data)
-     * createcoursefailed   call(message)
-     *
-     * uploadnoticesuccess  call()
-     * uploadnoticefailed   call(message)
-     *
-     * startlessonsuccess   call(json)
-     * startlessonfailed    call(message)
-     *
-     * continuelessonsuccess    call()
-     * continuelessonfailed     call(message)
-     *
-     * endlessonsuccess     call()
-     * endlessonfailed      call(message)
-     *
-     * @returns {teacherHandler}
-     * @constructor
-     */
     function TeacherHandler() {
 
         /****************************************************************/
@@ -258,9 +256,8 @@ define(function (require) {
 
         teacherHandler.prototype = new UserHandler();
 
-        teacherHandler.prototype.createCourse = function (bundle) {
+        teacherHandler.prototype.createCourse = function (bundle,success,failed) {
 
-            var that = this;
 
             var request = new Ajax("POST",API.createCourse);
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded");
@@ -273,18 +270,35 @@ define(function (require) {
 
                     if (response.status === 200) {
                         console.log("success createcourse");
-                        that.trigger("createcoursesuccess", response.data);
+                        success(response.data);
                     } else {
                         console.log("failed getcourse");
-                        that.trigger("createcoursefailed", response.message);
+                        failed(response.message);
                     }
 
                 })
         };
 
-        teacherHandler.prototype.uploadNotice = function (courseId,bundle) {
+        teacherHandler.prototype.updateCourse = function (courseId,bundle,success,failed) {
 
-            var that = this;
+            var request = new Ajax("POST",API.updateCourse(courseId));
+            request.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+            request.send(objectToFormData(bundle))
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success uploadnotice");
+                        success();
+                    } else {
+                        console.log("failed getcourse");
+                        failed(response.message);
+                    }
+
+                })
+        };
+
+        teacherHandler.prototype.uploadNotice = function (noticeId,bundle,success,failed) {
 
             var request = new Ajax("POST",API.uploadNotice(courseId));
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded");
@@ -296,74 +310,103 @@ define(function (require) {
 
                     if (response.status === 200) {
                         console.log("success uploadnotice");
-                        that.trigger("uploadnoticesuccess");
+                        success();
                     } else {
                         console.log("failed getcourse");
-                        that.trigger("uploadnoticefailed", response.message);
+                        failed(response.message);
                     }
 
                 })
         };
 
-        teacherHandler.prototype.startLesson = function (courseId,bundle) {
+        teacherHandler.prototype.deleteNotice = function (noticeId,success,failed) {
 
-            var that = this;
-
-            var request = new Ajax("POST",API.startLesson(courseId));
-            request.send(objectToFormData({
-                introduce:bundle?bundle.introduce:""
-            }))
-                .then(function (response) {
-                    response = JSON.parse(response);
-
-                    if (response.status === 200) {
-                        console.log("success startlesson");
-                        that.trigger("startlessonsuccess", response.data);
-                    } else {
-                        console.log("failed startleson");
-                        that.trigger("startlessonfailed", response.message);
-                    }
-
-                });
-
-        };
-
-        teacherHandler.prototype.continueLesson = function (courseId,lessonId) {
-
-            var that = this;
-
-            var request = new Ajax("POST",API.continueLesson(courseId,lessonId));
+            var request = new Ajax("POST",API.deleteNotice(noticeId));
             request.send()
                 .then(function (response) {
                     response = JSON.parse(response);
 
                     if (response.status === 200) {
-                        console.log("success continuelesson");
-                        that.trigger("continuelessonsuccess");
+                        console.log("success uploadnotice");
+                        success();
                     } else {
-                        console.log("failed continueleson");
-                        that.trigger("continuelessonfailed", response.message);
+                        console.log("failed getcourse");
+                        failed(response.message);
+                    }
+
+                })
+        };
+
+        teacherHandler.prototype.getCourseMember = function (courseId,success,failed) {
+
+            var request = new Ajax("GET", API.getCourseMember(courseId));
+
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+                    if (response.status === 200) {
+                        console.log("success getcourse");
+                        success(response.data);
+                    } else {
+                        console.log("failed getcourse");
+                        failed(response.message);
                     }
 
                 });
 
         };
 
-        teacherHandler.prototype.endLesson = function (lessonId) {
+        teacherHandler.prototype.deleteCourseMember = function (courseId,studentId,success,failed) {
 
-            var that = this;
+            var request = new Ajax("POST",API.deleteCourseMember(courseId,studentId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
 
-            var request = new Ajax("POST",API.endLesson(lessonId));
+                    if (response.status === 200) {
+                        console.log("success uploadnotice");
+                        success();
+                    } else {
+                        console.log("failed getcourse");
+                        failed(response.message);
+                    }
+
+                })
+        };
+
+        teacherHandler.prototype.startCourse = function (courseId,success,failed) {
+
+            var request = new Ajax("POST",API.startLesson(courseId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success startCourse");
+                        success(response.data);
+                    } else {
+                        console.log("failed startCourse");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        teacherHandler.prototype.endCourse = function (courseId,success,failed) {
+
+            var request = new Ajax("POST",API.endCourse(courseId));
             request.send()
                 .then(function (response) {
                     response = JSON.parse(response);
 
                     if (response.status === 200) {
                         console.log("success endlesson");
-                        that.trigger("endlessonsuccess");
+                        success();
                     } else {
                         console.log("failed endleson");
-                        that.trigger("endlessonfailed", response.message);
+                        failed(response.message);
                     }
 
                 });
@@ -374,17 +417,6 @@ define(function (require) {
         return new teacherHandler();
     }
 
-    /***
-     * Events
-     * searchcoursesuccess  call(json)
-     * searchcoursefailed   call(message)
-     *
-     * joincoursesuccess    call()
-     * joincoursefailed     call(message)
-     *
-     * @returns {studentHandler}
-     * @constructor
-     */
     function StudentHandler() {
 
         /****************************************************************/
@@ -401,9 +433,7 @@ define(function (require) {
 
         studentHandler.prototype = new UserHandler();
 
-        studentHandler.prototype.searchCourse = function (keyWord) {
-
-            var that = this;
+        studentHandler.prototype.searchCourse = function (keyWord,success,failed) {
 
             var request = new Ajax("GET",API.searchCourse(keyWord));
             request.send()
@@ -413,19 +443,37 @@ define(function (require) {
 
                     if (response.status === 200) {
                         console.log("success searchcourse");
-                        that.trigger("searchcoursesuccess",response.data);
+                        success(response.data);
                     } else {
                         console.log("failed searchcourse");
-                        that.trigger("searchcoursefailed", response.message);
+                        failed(response.message);
                     }
 
                 })
 
         };
 
-        studentHandler.prototype.joinCourse = function (courseId) {
+        teacherHandler.prototype.searchAllCourse = function (success,failed) {
 
-            var that = this;
+            var request = new Ajax("GET", API.searchAllCourse);
+
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+                    if (response.status === 200) {
+                        console.log("success getcourse");
+                        success(response.data);
+                    } else {
+                        console.log("failed getcourse");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        studentHandler.prototype.joinCourse = function (courseId,success,failed) {
 
             var request = new Ajax("POST",API.joinCourse(courseId));
             request.send()
@@ -435,10 +483,50 @@ define(function (require) {
 
                     if (response.status === 200) {
                         console.log("success joincourse");
-                        that.trigger("joincoursesuccess");
+                        success()
                     } else {
                         console.log("failed joincourse");
-                        that.trigger("joincoursefailed", response.message);
+                        failed(response.message);
+                    }
+
+                })
+
+        };
+
+        studentHandler.prototype.quitCourse = function (courseId,success,failed) {
+
+            var request = new Ajax("POST",API.searchCourse(courseId));
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success searchcourse");
+                        success();
+                    } else {
+                        console.log("failed searchcourse");
+                        failed(response.message);
+                    }
+
+                })
+
+        };
+
+        studentHandler.prototype.checkIn = function (courseId,success,failed) {
+
+            var request = new Ajax("POST",API.checkIn(courseId));
+            request.send()
+                .then(function (response) {
+
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success searchcourse");
+                        success();
+                    } else {
+                        console.log("failed searchcourse");
+                        failed(response.message);
                     }
 
                 })
@@ -459,7 +547,6 @@ define(function (require) {
 
     return {
         TeacherHandler: TeacherHandler,
-        StudentHandler: StudentHandler,
-        Emit: Emit
+        StudentHandler: StudentHandler
     }
 })
