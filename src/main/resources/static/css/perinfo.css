@@ -1,0 +1,59 @@
+div#perinfo_out {height: 100%;background-color: #ecebeb;}
+
+div#perinfo_middle {
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+    background-color: #efefef;
+}
+.perInfo_image_1 {
+    width: 49%;
+    height: 79px;
+    display: inline-block;
+    /* margin: 0 auto; */
+    /* float: left; */
+}
+
+div#perinfo_in_bottom {
+    width: 60%;
+    margin: 0 auto;
+}
+.perInfo_image_2 {
+    margin: 0 auto;
+    width: 56%;
+    text-align: center;
+}
+
+.perInfo_logo {
+    /* margin: 0 auto; */
+    /* text-align: center; */
+    padding-bottom: 10%;
+    cursor: pointer;
+}
+div#perinfo_in_up {
+    width: 70%;
+    margin: 0 auto;
+    /* text-align: center; */
+}
+
+.perinfo_little_div {
+    margin: 0 auto;
+}
+
+.perInfo_little_div {
+    margin: 0 auto;
+    width: 80%;
+    height: 50px;
+    position: relative;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+img.penLogo {
+    position: absolute;
+    right: 1%;
+    /* float: right; */
+    /* text-align: right; */
+    cursor: pointer;
+}

@@ -1,6 +1,17 @@
 /**
  * Created by 延松松松松 on 2017/8/20.
+ *
+ *
+ *
  */
+
+require.config({
+
+    paths: {
+        "jquery": "module/jquery",
+        "API":"module/API"
+    }
+});
 //下面写注册小div中的滑块
 
 var state_slide = 0;
@@ -74,8 +85,9 @@ function showRegistDiv() {
     registDiv.style.display = "block";
 }
 
-//对关闭图标的显示
+//对关闭图标的js
 function Login_close() {
+
     logininDiv.style.display = "none";
     firstViewDiv.style.display = "block";
     //当退出登录界面时 清空信息
@@ -100,5 +112,22 @@ function goRegist() {
     registDiv.style.display = "block";
 }
 
-
+//
+//
+// require(['jquery',"API"],function ($,API) {
+//     //下面写注册ajax
+//     $.Ajax(
+//         {
+//             url:API.register,
+//             method:"POST",
+//             dataType:"json",
+//             data:{
+//
+//
+//             }
+//
+//
+//         }
+//     )
+// });
 
