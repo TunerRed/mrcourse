@@ -266,7 +266,6 @@ nav>ul>li{
     width: 100%;
 }
 .page-1 .row2{
-    background-color: lightblue;
     flex-basis: 150px;
     flex-shrink: 0;
 }
@@ -284,7 +283,7 @@ nav>ul>li{
     box-sizing: border-box;
 }
 .page-1 .row1 .middle{
-    background-color: lightcyan;
+    background-image: linear-gradient(to right,#484673,#573873,#464873);
     flex-grow: 1;
     object-fit: contain;
 }
@@ -336,7 +335,70 @@ ul.tab-switcher__content>li:not(.active){
     right: 1em;
     bottom: 1.125em;
 }
-
+.chat-area{
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.message-block{
+    height: 100%;
+    width: 1000%;
+    background-color: rgb(233,233,233);
+}
+.person-message,.system-message{
+    width: 250px;
+    height: 100%;
+    box-sizing: border-box;
+    border-right: 1px solid gray;
+    float: left;
+    padding: 0 1em;
+}
+.person-message{
+    color: #767676;
+}
+.system-message{
+    color: #a2a2a2;
+}
+.person-message__info{
+    padding: .5em 0;
+}
+.person-message__info .portrait{
+    height: 2em;
+    width: 2em;
+    object-fit: contain;
+    vertical-align: middle;
+}
+.person-message__info .name{
+    vertical-align: middle;
+}
+.person-message__content{
+    font-size: .9em;
+}
+.system-message__content{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 1.5;
+}
+.chat-area .arrow-left,.chat-area .arrow-right{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 30px;
+    background-color: rgb(216,216,216);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50% auto;
+}
+.chat-area .arrow-left{
+    left: 0;
+    background-image: url("../image/arrow_left.png") ;
+}
+.chat-area .arrow-right{
+    right: 0;
+    background-image: url("../image/arrow_right.png") ;
+}
 
 
 
