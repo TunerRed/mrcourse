@@ -276,7 +276,6 @@ nav>ul>li{
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow: hidden;
 }
 .page-1 .row1{
     color: white;
