@@ -220,18 +220,40 @@
     </div>
 </section>
 <section class="bottom-bar" id="bottom-bar">
-    <div class="bottom-bar__left">学生管理 视频直播 课程介绍 实时讨论</div>
+    <div class="bottom-bar__left active">学生管理 视频直播 课程介绍 实时讨论</div>
     <div class="bottom-bar__right">课程问题 课程公告 课程资料</div>
 </section>
 <script>
+
     //    计算主体部分高度
     function windownResizeHandler() {
+        var list = document.body.childNodes;
+        var heightSpecified = window.innerHeight;
         var mainSection = document.getElementById("main");
-        var bottomBarSection = document.getElementById("bottom-bar");
-        mainSection.style.height = window.innerHeight - mainSection.offsetTop - bottomBarSection.offsetHeight + "px";
+        for (var i in list){
+            if (list[i].nodeType === 1 && list[i]!=mainSection) {
+                heightSpecified -= list[i].offsetHeight;
+            }
+        }
+        mainSection.style.height = heightSpecified + "px";
     }
     window.addEventListener("resize", windownResizeHandler)
-    windownResizeHandler()
+    windownResizeHandler();
+    if (isMobile()) {
+        (function () {
+            //    bottom-bar上浮
+            var bottomBarSection = document.getElementById("bottom-bar");
+            var nav = document.getElementsByTagName("nav")[0];
+            var mainSection = document.getElementById("main");
+            document.body.removeChild(bottomBarSection);
+            document.body.insertBefore(bottomBarSection,nav);
+
+//            替换bottom-bar文字
+            bottomBarSection.getElementsByClassName("bottom-bar__left")[0].innerHTML = "课堂 介绍 讨论";
+            bottomBarSection.getElementsByClassName("bottom-bar__right")[0].innerHTML = "公告 问题 资料";
+
+        }());
+    }
 </script>
 </body>
 </html>
