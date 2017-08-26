@@ -28,7 +28,7 @@
     margin: 0 auto;
     border-bottom: 1px solid #d0d0d0;
 }
-.content:nth-last-child(1){
+.content:nth-last-child(1 ){
     border-bottom: 0;
 }
 .content:nth-child(2n) .content-time{
