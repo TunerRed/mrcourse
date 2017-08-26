@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    padding:0;
+}
 .wrap{
     background-color: #f6f6f6;
 }
@@ -100,3 +104,12 @@
 /*.content .content-answer{*/
     /*color: red;*/
 /*}*/
+
+.close{
+    height: 0;
+    overflow: hidden;
+}
+.open{
+    transition: height 1s;
+    overflow: auto;
+}
