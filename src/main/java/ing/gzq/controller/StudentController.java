@@ -34,4 +34,9 @@ public class StudentController {
     public Result quitCourse(@PathVariable  Long courseId) {
         return courseService.quitCourse(courseId);
     }
+
+    @RequestMapping(value = "/checkIn/{courseId}", method = RequestMethod.POST)
+    public Result sign(@PathVariable Long courseId) {
+        return courseService.sign(courseId);
+    }
 }

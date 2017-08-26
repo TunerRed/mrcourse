@@ -15,6 +15,10 @@
         INSERT INTO course_student
         VALUES (#{courseId}, #{studentId})
     </insert>
+    <insert id="sign">
+        INSERT INTO sign
+        VALUES (#{courseId},#{studentId})
+    </insert>
     <update id="modifyCourse" parameterType="ing.gzq.model.Course">
         UPDATE course
         SET introduce = #{introduce}
@@ -28,6 +32,10 @@
     <delete id="deleteStudent">
         DELETE FROM course_student
         WHERE courseId = #{courseId} AND studentId = #{studentId}
+    </delete>
+    <delete id="clearSign">
+        DELETE FROM sign
+        WHERE courseId = #{courseId}
     </delete>
     <!--<update id="updateLessonStateToZero" parameterType="long">-->
     <!--UPDATE lesson-->
@@ -89,6 +97,13 @@
         LEFT JOIN user as u
         ON cs.studentId = u.username
         WHERE cs.courseId = #{courseId}
+    </select>
+    <select id="getAllSignedStudent" resultType="ing.gzq.model.StudentInfo">
+        SELECT u.username,u.name,u.introduce
+        FROM sign s
+        LEFT JOIN user u
+        ON s.studentId = u.username
+        WHERE s.courseId = #{courseId}
     </select>
     <resultMap id="courseMap" type="ing.gzq.model.Course">
         <id property="id" column="id"/>

@@ -17,14 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlainController {
 
     @Autowired
-    MyUserDetailsServiceImpl anthService;
-
-    @Autowired
     UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result register(User user) {
-        if (anthService.loadUserByUsername(user.getUsername()) != null) {
+        if (userService.loadUserByUsername(user.getUsername()) != null) {
             return ResultCache.getFailureDetail("该账号已经被注册");
         }
         return userService.insertUser(user);

@@ -10,6 +10,7 @@ import ing.gzq.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -63,12 +64,14 @@ public class CourseService {
         }
     }
 
+    @Transactional
     public Result endCourse(long courseId) {
         try {
             Course course = new Course();
             course.setId(courseId);
             course.setState(false);
             courseDao.modifyCourseState(course);
+            courseDao.clearSign(courseId);
             return ResultCache.OK;
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,6 +128,17 @@ public class CourseService {
             courseDao.deleteStudent(courseId,user.getUsername());
             return ResultCache.OK;
         }catch (Exception e){
+            e.printStackTrace();
+            return ResultCache.getFailureDetail(e.getMessage());
+        }
+    }
+
+    public Result sign(Long courseId) {
+        try {
+            User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            courseDao.sign(courseId,user.getUsername());
+            return ResultCache.OK;
+        } catch (Exception e) {
             e.printStackTrace();
             return ResultCache.getFailureDetail(e.getMessage());
         }

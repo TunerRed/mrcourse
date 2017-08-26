@@ -75,7 +75,6 @@ DROP TABLE IF EXISTS sign;
 create table sign
 (
 	courseId bigint not null,
-	lessonId bigint not null,
 	studentId varchar(255) not null
 )
 ;

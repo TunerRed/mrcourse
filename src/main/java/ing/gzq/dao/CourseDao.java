@@ -36,4 +36,10 @@ public interface CourseDao {
     void deleteStudent(@Param("courseId") Long courseId,@Param("studentId") String studentId);
 
     void modifyCourseState(Course course);
+
+    void sign(@Param("courseId") Long courseId,@Param("studentId") String studentId);
+
+    void clearSign(Long courseId);
+
+    List<StudentInfo> getAllSignedStudent(Long courseId);
 }

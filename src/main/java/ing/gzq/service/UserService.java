@@ -47,6 +47,9 @@ public class UserService implements UserDetailsService {
         if (!"student".equals(user.getType()) && !"teacher".equals(user.getType())) {
             return ResultCache.getFailureDetail("用户类型只能为student or teacher");
         }
+
+        user.setPassword(bcryptEncoder.encode(user.getPassword()));
+
         userDao.insertUser(user);
         if ("student".equals(user.getType())) {
             userDao.giveAuthority(user.getUsername(), STUDENT_ROLE);

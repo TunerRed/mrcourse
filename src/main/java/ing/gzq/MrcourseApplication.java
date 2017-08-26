@@ -11,7 +11,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 public class MrcourseApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(MrcourseApplication.class, args);
 	}
 	@Override
