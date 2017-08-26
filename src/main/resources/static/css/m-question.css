@@ -26,7 +26,10 @@
 .content{
     width:90%;
     margin: 0 auto;
-    border-top: 1px solid #d0d0d0;
+    border-bottom: 1px solid #d0d0d0;
+}
+.content:nth-last-child(1){
+    border-bottom: 0;
 }
 .content:nth-child(2n) .content-time{
     color: orange;
@@ -88,6 +91,7 @@
     width: 90%;
     height: 1rem;
     margin-left: 5%;
+    border:none;
 }
 .content-input input:focus{
     /*border: 0;*/
