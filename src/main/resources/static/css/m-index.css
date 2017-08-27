@@ -9,6 +9,9 @@ body{
 li{
     list-style: none;
 }
+html{
+    font-size: 14px;
+}
 
 /************************************************************/
 /*                                                          */
@@ -17,9 +20,9 @@ li{
 /************************************************************/
 header{
     background-size: cover;
-    background-position: 40% center;
+    background-position: left center;
     position: relative;
-    background-image: url("../image/bg_topbar_tch.jpg");
+    background-image: url("../image/bg_topbar_stu.jpg");
 }
 header h1{
     font-size: 150%;
@@ -100,224 +103,209 @@ nav{
 
 
 .switcher{
-    display: inline-flex;
+    /*display: inline-flex;*/
 }
 .switcher__on,.switcher__off{
     margin: 0 .3em;
-    flex-grow: 1;
+    /*flex-grow: 1;*/
+    display: inline-block;
 }
-.drag-box{
-    position: relative;
+.switcher.on .switcher__on{
+    color: #5ccbbb;
 }
-.drag-box__container{
-    z-index: 2;
-    color: #d0d0d0;
-    padding-bottom: .5em;
-    background-color: #f5f5f5;
-    text-align: center;
-    width: 100%;
-    position: absolute;
-    top: 100%;
-    opacity: 0;
-    pointer-events: none;
-
-    transition-duration: .2s;
-    transition-property: opacity;
-}
-.drag-box__item{
-    position: relative;
-    transition-duration: .1s;
-    transition-property: background;
-}
-.drag-box__item a{
-    padding: .5em 0;
-    display: block;
-}
-.drag-box__item:hover{
-    background-color: rgba(255,255,255,.5);
-}
-.drag-box__bottom-bar{
-    display: block;
-    padding: 1em 0;
-}
-.drag-box:hover .drag-box__container{
-    opacity: 1;
-    display: block;
-    pointer-events: initial;
+.switcher.off .switcher__off{
+    color: #f96989;
 }
 
-.drag-box__item.on{
-    color: rgb(255,209,98);
-}
-.drag-box__item.on:after{
-    content: "";
-    position: absolute;
-    right: 1em;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1em;
-    height: 1em;
-    background-color: rgb(255,209,98);
-    border-radius: 50%;
-}
 
 /************************************************************/
 /*                                                          */
 /*                  主体从这里开始                             */
 /*                                                          */
-/*************************,***********************************/
+/*************************************************************/
 .page-1{
     display: flex;
     flex-direction: column;
-    height: 100%;
-    overflow: hidden;
+    height:100%;
 }
-.page-1 .row1{
-    color: white;
+.block.course-list,.block.course-info{
+    flex-shrink: 0;
+}
+.block.chat-area{
     flex-grow: 1;
+}
+.block__title{
+    background-color: rgb(239,239,239);
+    color: #8d8d8d;
+    padding: .75em 1em;
+}
+.course-list .block__title,.course-info .block__title{
     display: flex;
-    width: 100%;
-}
-.page-1 .row2{
-    flex-basis: 150px;
-    flex-shrink: 0;
-}
-.page-1 .row1 .left{
-    background-color: rgb(56,85,114);
-    flex-basis: 300px;
-    flex-shrink: 0;
     position: relative;
 }
-.page-1 .row1 .right{
-    background-color: rgb(56,85,115);
-    flex-basis: 300px;
-    flex-shrink: 0;
-    padding: 0 1em;
-    box-sizing: border-box;
-}
-.page-1 .row1 .middle{
-    background-image: linear-gradient(to right,#484673,#573873,#464873);
-    flex-grow: 1;
-    object-fit: contain;
-}
-ul.tab-switcher__title{
-    display: flex;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    width: 100%;
-}
-ul.tab-switcher__title>li{
-    background-color: rgb(88,124,165);
-    flex-grow: 1;
+.course-list .block__title>*,.course-info .block__title>*{
     flex-basis: 0;
-    padding: .5em 0;
+    flex-grow: 1;
 }
-ul.tab-switcher__title>li.active{
-    background-color: rgb(56,85,114);
+.chat-area .block__title{
+    text-align: center;
 }
-ul.tab-switcher__content{
-    padding-top: 32px;
-    box-sizing: border-box;
-    height: 100%;
-    overflow-y: scroll;
+.course-list .block__title:after,.course-info .block__title:after{
+    content: "";
+    position: absolute;
+    top: .75em;
+    right: .5em;
+    width: 1em;
+    height: 1em;
+    background-image: url("../image/arrow_right.png");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
-ul.tab-switcher__content>li{
-    background-color: rgb(56,85,114);
-    padding: .5em 1em;
+.course-list .block__content{
+    display: flex;
 }
-ul.tab-switcher__content>li:not(.active){
-    display: none;
+.course-list .block__content ul{
+    flex-basis: 0;
+    flex-grow: 1;
+    padding: 1em;
 }
-
-
-.page-1 .stu-list>li{
+.course-info .block__content{
+    display: flex;
+}
+.course-info .course-introduce{
+    flex-grow: 1;
+    padding: 1em;
+    color: #6e6e6e;
+}
+.course-introduce h1{
+    text-align: center;
     padding: .3em;
 }
-.page-1 .right h1{
-    padding: 1em 0;
-    font-size: 1.2em;
-    font-weight: normal;
-    text-align: center;
-    position: relative;
+.course-info .button-group{
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 1em;
+    color: white;
+    min-height: 100px;
 }
-#edit-course{
-    color: #749bc3;
-    position: absolute;
-    font-size: .8em;
-    right: 1em;
-    bottom: 1.125em;
+.course-info .button-group .button{
+    background-color: rgb(92,203,187);
+    border-radius: 5px;
+    padding: .5em .75em;
+    text-align: center;
+}
+.course-info .button-group .button.disabled{
+    background-color: rgb(187,187,187);
 }
 .chat-area{
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.chat-area .block__title{
+    flex-shrink: 0;
+}
+.chat-area .block__content{
+    flex-grow: 1;
+}
+.chat-area .block__content{
+    font-size: .9em;
     position: relative;
-    overflow: hidden;
 }
 .message-block{
-    height: 100%;
-    width: 1000%;
-    background-color: rgb(233,233,233);
-}
-.person-message,.system-message{
-    width: 250px;
-    height: 100%;
+    padding: .5em .5em 0 .5em;
     box-sizing: border-box;
-    border-right: 1px solid gray;
-    float: left;
-    padding: 0 1em;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 2.5em;
+    /*background-color: red;*/
+    overflow-y: scroll;
 }
 .person-message{
-    color: #767676;
+    display: flex;
+    align-items: flex-start;
 }
-.system-message{
-    color: #a2a2a2;
+.person-message,.system-message{
+    margin-bottom: 1em;
 }
 .person-message__info{
-    padding: .5em 0;
+    flex-shrink: 0;
+    margin: 0 .7em;
 }
 .person-message__info .portrait{
-    height: 2em;
-    width: 2em;
-    object-fit: contain;
-    vertical-align: middle;
+    width: 3em;
+    height: 3em;
 }
 .person-message__info .name{
-    vertical-align: middle;
+    display: block;
+    text-align: center;
 }
 .person-message__content{
-    font-size: .9em;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.person-message__content .wrapper{
+    background-color: rgb(239,239,239);
+    border-radius: 5px;
+    padding: .75em;
+    display: inline-block;
+}
+.system-message{
+    text-align: center;
 }
 .system-message__content{
-    text-align: center;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 1.5;
+    display: inline-block;
+    background-color: rgb(239,239,239);
+    border-radius: 5px;
+    padding: .3em 2em;
 }
-.chat-area .arrow-left,.chat-area .arrow-right{
+.pre-sending-area{
     position: absolute;
-    top: 0;
-    height: 100%;
-    width: 30px;
-    background-color: rgb(216,216,216);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 50% auto;
-}
-.chat-area .arrow-left{
+    bottom: 0;
     left: 0;
-    background-image: url("../image/arrow_left.png") ;
+    width: 100%;
 }
-.chat-area .arrow-right{
-    right: 0;
-    background-image: url("../image/arrow_right.png") ;
+.pre-sending-area input{
+    width: 100%;
+    border-width: 0 0 1px 0;
+    border-color: rgb(92,203,187);
+    outline: none;
 }
-
-
-
+.pre-sending-area .button{
+    background-color: rgb(92,203,187);
+    display: inline-block;
+    position: absolute;
+    right: 1em;
+    bottom: .3em;
+    padding: .5em .75em;
+    border-radius: 5px;
+}
 
 /************************************************************/
 /*                                                          */
 /*                      媒体查询(放在最后)                     */
 /*                                                          */
 /************************************************************/
+
+
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+header,nav{
+    flex-shrink: 0;
+}
+section.main{
+    flex-grow: 1;
+    flex-basis: 0;
+    align-items: stretch;
+    display: flex;
+}

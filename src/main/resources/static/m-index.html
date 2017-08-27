@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>课堂助手</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel='stylesheet' href='css/m-index.css'>
 </head>
@@ -33,90 +35,104 @@
 </nav>
 <section class="main" id="main">
     <div class="page-1">
-        <div class="row1">
-            <div class="tab-switcher left">
-                <ul class="tab-switcher__title">
-                    <li class="active">课堂学生</li>
-                    <li>签到学生</li>
-                </ul>
-                <ul class="tab-switcher__content">
-                    <li class="active">
-                        <ul class="stu-list">
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <ul class="stu-list">
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                            <li>郭卓强</li>
-                        </ul>
-                    </li>
-                </ul>
+        <div class="block course-list">
+            <div class="block__title">
+                <div>所有课堂 <span id="all-courses-sum">102</span></div>
+                <div>我的课堂 <span id="my-courses-sum">11</span></div>
             </div>
-            <div class="middle">
-                <video class="live-area" poster="image/live_poster_tch.jpg" style="width: 100%;height: 100%"></video>
-            </div>
-            <div class="course-introduce right">
-                <h1>课程介绍<a href="javascript:void(0)" id="edit-course">修改</a></h1>
-                <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+            <div class="block__content">
+                <ul class="all-courses">
+                    <li><a href="javascript:void(0)"></a>xx</li>
+                    <li><a href="javascript:void(0)"></a>aa</li>
+                    <li><a href="javascript:void(0)"></a>xxx</li>
+                    <li><a href="javascript:void(0)"></a>aaa</li>
+                </ul>
+                <ul class="my-courses">
+                    <li><a href="javascript:void(0)"></a>xx</li>
+                    <li><a href="javascript:void(0)"></a>aa</li>
+                    <li><a href="javascript:void(0)"></a>xxx</li>
+                    <li><a href="javascript:void(0)"></a>aaa</li>
+                </ul>
             </div>
         </div>
-        <div class="row2">
-            <div class="chat-area">
-                <div class="arrow-left"></div>
+        <div class="block course-info">
+            <div class="block__title">
+                <div>课堂 <span id="now-course">aaaa</span></div>
+                <div class="switcher on">
+                    状态
+                    <div class="switcher__on">上课中</div>
+                    <div class="switcher__off">已下课</div>
+                </div>
+            </div>
+            <div class="block__content">
+                <div class="course-introduce">
+                    <h1>课程介绍</h1>
+                    <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+                </div>
+                <div class="button-group">
+                    <div class="button disabled">已进入课堂</div>
+                    <div class="button">签到</div>
+                </div>
+            </div>
+        </div>
+        <div class="block chat-area">
+            <div class="block__title">讨论区</div>
+            <div class="block__content">
                 <div class="message-block">
                     <div class="person-message">
                         <div class="person-message__info">
                             <img src="image/portrait.png" class="portrait">
                             <span class="name">翁清涛</span>
                         </div>
-                        <div class="person-message__content">我来啦</div>
+                        <div class="person-message__content">
+                            <div class="wrapper">
+                                我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦
+                            </div>
+                        </div>
                     </div>
                     <div class="person-message">
                         <div class="person-message__info">
                             <img src="image/portrait.png" class="portrait">
                             <span class="name">翁清涛</span>
                         </div>
-                        <div class="person-message__content">我来啦</div>
+                        <div class="person-message__content">
+                            <div class="wrapper">
+                                我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦
+                            </div>
+                        </div>
                     </div>
                     <div class="person-message">
                         <div class="person-message__info">
                             <img src="image/portrait.png" class="portrait">
                             <span class="name">翁清涛</span>
                         </div>
-                        <div class="person-message__content">我来啦</div>
+                        <div class="person-message__content">
+                            <div class="wrapper">
+                                wodsfdsf
+                            </div>
+                        </div>
+                    </div>
+                    <div class="person-message">
+                        <div class="person-message__info">
+                            <img src="image/portrait.png" class="portrait">
+                            <span class="name">翁清涛</span>
+                        </div>
+                        <div class="person-message__content">
+                            <div class="wrapper">
+                                我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦我来啦
+                            </div>
+                        </div>
                     </div>
                     <div class="system-message">
                         <div class="system-message__content">
                             <p>已关闭实时讨论</p>
-                            <p>请在上方开启</p>
                         </div>
                     </div>
                 </div>
-                <div class="arrow-right"></div>
+                <div class="pre-sending-area">
+                    <input type="text">
+                    <div class="button send">发送</div>
+                </div>
             </div>
         </div>
     </div>
@@ -165,23 +181,5 @@
         </div>
     </div>
 </section>
-<script>
-
-    //    计算主体部分高度
-    function windownResizeHandler() {
-        var list = document.body.childNodes;
-        var heightSpecified = window.innerHeight;
-//        console.log(heightSpecified)
-        var mainSection = document.getElementById("main");
-        for (var i in list){
-            if (list[i].nodeType === 1 && list[i]!=mainSection) {
-                heightSpecified -= list[i].offsetHeight;
-            }
-        }
-        mainSection.style.height = heightSpecified + "px";
-    }
-    window.addEventListener("resize", windownResizeHandler)
-    windownResizeHandler();
-</script>
 </body>
 </html>
