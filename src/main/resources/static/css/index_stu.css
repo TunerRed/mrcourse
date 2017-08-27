@@ -1,0 +1,44 @@
+header{
+    background-image: url("../image/bg_topbar_stu.jpg");
+}
+.bottom-bar{
+    background-color: rgb(143,210,159);
+}
+.bottom-bar__left{
+    background-color: rgb(101,151,152);
+}
+.page-1 .row1 .middle{
+    background-image: linear-gradient(to right,#a7e3ad,#c6f0b7,#82c69c);
+    flex-grow: 1;
+    object-fit: contain;
+}
+ul.tab-switcher__title>li {
+    background-color: rgb(128, 178, 180);
+}
+.page-1 .row1 .left,.page-1 .row1 .right,ul.tab-switcher__title>li.active{
+    background-color: rgb(88,138,139);
+}
+
+
+
+
+
+.bottom-bar__left:after{
+    border-left: 1em solid rgb(101,151,152);
+    border-top:1.3em solid transparent;
+    border-bottom:1.3em solid transparent;
+    border-right: 0em solid rgb(101,151,152);
+}
+.bottom-bar__right:before{
+    border-left: 0em solid rgb(101,151,152);
+    border-top:1.3em solid transparent;
+    border-bottom:1.3em solid transparent;
+    border-right: 0em solid rgb(143,210,159);
+
+}
+.bottom-bar__left:hover:after{
+    border-left: 0em solid rgb(101,151,152);
+}
+.bottom-bar__left:hover+.bottom-bar__right:before{
+    border-right: 1em solid rgb(143,210,159);
+}

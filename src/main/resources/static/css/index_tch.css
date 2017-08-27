@@ -1,3 +1,46 @@
 header{
     background-image: url("../image/bg_topbar_tch.jpg");
 }
+.bottom-bar{
+    background-color: rgb(243,112,66);
+}
+.bottom-bar__left{
+    background-color: rgb(72,71,115);
+}
+
+
+.page-1 .row1 .middle{
+    background-image: linear-gradient(to right,#484673,#573873,#464873);
+    flex-grow: 1;
+    object-fit: contain;
+}
+ul.tab-switcher__title>li {
+    background-color: rgb(88, 124, 165);
+}
+.page-1 .row1 .left,.page-1 .row1 .right,ul.tab-switcher__title>li.active{
+    background-color: rgb(56,85,115);
+}
+
+
+
+
+
+.bottom-bar__left:after{
+    border-left: 1em solid rgb(72,71,115);
+    border-top:1.3em solid transparent;
+    border-bottom:1.3em solid transparent;
+    border-right: 0em solid rgb(72,71,115);
+}
+.bottom-bar__right:before{
+    border-left: 0em solid rgb(72,71,115);
+    border-top:1.3em solid transparent;
+    border-bottom:1.3em solid transparent;
+    border-right: 0em solid rgb(243,112,66);
+
+}
+.bottom-bar__left:hover:after{
+    border-left: 0em solid rgb(72,71,115);
+}
+.bottom-bar__left:hover+.bottom-bar__right:before{
+    border-right: 1em solid rgb(243,112,66);
+}

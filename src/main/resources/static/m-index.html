@@ -3,23 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>课堂助手</title>
-    <script>
-        function isMobile() {
-            var _ua = window.navigator.userAgent,
-                _isMobile = /(mobile|mobi|wap|iphone)/i.test(_ua),
-                _isAndroid = /android/i.test(_ua),
-                _isIpad = /(ipad)/i.test(_ua);
-            if (_isMobile || _isAndroid || _isIpad) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel='stylesheet' href='css/index.css'>
-    <link rel="stylesheet" href="css/index_stu.css">
-    <link rel="stylesheet" href="css/perinfo.css">
+    <link rel='stylesheet' href='css/m-index.css'>
 </head>
 <body>
 <header>
@@ -43,41 +28,8 @@
     </div>
 </header>
 <nav>
-    <ul>
-        <li class="drag-box">
-            <div class="nav__title">课堂</div>
-            <div class="nav__content drag-box__scene">高级程序语言</div>
-            <ul class="drag-box__container">
-                <li class="drag-box__item"><a href="#">计算机引论</a></li>
-                <li class="drag-box__item"><a href="#">高级程序语言</a></li>
-                <li class="drag-box__item on"><a href="#">高等数学</a></li>
-                <li class="drag-box__item"><a href="#">Test1</a></li>
-                <li class="drag-box__item"><a href="#">Test2</a></li>
-                <a href="#" class="drag-box__bottom-bar">+添加课程</a>
-            </ul>
-        </li>
-        <li>
-            <div class="nav__title">课堂状态</div>
-            <div class="nav__content switcher on">
-                <a href="#" class="switcher__on">开启</a>
-                <a href="#" class="switcher__off">关闭</a>
-            </div>
-        </li>
-        <li>
-            <div class="nav__title">视频直播</div>
-            <div class="nav__content switcher off">
-                <a href="#" class="switcher__on">开启</a>
-                <a href="#" class="switcher__off">关闭</a>
-            </div>
-        </li>
-        <li>
-            <div class="nav__title">实时讨论</div>
-            <div class="nav__content switcher">
-                <a href="#" class="switcher__on">开启</a>
-                <a href="#" class="switcher__off">关闭</a>
-            </div>
-        </li>
-    </ul>
+    <div class="nav__item active">课堂 介绍 讨论</div>
+    <div class="nav__item">公告 问题 资料</div>
 </nav>
 <section class="main" id="main">
     <div class="page-1">
@@ -125,7 +77,7 @@
                 </ul>
             </div>
             <div class="middle">
-                <video class="live-area" poster="image/live_poster_stu.jpg" style="width: 100%;height: 100%"></video>
+                <video class="live-area" poster="image/live_poster_tch.jpg" style="width: 100%;height: 100%"></video>
             </div>
             <div class="course-introduce right">
                 <h1>课程介绍<a href="javascript:void(0)" id="edit-course">修改</a></h1>
@@ -212,10 +164,6 @@
             </div>
         </div>
     </div>
-</section>
-<section class="bottom-bar" id="bottom-bar">
-    <div class="bottom-bar__left active">学生管理 视频直播 课程介绍 实时讨论</div>
-    <div class="bottom-bar__right">课程问题 课程公告 课程资料</div>
 </section>
 <script>
 

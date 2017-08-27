@@ -32,7 +32,6 @@ header{
     background-size: cover;
     background-position: 40% center;
     position: relative;
-    background-image: url("../image/bg_topbar_tch.jpg");
 }
 header h1{
     font-size: 150%;
@@ -112,7 +111,10 @@ nav>ul>li{
     padding-left: 1em;
 }
 .nav__content.switcher.on .switcher__on{
-
+    color: #5ccbbb;
+}
+.nav__content.switcher.off .switcher__off{
+    color: #f96989;
 }
 
 
@@ -124,7 +126,6 @@ nav>ul>li{
     color: rgba(255,255,255,.7);
     line-height: 2;
     white-space: nowrap;
-    background-color: rgb(243,112,66);
     display: flex;
 
     position: fixed;
@@ -140,10 +141,6 @@ nav>ul>li{
     transition-duration: .6s;
     transition-timing-function: ease-out;
 }
-.bottom-bar__left{
-    background-color: rgb(72,71,115);
-
-}
 .bottom-bar__right{
     color: transparent;
 }
@@ -154,10 +151,6 @@ nav>ul>li{
     width: 0;
     height: 0;
     top: 0;
-    border-left: 1em solid rgb(72,71,115);
-    border-top:1.3em solid transparent;
-    border-bottom:1.3em solid transparent;
-    border-right: 0em solid rgb(72,71,115);
 
     transition-delay: .3s;
     transition-property: border;
@@ -171,10 +164,6 @@ nav>ul>li{
     width: 0;
     height: 0;
     top: 0;
-    border-left: 0em solid rgb(72,71,115);
-    border-top:1.3em solid transparent;
-    border-bottom:1.3em solid transparent;
-    border-right: 0em solid rgb(243,112,66);
 
     transition-property: border;
     transition-delay: 0s;
@@ -193,11 +182,9 @@ nav>ul>li{
     flex-grow: 1;
 }
 .bottom-bar__left:hover:after{
-    border-left: 0em solid rgb(72,71,115);
     transition-delay: 0s;
 }
 .bottom-bar__left:hover+.bottom-bar__right:before{
-    border-right: 1em solid rgb(243,112,66);
     transition-delay: .3s;
 }
 
@@ -217,6 +204,7 @@ nav>ul>li{
     position: relative;
 }
 .drag-box__container{
+    z-index: 2;
     color: #d0d0d0;
     padding-bottom: .5em;
     background-color: #f5f5f5;
@@ -289,20 +277,17 @@ nav>ul>li{
     flex-shrink: 0;
 }
 .page-1 .row1 .left{
-    background-color: rgb(56,85,114);
     flex-basis: 300px;
     flex-shrink: 0;
     position: relative;
 }
 .page-1 .row1 .right{
-    background-color: rgb(56,85,115);
     flex-basis: 300px;
     flex-shrink: 0;
     padding: 0 1em;
     box-sizing: border-box;
 }
 .page-1 .row1 .middle{
-    background-image: linear-gradient(to right,#484673,#573873,#464873);
     flex-grow: 1;
     object-fit: contain;
 }
@@ -314,13 +299,13 @@ ul.tab-switcher__title{
     width: 100%;
 }
 ul.tab-switcher__title>li{
-    background-color: rgb(88,124,165);
+    /*background-color: rgb(88,124,165);*/
     flex-grow: 1;
     flex-basis: 0;
     padding: .5em 0;
 }
 ul.tab-switcher__title>li.active{
-    background-color: rgb(56,85,114);
+    /*background-color: rgb(56,85,114);*/
 }
 ul.tab-switcher__content{
     padding-top: 32px;
@@ -329,7 +314,7 @@ ul.tab-switcher__content{
     overflow-y: scroll;
 }
 ul.tab-switcher__content>li{
-    background-color: rgb(56,85,114);
+    /*background-color: rgb(56,85,114);*/
     padding: .5em 1em;
 }
 ul.tab-switcher__content>li:not(.active){
@@ -427,19 +412,19 @@ ul.tab-switcher__content>li:not(.active){
 /*                      媒体查询(放在最后)                     */
 /*                                                          */
 /************************************************************/
-@media screen and (max-width: 787px){
+@media screen and (max-width: 793px){
     body{
-        width: 787px;
+        width: 793px;
     }
 }
-@media screen and (max-width: 480px){
-    body{
-        width: 100%;
-    }
-    nav>ul{
-        flex-wrap: wrap;
-    }
-    nav>ul>li{
-        flex-basis: 100%;
-    }
-}
+/*@media screen and (max-width: 480px){*/
+    /*body{*/
+        /*width: 100%;*/
+    /*}*/
+    /*nav>ul{*/
+        /*flex-wrap: wrap;*/
+    /*}*/
+    /*nav>ul>li{*/
+        /*flex-basis: 100%;*/
+    /*}*/
+/*}*/
