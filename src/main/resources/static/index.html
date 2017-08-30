@@ -190,7 +190,7 @@
                     <img src="image/perInfoPenlogo.png" onclick="changePassword()" class="penLogo">
                 </div>
 
-                <div id="perinfo_little_passwordIdentify" class="perInfo_little_div">
+                <div id="perinfo_little_passwordIdentify" class="perInfo_little_div" style="display: none">
                     确认密码：<input type="password" id="perInfo_passwordIdentify" class="perInfo_input">
                 </div>
             </div>
@@ -243,6 +243,8 @@
     function changePassword() {
         document.getElementById("perInfo_password").style.display = "inline-block";
         document.getElementById("perInfo_passwordIdentify").style.display = "inline-block"
+
+        document.getElementById("perinfo_little_passwordIdentify").style.display = "block"
     }
     
 </script>
