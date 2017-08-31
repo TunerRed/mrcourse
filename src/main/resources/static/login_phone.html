@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
     <title>LoginIn</title>
     <link rel="stylesheet" href="css/reset.css">
 
@@ -17,11 +18,15 @@
 <div id="totalDiv">
     <!-- TotalDiv 包含了剩下的几个单独的div 给TotalDiv设置背景-->
     <div id="firstViewDiv" class="middleDiv" style="" >
-        <img id="LoginLogo" onclick="showLoginDiv()" src="image/signin_icon_phone.png">
-        <img id="RegiestLogo" onclick="showRegistDiv()" src="image/register_icon_phone.png">
+
         <div id="firstView_p_Div">
             <p id="ktzs_Chi">课堂助手</p><br>
             <p id="ktzs_Eng"><span style="font-weight: 100">CLASSROOM</span> ASSISTANT</p>
+        </div>
+
+        <div id="twocircle">
+            <img id="LoginLogo" class="circle" onclick="showLoginDiv()" src="image/signin_icon_phone.png">
+            <img id="RegiestLogo" class="circle" onclick="showRegistDiv()" src="image/register_phone.png">
         </div>
     </div>
 
@@ -68,7 +73,7 @@
 
             <div class="input_regist_div">
                 <span>姓名|</span>
-                <input class="input_regist" type="text" placeholder="请输入真实姓名" style="letter-spacing: 4px">
+                <input class="input_regist" type="text" placeholder="请输入真实姓名" style="letter-spacing: 2px">
             </div>
 
             <div class="input_regist_div">
@@ -95,6 +100,6 @@
 
 </body>
 <script src="script/require.js" defer async="true" ></script>
-<script src="script/require.js" data-main="script/regist_login.js"></script>
+<script src="script/require.js" data-main="script/regist_login_phone.js"></script>
 
 </html>
