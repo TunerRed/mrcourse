@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoginIn</title>
+    <link rel="stylesheet" href="css/reset.css">
+
+    <link rel="stylesheet" type="text/css" href="css/loginIn_phone.css">
+    <!--         竖屏的属性为 media="(orientation: portrait)"          -->
+
+    
+    
+    
+</head>
+<body>
+
+<div id="totalDiv">
+    <!-- TotalDiv 包含了剩下的几个单独的div 给TotalDiv设置背景-->
+    <div id="firstViewDiv" class="middleDiv" style="" >
+        <img id="LoginLogo" onclick="showLoginDiv()" src="image/signin_icon_phone.png">
+        <img id="RegiestLogo" onclick="showRegistDiv()" src="image/register_icon_phone.png">
+        <div id="firstView_p_Div">
+            <p id="ktzs_Chi">课堂助手</p><br>
+            <p id="ktzs_Eng"><span style="font-weight: 100">CLASSROOM</span> ASSISTANT</p>
+        </div>
+    </div>
+
+    <div id="logininDiv" style="display: none">
+
+        <img id="close_loginIn" onclick="Login_close()" src="image/close.png" height="20" width="20"/>
+        <div id="BagOfInput_login">
+            <p><span id="littleDiv_loginin_Chinese" >课堂助手</span>
+                <br>
+                <span id="littleDiv_class">CLASSROOM</span>
+                &nbsp;
+                <span id="littleDiv_Assi" >ASSISTANT</span>
+            </p>
+
+            <div class="input_login_div">
+                <span>账号|</span>
+                <input class="input_login" type="text">
+            </div>
+
+            <div class="input_login_div">
+                <span>密码|</span>
+                <input class="input_login" type="password">
+            </div>
+
+            <div id="loginIn_Button">登录</div>
+            <div id="goRegiestDiv"><span style="cursor: pointer;" onclick="goRegist()">前去注册</span></div>
+        </div>
+
+    </div>
+
+    <div id="regiestDiv" style="display: none">
+
+        <img id="close_regiest" src="image/close.png" onclick="Regist_close()" height="20" width="20"/>
+        <div id="BagOfInput_regiest">
+            <p style="margin-bottom: 50px"><span id="littleDiv_regiest_Chinese" >注册账号</span>
+                <br>
+
+            </p>
+
+            <div class="input_regist_div">
+                <span>账号|</span>
+                <input class="input_regist" type="text">
+            </div>
+
+            <div class="input_regist_div">
+                <span>姓名|</span>
+                <input class="input_regist" type="text" placeholder="请输入真实姓名" style="letter-spacing: 4px">
+            </div>
+
+            <div class="input_regist_div">
+                <span>密码|</span>
+                <input class="input_regist" type="password">
+            </div>
+
+            <div id="slide_outDiv">
+                <span id="student_slide">学生</span> &nbsp; <span id="teacher_slide">教师</span>
+                <div id="slide_inDiv">
+
+                </div>
+            </div>
+
+            <div id="regist_Button">注册</div>
+            <br>
+            <br>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+<script src="script/require.js" defer async="true" ></script>
+<script src="script/require.js" data-main="script/regist_login.js"></script>
+
+</html>
