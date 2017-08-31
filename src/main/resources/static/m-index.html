@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel='stylesheet' href='css/m-index.css'>
     <link rel="stylesheet" href="css/m-question.css">
+    <link rel="stylesheet" href="css/perinfo_phone.css">
 
 </head>
 <body>
@@ -36,7 +37,7 @@
     <div class="nav__item" onclick="changePage(1)">公告 问题 资料</div>
 </nav>
 <section class="main" id="main">
-    <div class="page-1">
+    <div class="page-1" style="display: none;">
         <div class="block course-list">
             <div class="block__title">
                 <div>所有课堂 <span id="all-courses-sum">102</span></div>
@@ -138,29 +139,29 @@
             </div>
         </div>
     </div>
-    <div style="display:none" id="perinfo_out">
+    <div style="" id="perinfo_out">
         <div id="perinfo_middle">
             <div id="perinfo_in_up">
                 <div id="perinfo_little_name" class="perInfo_little_div">
                     真实姓名：<input type="text" class="perInfo_input" id="perInfo_input_name" value="戴红军">
                     <span id="perInfo_name">戴红军</span>
-                    <img src="image/perInfoPenlogo.png" class="penLogo">
+                    <img src="image/perInfoPenlogo.png" onclick="chageName()" class="penLogo">
                 </div>
 
                 <div id="perinfo_little_position" class="perInfo_little_div">
-                    身份：<span id="perInfo_position">教师</span>
+                    <span class="twoletter">身</span>份：<span id="perInfo_position">教师</span>
                 </div>
 
                 <div id="perinfo_little_Id" class="perInfo_little_div">
-                    账号：<span id="perInfo_ID">123456789</span>
+                    <span class="twoletter">账</span>号：<span id="perInfo_ID">123456789</span>
                 </div>
 
                 <div id="perinfo_little_password" class="perInfo_little_div">
-                    密码：<input type="password" id="perInfo_password" class="perInfo_input">
-                    <img src="image/perInfoPenlogo.png" class="penLogo">
+                    <span class="twoletter">密</span>码：<input type="password" id="perInfo_password" class="perInfo_input">
+                    <img src="image/perInfoPenlogo.png" onclick="changePassword()" class="penLogo">
                 </div>
 
-                <div id="perinfo_little_passwordIdentify" class="perInfo_little_div">
+                <div id="perinfo_little_passwordIdentify" class="perInfo_little_div" style="display: none">
                     确认密码：<input type="password" id="perInfo_passwordIdentify" class="perInfo_input">
                 </div>
             </div>
@@ -182,6 +183,7 @@
             </div>
         </div>
     </div>
+
 </section>
 <section id="main2">
     <div class="wrap">
@@ -333,5 +335,17 @@
             document.getElementById('main2').style.display = 'block';
         }
     }
+    //点笔logo显示输入框
+    function chageName() {
+        document.getElementById("perInfo_input_name").style.display = "inline-block";
+        document.getElementById("perInfo_name").style.display = "none"
+    }
+    function changePassword() {
+        document.getElementById("perInfo_password").style.display = "inline-block";
+        document.getElementById("perInfo_passwordIdentify").style.display = "inline-block"
+
+        document.getElementById("perinfo_little_passwordIdentify").style.display = "block"
+    }
+
 </script>
 </html>
