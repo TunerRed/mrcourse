@@ -13,7 +13,7 @@ require(['userHandler','liveRTC','API'],function (userHandlerModule,liveRTCModul
 
     studentClient.login(info,function () {
 
-        var ws = new WebSocket(API.webSocketServer())
+        var ws = new WebSocket(API.webSocketServer(1));
 
         var liveClient = new liveRTCModule.RtcClient({
             name:"xiaoming",
@@ -23,7 +23,7 @@ require(['userHandler','liveRTC','API'],function (userHandlerModule,liveRTCModul
             console.log("onstraewm")
             document.getElementById("my-video").src = URL.createObjectURL(mediaStream);
         });
-        liveClient.setWebSocketChannel()
+        liveClient.setWebSocketChannel(ws)
 
 
 
