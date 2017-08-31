@@ -19,6 +19,8 @@ define(function (require) {
         }
 
         userHandler.prototype.register = function (bundle,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST", API.register);
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded")
@@ -44,6 +46,8 @@ define(function (require) {
         };
 
         userHandler.prototype.login = function (bundle,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST", API.login);
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded")
@@ -67,6 +71,8 @@ define(function (require) {
         };
 
         userHandler.prototype.logout = function (success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST", API.logout);
             request.send()
@@ -87,6 +93,8 @@ define(function (require) {
         };
 
         userHandler.prototype.getUserInfo = function (username,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("GET", API.getUserInfo(username));
             request.send()
@@ -107,6 +115,8 @@ define(function (require) {
         };
 
         userHandler.prototype.updateUserInfo = function (bundle,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST", API.updateUserInfo);
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded");
@@ -128,6 +138,8 @@ define(function (require) {
         };
 
         userHandler.prototype.getCourse = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("GET", API.getCourse(courseId));
 
@@ -148,6 +160,8 @@ define(function (require) {
         };
 
         userHandler.prototype.getAllCourse = function (success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("GET", API.getCourse);
 
@@ -168,6 +182,8 @@ define(function (require) {
         };
 
         userHandler.prototype.getCourseFile = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("GET", API.getCourseFile(courseId));
 
@@ -188,6 +204,8 @@ define(function (require) {
         };
 
         userHandler.prototype.uploadCourseFile = function (courseId, file,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var formdata = new FormData();
             formdata.append("file", file);
@@ -216,6 +234,8 @@ define(function (require) {
         };
 
         userHandler.prototype.getNotice = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("GET", API.getNotice(courseId));
 
@@ -257,6 +277,8 @@ define(function (require) {
         teacherHandler.prototype = new UserHandler();
 
         teacherHandler.prototype.createCourse = function (bundle,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
 
             var request = new Ajax("POST",API.createCourse);
@@ -280,6 +302,8 @@ define(function (require) {
         };
 
         teacherHandler.prototype.updateCourse = function (courseId,bundle,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST",API.updateCourse(courseId));
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded");
@@ -299,6 +323,8 @@ define(function (require) {
         };
 
         teacherHandler.prototype.uploadNotice = function (noticeId,bundle,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST",API.uploadNotice(courseId));
             request.setRequestHeader("content-type", "application/x-www-form-urlencoded");
@@ -320,6 +346,8 @@ define(function (require) {
         };
 
         teacherHandler.prototype.deleteNotice = function (noticeId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST",API.deleteNotice(noticeId));
             request.send()
@@ -338,6 +366,8 @@ define(function (require) {
         };
 
         teacherHandler.prototype.getCourseMember = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("GET", API.getCourseMember(courseId));
 
@@ -358,6 +388,8 @@ define(function (require) {
         };
 
         teacherHandler.prototype.deleteCourseMember = function (courseId,studentId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST",API.deleteCourseMember(courseId,studentId));
             request.send()
@@ -376,8 +408,10 @@ define(function (require) {
         };
 
         teacherHandler.prototype.startCourse = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
-            var request = new Ajax("POST",API.startLesson(courseId));
+            var request = new Ajax("POST",API.startCourse(courseId));
             request.send()
                 .then(function (response) {
                     response = JSON.parse(response);
@@ -395,6 +429,8 @@ define(function (require) {
         };
 
         teacherHandler.prototype.endCourse = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST",API.endCourse(courseId));
             request.send()
@@ -434,6 +470,8 @@ define(function (require) {
         studentHandler.prototype = new UserHandler();
 
         studentHandler.prototype.searchCourse = function (keyWord,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("GET",API.searchCourse(keyWord));
             request.send()
@@ -453,7 +491,9 @@ define(function (require) {
 
         };
 
-        teacherHandler.prototype.searchAllCourse = function (success,failed) {
+        studentHandler.prototype.searchAllCourse = function (success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("GET", API.searchAllCourse);
 
@@ -474,6 +514,8 @@ define(function (require) {
         };
 
         studentHandler.prototype.joinCourse = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST",API.joinCourse(courseId));
             request.send()
@@ -494,6 +536,8 @@ define(function (require) {
         };
 
         studentHandler.prototype.quitCourse = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST",API.searchCourse(courseId));
             request.send()
@@ -514,6 +558,8 @@ define(function (require) {
         };
 
         studentHandler.prototype.checkIn = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
 
             var request = new Ajax("POST",API.checkIn(courseId));
             request.send()
@@ -544,7 +590,6 @@ define(function (require) {
         }
         return res;
     }
-
     return {
         TeacherHandler: TeacherHandler,
         StudentHandler: StudentHandler
