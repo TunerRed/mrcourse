@@ -34,7 +34,7 @@ define(function (require) {
         quitCourse:match(HTTPS_ADDRESS+"/student/course/quit/${courseId}"),
         checkIn:match(HTTPS_ADDRESS+"/student/checkIn/${courseId}"),
         // websocket
-        webSocketServer:match(WSS_ADDRESS + "?room=${courseId}%2B${lessonId}")
+        webSocketServer:match(WSS_ADDRESS + "?room=${courseId}")
     }
 
     // curry参数模板替换
