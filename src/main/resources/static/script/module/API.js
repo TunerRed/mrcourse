@@ -22,7 +22,7 @@ define(function (require) {
         createCourse:HTTPS_ADDRESS+"/teacher/course",
         updateCourse:match(HTTPS_ADDRESS + "/teacher/course/${courseId}"),
         uploadNotice:match(HTTPS_ADDRESS+"/teacher/notice/${courseId}"),
-        deleteNotice:match(HTTPS_ADDRESS + "/teacher/notice/${noticeId}"),
+        deleteNotice:match(HTTPS_ADDRESS + "/teacher/notice/delete/${noticeId}"),
         getCourseMember:match(HTTPS_ADDRESS + "/teacher/member"),
         deleteCourseMember:match(HTTPS_ADDRESS + "/teacher/member/delete/${courseId}/${studentId}"),
         startCourse:match(HTTPS_ADDRESS + "/teacher/course/start/${courseId}"),

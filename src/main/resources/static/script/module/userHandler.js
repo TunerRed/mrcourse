@@ -312,17 +312,17 @@ define(function (require) {
                     response = JSON.parse(response);
 
                     if (response.status === 200) {
-                        console.log("success uploadnotice");
+                        console.log("success updateCourse");
                         success();
                     } else {
-                        console.log("failed getcourse");
+                        console.log("failed updateCourse");
                         failed(response.message);
                     }
 
                 })
         };
 
-        teacherHandler.prototype.uploadNotice = function (noticeId,bundle,success,failed) {
+        teacherHandler.prototype.uploadNotice = function (courseId,bundle,success,failed) {
             success = typeof success === "function"?success:new Function();
             failed = typeof failed === "function"?failed:new Function();
 
@@ -355,10 +355,10 @@ define(function (require) {
                     response = JSON.parse(response);
 
                     if (response.status === 200) {
-                        console.log("success uploadnotice");
+                        console.log("success deleteNotice");
                         success();
                     } else {
-                        console.log("failed getcourse");
+                        console.log("failed deleteNotice");
                         failed(response.message);
                     }
 
@@ -568,10 +568,10 @@ define(function (require) {
                     response = JSON.parse(response);
 
                     if (response.status === 200) {
-                        console.log("success searchcourse");
+                        console.log("success checkIn");
                         success();
                     } else {
-                        console.log("failed searchcourse");
+                        console.log("failed checkIn");
                         failed(response.message);
                     }
 
