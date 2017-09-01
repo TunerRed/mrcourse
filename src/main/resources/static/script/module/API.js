@@ -2,7 +2,7 @@ define(function (require) {
 
     var HOST = "guozhuoqiang.top:8443/mrcourse";
     var HTTPS_ADDRESS = "https://" + HOST;
-    var WSS_ADDRESS = "wss://" + HOST;
+    var WSS_ADDRESS = "wss://" + HOST+"/websocket";
 
     return {
         login: HTTPS_ADDRESS + "/login",

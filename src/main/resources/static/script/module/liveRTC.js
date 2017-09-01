@@ -71,6 +71,7 @@
         /*                   构造函数，负责初始化变量                       */
         /****************************************************************/
         function rtcRoom() {
+            config = config || {};
             config.iceConfig = config.iceConfig || {
                     iceServers: [
                         {
