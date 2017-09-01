@@ -23,7 +23,13 @@ require(['userHandler','liveRTC','API'],function (userHandlerModule,liveRTCModul
             console.log("onstraewm")
             document.getElementById("my-video").src = URL.createObjectURL(mediaStream);
         });
-        liveClient.setWebSocketChannel(ws)
+
+
+        ws.onopen = function () {
+            liveClient.setWebSocketChannel(ws)
+
+        }
+
 
 
 
