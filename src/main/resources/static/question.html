@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/question.css">
 </head>
 <body>
-<header id="header">
+<header id="header" style="z-index: 111;">
     <h1>CLASSROOM ASSISTANT</h1>
     <div class="self-info">
         <img src="image/portrait_tch.png" class="portrait">
@@ -29,7 +29,7 @@
         </ul>
     </div>
 </header>
-    <div class="nav-bar" id="bar">
+    <div class="nav-bar" id="bar" style="z-index: 0">
         <div>公告栏
             <img class="icon" src="image/bulletin-icon.png" alt="点击添加公告" onclick="showMode('bulletin')">
         </div>
@@ -257,4 +257,6 @@
         }
     }
 </script>
+<script src="script/require.js" defer async="true" ></script>
+<script src="script/require.js" data-main="script/question-main.js"></script>
 </html>
