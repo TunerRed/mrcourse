@@ -11,7 +11,11 @@ require(['API','userHandler'],function (API,user) {
     var teacherHandler = user.TeacherHandler;
     var teacher = new teacherHandler();
 
+    teacher.login({username:'gzq9425',password:'123'},function(){
+        teacher.uploadNotice(courseId,bundle,function(){
 
-    teacher.uploadNotice(courseId,bundle);
-    console.log(11);
+        });
+    });
+    
+    
 });
