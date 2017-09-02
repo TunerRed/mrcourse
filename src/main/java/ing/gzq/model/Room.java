@@ -1,12 +1,15 @@
 package ing.gzq.model;
 
 
+import ing.gzq.websocket.WebSocket;
 import lombok.Data;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Data
 public class Room {
@@ -15,18 +18,18 @@ public class Room {
 
     String teacherId;
 
-    WebSocketSession teacherSession;
+    WebSocket teacherWebSocket;
 
-    HashMap<String, WebSocketSession> students;
+    Map<String, WebSocket> students = new ConcurrentHashMap<>();
 
-    public Room(String id, String teacherId, WebSocketSession teacherSession) {
+    public Room(String id, String teacherId, WebSocket webSocket) {
         this.id = id;
         this.teacherId = teacherId;
-        this.teacherSession = teacherSession;
+        this.teacherWebSocket = webSocket;
     }
 
-    public void addStudent(String studentId, WebSocketSession session) {
-        students.put(studentId, session);
+    public void addStudent(String studentId, WebSocket webSocket) {
+        students.put(studentId, webSocket);
     }
 
 
@@ -35,20 +38,20 @@ public class Room {
     }
 
     public void sendToTeacher(String message) throws IOException {
-        teacherSession.sendMessage(new TextMessage(message));
+        teacherWebSocket.sendMessage(message);
     }
 
 
     public void sendToStudents(String message) throws IOException {
-        for (WebSocketSession session : students.values()) {
-            session.sendMessage(new TextMessage(message));
+        for (WebSocket session : students.values()) {
+            session.sendMessage(message);
         }
     }
 
 
     public void sendToStudent(String target, String message) throws IOException {
         if (students.containsKey(target)) {
-            students.get(target).sendMessage(new TextMessage(message));
+            students.get(target).sendMessage(message);
         }
     }
 
@@ -58,5 +61,11 @@ public class Room {
         sendToStudents(message);
     }
 
-
+    public void sendToTarget(String target, String message) throws IOException {
+        if (getTeacherId().equals(target)) {
+            sendToTeacher(message);
+        } else {
+            sendToStudent(target, message);
+        }
+    }
 }

@@ -77,19 +77,15 @@ String room = courseId
 ```json
 {
 "type":"new-check-in",
-"data":{
-    "name":"xxxx",
-    "id":"xxxx"
-}
+"name":"userid",
+"data":"name"
 }
 ```
 ```json
 {
 "type":"new-check-out",
-"data":{
-    "name":"xxxx",
-    "id":"Xxxxx"
-}
+"name":"userID",
+"data":"nameaaa"
 }
 ```
 
