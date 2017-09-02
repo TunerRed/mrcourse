@@ -31,18 +31,18 @@
 </header>
     <div class="nav-bar" id="bar" style="z-index: 0">
         <div>公告栏
-            <img class="icon" src="image/bulletin-icon.png" alt="点击添加公告" onclick="showMode('bulletin')">
+            <img class="icon" id="icon-1" src="image/bulletin-icon.png" alt="点击添加公告" >
         </div>
         <div>课堂问题
-            <img class="icon" style="width: 3rem" src="image/question-icon.png" alt="点击添加问题" onclick="showMode('question')">
+            <img class="icon" id="icon-2" style="width: 3rem" src="image/question-icon.png" alt="点击添加问题" >
         </div>
         <div>资料库
-            <img class="icon" src="image/material-icon.png" alt="点击添加资料" onclick="showMode('material')">
+            <img class="icon" id="icon-3" src="image/material-icon.png" alt="点击添加资料" >
         </div>
 
     </div>
     <div class="warp">
-        <div class="left-side list">
+        <div class="left-side list" id="left-side">
             <div class="card">
                 <div class="card-title">2017-02-22 <span class="close">X</span></div>
                 <div class="card-content">&nbsp;&nbsp;哈哈哈哈哈哈或或或或或或或哈哈哈哈哈哈</div>
@@ -213,49 +213,13 @@
     for(var i = 0 ;i<list_column.length;i++){
         list_column[i].style.height = h-bar_h-header_h-b_bar_h+'px';
     }
-    function showMode(m) {
-        closeMode();
-        var body = document.body;
-        var div = document.createElement('div');
-        div.className = 'mode';
-        div.id = m;
-        if(m=='bulletin'){
-            div.innerHTML = `<img class="mode-icon" src="image/bulletin-icon.png" alt="">
-        <div class="mode-head">发布公告</div>
-        <textarea name="" class="mode-content" placeholder="请输入公告内容"></textarea>
-        <div class="mode-btn">
-            <img src="image/cancel.png" alt="" onclick="closeMode()">
-            <img src="image/upload.png" alt="">
-        </div>`;
-        }else if(m=='question'){
-            div.innerHTML = `<img class="mode-icon" src="image/question-icon.png" alt="">
-        <div class="mode-head">发布问题</div>
-        <textarea name="" class="mode-content" placeholder="请输入问题内容"></textarea>
-        <div class="mode-btn">
-            <img src="image/cancel.png" alt="" onclick="closeMode()">
-            <img src="image/upload.png" alt="">
-        </div>`;
-        }else{
-            div.innerHTML = `<img class="mode-icon" src="image/material-icon.png" alt="">
-        <div class="mode-head">发布资料</div>
-        <div class="mode-name">js权威指南 <span class="gray-word">13.3M</span></div>
-        <div class="mode-state"><img src="image/material-a.png" alt="">上传成功！</div>
-        <div class="mode-state" style="color: #7c7c7c"><img src="image/material.png" alt="">点击上传</div>
-        <div class="mode-btn">
-            <img src="image/cancel.png" alt="" onclick="closeMode()">
-            <img src="image/upload.png" alt="">
-        </div>`;
-        }
-        body.appendChild(div);
-
-
-    }
     function closeMode() {
         var mode = document.getElementsByClassName('mode');
         for(var j = 0;j<mode.length;j++){
             mode[j].remove();
         }
     }
+
 </script>
 <script src="script/require.js" defer async="true" ></script>
 <script src="script/require.js" data-main="script/question-main.js"></script>
