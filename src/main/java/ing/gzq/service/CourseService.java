@@ -3,10 +3,8 @@ package ing.gzq.service;
 import ing.gzq.base.Result;
 import ing.gzq.base.ResultCache;
 import ing.gzq.dao.CourseDao;
-import ing.gzq.model.Course;
-import ing.gzq.model.Lesson;
-import ing.gzq.model.StudentInfo;
-import ing.gzq.model.User;
+import ing.gzq.model.*;
+import ing.gzq.websocket.WebsocketSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -26,6 +24,9 @@ public class CourseService {
 
     @Autowired
     CourseDao courseDao;
+
+    @Autowired
+    WebsocketSupport websocketSupport;
 
     public Result insertCourse(Course course) {
         try {
@@ -149,6 +150,12 @@ public class CourseService {
         try {
             User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             courseDao.sign(courseId,user.getUsername());
+
+            Message<String> message = new Message<>("new-check-in");
+            message.setName(user.getUsername());
+            message.setData(user.getName());
+            websocketSupport.sendMessageToTeacher(String.valueOf(courseId),message);
+
             return ResultCache.OK;
         } catch (Exception e) {
             e.printStackTrace();

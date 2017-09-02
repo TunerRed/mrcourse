@@ -9,9 +9,10 @@
         INSERT INTO user_role
         VALUES (#{username},#{role})
     </insert>
-    <update id="updateUserName" parameterType="ing.gzq.model.User">
+    <update id="updateUserInfo" parameterType="ing.gzq.model.User">
         UPDATE user
-        SET name = #{name}
+        SET name = #{name} ,
+            password = #{password}
         WHERE username = #{username}
     </update>
     <select id="getUserByUsername" resultMap="userMap" parameterType="string">
