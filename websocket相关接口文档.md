@@ -77,31 +77,34 @@ String room = courseId
 ```json
 {
 "type":"new-check-in",
-"data":{
-    "name":"xxxx",
-    "id":"xxxx"
-}
+"name":"userid",
+"data":"name"
 }
 ```
 ```json
 {
 "type":"new-check-out",
-"data":{
-    "name":"xxxx",
-    "id":"Xxxxx"
-}
+"name":"userID",
+"data":"nameaaa"
 }
 ```
 
-
-关闭聊天（只能老师关闭）（群体转发）
+讨论
+---
+聊天已开启（群体转发）
 ```json
 {
-"type":"close-chat",
+"type":"chat-open",
 "name":"lihua"
 }
 ```
-
+聊天已关闭（群体转发）
+```json
+{
+"type":"chat-closed",
+"name":"lihua"
+}
+```
 发送消息（群体转发）
 ```json
 {
@@ -113,23 +116,23 @@ String room = courseId
 
 投票
 ---
-开启投票（只能老师开启）（群体转发）
+投票已开启（群体转发）
 ```json
 {
-"type":"open-vote",
+"type":"vote-open",
 "name":"lihua"
 }
 ```
 
-关闭投票（只能老师关闭）（群体转发）
+投票已关闭（群体转发）
 ```json
 {
-"type":"close-vote",
+"type":"vote-closed",
 "name":"lihua"
 }
 ```
 
-发送消息（群体转发）
+发送投票（转发教师）
 ```json
 {
 "type":"send-vote",

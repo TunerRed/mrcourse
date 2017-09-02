@@ -9,7 +9,8 @@ require.config({
 
     paths: {
         "jquery": "module/jquery",
-        "API":"module/API"
+        "API":"module/API",
+        "userHandler":"module/userHandler"
     }
 });
 //下面写注册小div中的滑块
@@ -112,22 +113,30 @@ function goRegist() {
     registDiv.style.display = "block";
 }
 
-//
-//
-// require(['jquery',"API"],function ($,API) {
-//     //下面写注册ajax
-//     $.Ajax(
-//         {
-//             url:API.register,
-//             method:"POST",
-//             dataType:"json",
-//             data:{
-//
-//
-//             }
-//
-//
-//         }
-//     )
-// });
+//获取注册信息
+var registInput = document.getElementsByClassName("input_regist");
+var username_regist = registInput[0].value,name_regist = registInput[1].value,password_regist = registInput[2].value;
 
+var regiestInfo = {
+    username:username_regist,
+    name:name_regist,
+    password:password_regist
+}
+// require(["userHandler"],function (userHandler) {
+//     function submit_regist() {
+//
+//     }
+// })
+
+//*************发送注册信息********************
+function submit_regist() {
+
+}
+
+//获取登录信息
+var loginInput = document.getElementsByClassName("input_login");
+var username_login = loginInput[0].value,password_login = loginInput[1].value;
+var loginInfo = {
+    username:username_login,
+    password:password_login
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--后台测试专用 html-->
+    <title>Hello World</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script>
+        var ws;
+        $(function () {
+            $("#login").click(function () {
+                $.ajax({
+                    url:'login',
+                    type:'POST', //GET
+                    data:{
+                        username:'gzq9425',password:'123'
+                    },
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data.data)
+                    },
+                    error:function(error){
+                        console.log(error)
+                    },
+                })
+            });
+            $("#websocket").click(function () {
+                ws = new WebSocket('ws://localhost:8080/websocket?room=2');
+                ws.onopen = function (event) {
+                };
+                ws.onmessage= function (event) {
+                    console.log(event.data)
+                };
+            })
+            $("#close").click(function () {
+               ws.close();
+            })
+        });
+    </script>
+</head>
+<button id="login" >login</button><br/>
+<button id="websocket">websocket</button><br/>
+<button id="close">close</button><br/>
+<body>
+
+
+</body>
+</html>
