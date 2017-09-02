@@ -13,12 +13,12 @@ require(['userHandler','liveRTC','API'],function (userHandlerModule,liveRTCModul
     teacherHandler.login(info,function () {
 
         var liveRoom = new liveRTCModule.RtcRoom()
-        var ws = new WebSocket(API.webSocketServer(1))
+        // var ws = new WebSocket(API.webSocketServer(1))
 
         liveRoom.openUserMedia(document.getElementById("my-video"));
 
 
-        liveRoom.setWebSocketChannel(ws);
+        // liveRoom.setWebSocketChannel(ws);
 
 
 
