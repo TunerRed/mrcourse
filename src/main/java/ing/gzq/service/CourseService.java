@@ -3,7 +3,10 @@ package ing.gzq.service;
 import ing.gzq.base.Result;
 import ing.gzq.base.ResultCache;
 import ing.gzq.dao.CourseDao;
-import ing.gzq.model.*;
+import ing.gzq.model.Course;
+import ing.gzq.model.Message;
+import ing.gzq.model.StudentInfo;
+import ing.gzq.model.User;
 import ing.gzq.websocket.WebsocketSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import static ing.gzq.base.ResultCache.getFailureDetail;
 import static ing.gzq.service.UserService.getUserInSecurityContext;
 
 /**
@@ -31,12 +34,12 @@ public class CourseService {
     public Result insertCourse(Course course) {
         try {
             courseDao.insertCourse(course);
-            HashMap map = new HashMap<>();
+            HashMap<String,Long> map = new HashMap<>();
             map.put("courseId", course.getId());
             return ResultCache.getDataOk(map);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultCache.getFailureDetail("插入课程失败");
+            return getFailureDetail("插入课程失败");
         }
     }
 
@@ -52,8 +55,8 @@ public class CourseService {
 
     public Result getCourseById(Long courseId) {
         Course course = courseDao.getCourseById(courseId);
-        if(course == null){
-            return ResultCache.getFailureDetail("课程不存在");
+        if (course == null) {
+            return getFailureDetail("课程不存在");
         }
         return ResultCache.getDataOk(course);
     }
@@ -73,7 +76,7 @@ public class CourseService {
             return ResultCache.OK;
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultCache.getFailureDetail(e.getMessage());
+            return getFailureDetail(e.getMessage());
         }
     }
 
@@ -88,7 +91,7 @@ public class CourseService {
             return ResultCache.OK;
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultCache.getFailureDetail(e.getMessage());
+            return getFailureDetail(e.getMessage());
         }
     }
 
@@ -99,70 +102,69 @@ public class CourseService {
 
     public Result joinCourse(Long courseId) {
         try {
-            User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            courseDao.insertStudentToCourse(courseId,user.getUsername());
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            courseDao.insertStudentToCourse(courseId, user.getUsername());
             return ResultCache.OK;
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultCache.getFailureDetail(e.getMessage());
+            return getFailureDetail(e.getMessage());
         }
     }
 
     public Result modifyCourse(Course course) {
-        try{
+        try {
             courseDao.modifyCourse(course);
             return ResultCache.OK;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
-            return ResultCache.getFailureDetail(ex.getMessage());
+            return getFailureDetail(ex.getMessage());
         }
     }
 
     public Result getAllJoinedStudent(Long courseId) {
-        List<StudentInfo> students =  courseDao.getStudentsByCourseId(courseId);
+        List<StudentInfo> students = courseDao.getStudentsByCourseId(courseId);
         return ResultCache.getDataOk(students);
     }
 
     public Result deleteMember(Long courseId, String studentId) {
-        try{
-            courseDao.deleteStudent(courseId,studentId);
+        try {
+            courseDao.deleteStudent(courseId, studentId);
             return ResultCache.OK;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return ResultCache.getFailureDetail(e.getMessage());
+            return getFailureDetail(e.getMessage());
         }
     }
 
     public Result quitCourse(Long courseId) {
         User user = getUserInSecurityContext();
-        if(user == null)
+        if (user == null)
             return ResultCache.PERMISSION_DENIED;
-        try{
-            courseDao.deleteStudent(courseId,user.getUsername());
+        try {
+            courseDao.deleteStudent(courseId, user.getUsername());
             return ResultCache.OK;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return ResultCache.getFailureDetail(e.getMessage());
+            return getFailureDetail(e.getMessage());
         }
     }
 
     public Result sign(Long courseId) {
         try {
-            User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            courseDao.sign(courseId,user.getUsername());
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            courseDao.sign(courseId, user.getUsername());
 
             Message<String> message = new Message<>("new-check-in");
             message.setName(user.getUsername());
             message.setData(user.getName());
-            websocketSupport.sendMessageToTeacher(String.valueOf(courseId),message);
+            websocketSupport.sendMessageToTeacher(String.valueOf(courseId), message);
 
             return ResultCache.OK;
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultCache.getFailureDetail(e.getMessage());
+            return getFailureDetail(e.getMessage());
         }
     }
-
 
 
 }

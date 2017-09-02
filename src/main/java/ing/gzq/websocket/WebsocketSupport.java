@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-import static ing.gzq.websocket.WebsocketContainer.*;
+import static ing.gzq.websocket.WebsocketContainer.getRoomById;
 
 @Component
 public class WebsocketSupport {
@@ -18,7 +18,7 @@ public class WebsocketSupport {
         2 : 找不到人
      */
 
-    public int sendMessageToTeacher(String roomId,Message message) throws IOException {
+    public int sendMessageToTeacher(String roomId, Message message) throws IOException {
         Room room = getRoomById(roomId);
         if (room == null) return 1;
         WebSocket teacher = room.getTeacherWebSocket();

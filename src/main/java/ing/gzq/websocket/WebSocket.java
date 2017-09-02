@@ -13,12 +13,13 @@ import org.springframework.stereotype.Component;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Map;
 
 import static ing.gzq.websocket.WebsocketContainer.*;
 
 
 @Component
-@ServerEndpoint("/websocket")
+@ServerEndpoint(value = "/websocket")
 public class WebSocket{
 
     String username;
@@ -28,7 +29,7 @@ public class WebSocket{
     Session session;
 
     @OnOpen
-    public void afterConnectionEstablished(Session session) throws Exception {
+    public void handleAfterOpen(Session session,EndpointConfig config) throws Exception {
         this.session = session;
         Authentication anth = (Authentication) session.getUserPrincipal();
         if(anth == null) {
@@ -148,4 +149,5 @@ public class WebSocket{
     private boolean isTeacher(){
         return "teacher".equals(type);
     }
+
 }
