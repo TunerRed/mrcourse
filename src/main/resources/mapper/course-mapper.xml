@@ -105,6 +105,33 @@
         ON s.studentId = u.username
         WHERE s.courseId = #{courseId}
     </select>
+    <select id="getCourseById" resultMap="courseMap">
+        SELECT
+            id,
+            teacherId,
+            `name`,
+            introduce,
+            state,
+            teacherOnline,
+            chat,
+            vote,
+            `date`
+        FROM course
+        WHERE id = #{courseId}
+    </select>
+    <select id="getAllCourse" resultMap="courseMap">
+        SELECT
+            id,
+            teacherId,
+            `name`,
+            introduce,
+            state,
+            teacherOnline,
+            chat,
+            vote,
+            `date`
+        FROM course
+    </select>
     <resultMap id="courseMap" type="ing.gzq.model.Course">
         <id property="id" column="id"/>
         <result property="teacherId" column="teacherId"/>

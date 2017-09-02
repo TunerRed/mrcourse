@@ -50,6 +50,12 @@ public class CommonController {
         return ResultCache.FAILURE;
     }
 
+    @RequestMapping(value = "/course/{courseId}", method = RequestMethod.GET)
+    public Result getCourse(@PathVariable Long courseId) {
+
+        return courseService.getCourseById(courseId);
+    }
+
     @RequestMapping(value = "/notice/{courseId}", method = RequestMethod.GET)
     public Result getNotice(@PathVariable Long courseId) {
         return noticeService.getNotice(courseId);

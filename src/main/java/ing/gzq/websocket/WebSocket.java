@@ -10,10 +10,11 @@ import org.springframework.web.socket.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class WebSocket implements WebSocketHandler {
 
-    static HashMap<String, Room> roomMap = new HashMap<>();
+    static Map<String, Room> roomMap = new ConcurrentHashMap<>();
 
     String username;
     String type;
@@ -31,7 +32,9 @@ public class WebSocket implements WebSocketHandler {
                 room = roomMap.get(roomId);
                 room.addStudent(username, webSocketSession);
             } else {
-                webSocketSession.sendMessage(getErrorMessage("课堂不存在"));
+                room = new Room(roomId, null, null);
+                roomMap.put(roomId, room);
+                room.addStudent(username,webSocketSession);
             }
         } else if ("teacher".equals(type)) {
             if (roomMap.containsKey(roomId)) {

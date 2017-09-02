@@ -27,7 +27,6 @@ public class CourseService {
     @Autowired
     CourseDao courseDao;
 
-
     public Result insertCourse(Course course) {
         try {
             courseDao.insertCourse(course);
@@ -47,6 +46,19 @@ public class CourseService {
 
     public Result getCourseByStudentId(String studentId) {
         List<Course> courseList = courseDao.getCourseByStudentId(studentId);
+        return ResultCache.getDataOk(courseList);
+    }
+
+    public Result getCourseById(Long courseId) {
+        Course course = courseDao.getCourseById(courseId);
+        if(course == null){
+            return ResultCache.getFailureDetail("课程不存在");
+        }
+        return ResultCache.getDataOk(course);
+    }
+
+    public Result getAllCourse() {
+        List<Course> courseList = courseDao.getAllCourse();
         return ResultCache.getDataOk(courseList);
     }
 
@@ -143,4 +155,7 @@ public class CourseService {
             return ResultCache.getFailureDetail(e.getMessage());
         }
     }
+
+
+
 }

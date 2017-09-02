@@ -42,4 +42,8 @@ public interface CourseDao {
     void clearSign(Long courseId);
 
     List<StudentInfo> getAllSignedStudent(Long courseId);
+
+    Course getCourseById(Long courseId);
+
+    List<Course> getAllCourse();
 }

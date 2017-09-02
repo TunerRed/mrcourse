@@ -39,4 +39,9 @@ public class StudentController {
     public Result sign(@PathVariable Long courseId) {
         return courseService.sign(courseId);
     }
+    
+    @RequestMapping(value = "/course/all", method = RequestMethod.GET)
+    public Result getAllCourse() {
+        return courseService.getAllCourse();
+    }
 }
