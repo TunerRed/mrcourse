@@ -31,6 +31,10 @@ define(function (require) {
     }
     function initComponents(bundle) {
 
+        var navUl = document.querySelector("nav>ul");
+
+
+
     }
 
     return{

@@ -3,14 +3,15 @@ require.config({
 });
 require(["jquery", "indexFrameInit","webSocketChannel", 'jquery.cookie'], function ($, FrameInit,webSocket) {
 
-    console.log(typeof webSocket)
 
 
 //    先获取cookie中的信息
     var bundle = {
         username: $.cookie("username"),
         name: $.cookie("name"),
-        type: $.cookie("type")
+        type: $.cookie("type"),
+        webSocket:webSocket,
+        courseId:$.cookie("courseId")
     }
 
 

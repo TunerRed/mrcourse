@@ -591,6 +591,7 @@ define(function (require) {
         return res;
     }
     return {
+        UserHandler:UserHandler,
         TeacherHandler: TeacherHandler,
         StudentHandler: StudentHandler
     }
