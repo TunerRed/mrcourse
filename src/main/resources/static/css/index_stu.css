@@ -42,3 +42,26 @@ ul.tab-switcher__title>li {
 .bottom-bar__left:hover+.bottom-bar__right:before{
     border-right: 1em solid rgb(143,210,159);
 }
+
+
+#send-message{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 0;
+}
+#send-message a{
+    position: absolute;
+    font-size: 20px;
+    right: 1em;
+    bottom: .2em;
+}
+#send-message img{
+    font-size: 16px;
+    width: 10.92em;
+    height: 5.04em;
+}
+#send-message.disabled{
+    pointer-events: none;
+    color: transparent;
+}

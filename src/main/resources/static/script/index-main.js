@@ -1,7 +1,10 @@
 require.config({
     baseUrl: "script/module"
 });
-require(["jquery", "indexFrameInit", 'jquery.cookie'], function ($, FrameInit) {
+require(["jquery", "indexFrameInit","webSocketChannel", 'jquery.cookie'], function ($, FrameInit,webSocket) {
+
+    console.log(typeof webSocket)
+
 
 //    先获取cookie中的信息
     var bundle = {
@@ -11,12 +14,12 @@ require(["jquery", "indexFrameInit", 'jquery.cookie'], function ($, FrameInit) {
     }
 
 
-    // 根据用户类型(教师或学生)初始化框架内容
-    if (bundle.type === "teacher") {
-        FrameInit.initializeAsTeacher();
-    }
-    else if (bundle.type === "student") {
-        FrameInit.initializeAsStudent();
+    // 根据用户类型(教师或学生)初始化框架内容(文本\样式初始化 控件初始化)
+    if (bundle.type === "teacher" || bundle.type === "student") {
+
+        FrameInit.initHTML(bundle);
+        FrameInit.initComponents(bundle);
+
     } else {
         throw new Error("参数错误")
     }
