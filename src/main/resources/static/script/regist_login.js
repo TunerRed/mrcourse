@@ -7,11 +7,7 @@
 
 require.config({
 
-    paths: {
-        "jquery": "module/jquery",
-        "API":"module/API",
-        "userHandler":"module/userHandler"
-    }
+    baseUrl:"script/module"
 });
 //下面写注册小div中的滑块
 
@@ -115,28 +111,67 @@ function goRegist() {
 
 //获取注册信息
 var registInput = document.getElementsByClassName("input_regist");
-var username_regist = registInput[0].value,name_regist = registInput[1].value,password_regist = registInput[2].value;
-
-var regiestInfo = {
-    username:username_regist,
-    name:name_regist,
-    password:password_regist
-}
-// require(["userHandler"],function (userHandler) {
-//     function submit_regist() {
-//
-//     }
-// })
-
-//*************发送注册信息********************
-function submit_regist() {
-
-}
+var username_regist = registInput[0].value,name_regist = registInput[1].value,password_regist = registInput[2].value,type;
 
 //获取登录信息
 var loginInput = document.getElementsByClassName("input_login");
 var username_login = loginInput[0].value,password_login = loginInput[1].value;
-var loginInfo = {
-    username:username_login,
-    password:password_login
-}
+
+
+
+
+require(['userHandler','jquery'],function (userHandlerModel,jquery)
+    {
+        //*************发送注册信息********************
+        document.getElementById("regist_Button").onclick = function () {
+            if (state_slide==0){
+                type = "student"
+            }else {
+                type = "teacher"
+            }
+
+            var regiestInfo = {
+                username:username_regist,
+                name:name_regist,
+                password:password_regist,
+                type:type
+            };
+            var UserHandler = userHandlerModel.UserHandler;
+            var userHandler = new UserHandler();
+            userHandler.register(regiestInfo,function () {
+                alert("注册成功");
+                registDiv.style.display = "none";
+                firstViewDiv.style.display = "block";
+                //当退出注册界面时 清空信息
+                for(var i = 0;i<input_regist.length;i++){
+                    // console.log(input_login[i].value)
+                    input_regist[i].value = null;
+                }
+            },function () {
+                alert("注册出错了")
+            })
+        }
+    //    ********************发送登录信息****************
+        document.getElementById("loginIn_Button").onclick = function () {
+            var loginInfo = {
+                username:username_login,
+                password:password_login
+            }
+            var UserHandler = userHandlerModel.UserHandler;
+            var userHandler = new UserHandler();
+            userHandler.login(loginInfo,function () {
+                alert("登陆成功");
+
+                logininDiv.style.display = "none";
+                firstViewDiv.style.display = "block";
+                //当退出登录界面时 清空信息
+                for(var i = 0;i<input_login.length;i++){
+                    // console.log(input_login[i].value)
+                    input_login[i].value = null;
+                }
+            })
+        }
+    });
+
+
+
