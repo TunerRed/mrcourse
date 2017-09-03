@@ -35,7 +35,7 @@ define(function (require) {
             teacherHandler = new require("userHandler").TeacherHandler(),
             studentHandler = new require("userHandler").StudentHandler()
 
-        // 初始化当前课程DOM
+        // 初始化当前课程
         var dragBoxLi = navUl.querySelector(".drag-box");
         if (bundle.type === "teacher") {
 
