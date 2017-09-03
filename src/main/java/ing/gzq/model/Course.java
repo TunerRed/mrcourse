@@ -1,9 +1,6 @@
 package ing.gzq.model;
 
-import ing.gzq.base.Result;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * Created by gzq on 17-7-20.

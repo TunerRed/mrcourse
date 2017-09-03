@@ -27,6 +27,12 @@ define(function (require) {
         deleteCourseMember:match(HTTPS_ADDRESS + "/teacher/member/delete/${courseId}/${studentId}"),
         startCourse:match(HTTPS_ADDRESS + "/teacher/course/start/${courseId}"),
         endCourse:match(HTTPS_ADDRESS + "/teacher/course/end/${courseId}"),
+        startLive:match(HTTPS_ADDRESS + "/teacher/course/start/live/${courseId}"),
+        endLive:match(HTTPS_ADDRESS + "/teacher/course/end/live/${courseId}"),
+        startChat:match(HTTPS_ADDRESS + "/teacher/course/start/chat/${courseId}"),
+        endChat:match(HTTPS_ADDRESS + "/teacher/course/end/chat/${courseId}"),
+        startVote:match(HTTPS_ADDRESS + "/teacher/course/start/vote/${courseId}"),
+        endVote:match(HTTPS_ADDRESS + "/teacher/course/end/vote/${courseId}"),
         // student
         searchCourse:match(HTTPS_ADDRESS+"/student/search/${keyWord}"),
         searchAllCourse:match(HTTPS_ADDRESS+"/student/course/all"),

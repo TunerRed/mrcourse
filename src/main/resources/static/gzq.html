@@ -23,8 +23,10 @@
                     },
                 })
             });
+            url1 = 'wss://guozhuoqiang.top:8443/websocket?room=2';
+            url2 = 'ws://localhost:8080/websocket?room=2';
             $("#websocket").click(function () {
-                ws = new WebSocket('ws://localhost:8080/websocket?room=2');
+                ws = new WebSocket(url2);
                 ws.onopen = function (event) {
                 };
                 ws.onmessage= function (event) {
@@ -41,7 +43,5 @@
 <button id="websocket">websocket</button><br/>
 <button id="close">close</button><br/>
 <body>
-
-
 </body>
 </html>

@@ -11,7 +11,7 @@ define(function (require) {
             this.containerDom.innerHTML = txt;
         },
         clear:function () {
-            while (this.containerDom.firstChild){
+            while (!this.containerDom.firstChild.classList.contains("drag-box__bottom-bar")){
                 this.containerDom.removeChild(this.containerDom.firstChild);
             }
             while (this.sceneDom.firstChild){
@@ -20,7 +20,7 @@ define(function (require) {
         },
         add:function (_) {
             for (var i in arguments){
-                this.containerDom.appendChild(arguments[i])
+                this.containerDom.insertBefore(arguments[i],this.containerDom.lastChild)
             }
         },
         getContainerDom:function () {
@@ -30,6 +30,8 @@ define(function (require) {
 
     function Switcher(dom) {
         this.dom = dom;
+        this.onDom = dom.querySelector(".switcher__on");
+        this.offDom = dom.querySelector(".switcher__off");
     }
     Switcher.prototype = {
         toggle:function () {
