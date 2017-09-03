@@ -171,7 +171,7 @@ require(['userHandler','jquery'],function (userHandlerModel,jquery)
                 }
             })
         }
-    });
+    })
 
 
 
