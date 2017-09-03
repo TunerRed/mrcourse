@@ -25,3 +25,6 @@ nbdist/
 target/*
 .DS_Store
 .history/
+.vscode/
+/.vscode/
+/.vscode/ftp-sync.json

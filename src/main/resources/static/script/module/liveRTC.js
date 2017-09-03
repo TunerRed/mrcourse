@@ -93,19 +93,21 @@
         rtcRoom.prototype.openUserMedia = function (videoElement, config) {
 
             // 默认配置，以后可能添加修改的接口
-            config = config || {
-                    vide: true,
-                    audio: true
-                };
-
+            config = config || {video: true, audio: true};
             navigator.getUserMedia(config,
                 function (stream) {
                     if (mediaStream !== null) {
                         mediaStream.stop();
                     }
                     mediaStream = stream;
-                    videoElement.src = window.URL.createObjectURL(mediaStream);
+                    videoElement.src = window.URL.createObjectURL(stream);
                     videoElement.autoplay = "autoplay";
+
+
+                    videoElement.src = window.URL.createObjectURL(stream);
+                    videoElement.play()
+
+
                 },
                 function (error) {
                     console.log(error)

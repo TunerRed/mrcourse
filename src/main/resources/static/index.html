@@ -58,21 +58,21 @@
         </li>
         <li>
             <div class="nav__title">课堂状态</div>
-            <div class="nav__content switcher on">
+            <div class="nav__content switcher on" id="course-state">
                 <a href="#" class="switcher__on">开启</a>
                 <a href="#" class="switcher__off">关闭</a>
             </div>
         </li>
         <li>
             <div class="nav__title">视频直播</div>
-            <div class="nav__content switcher off">
+            <div class="nav__content switcher off" id="live-state">
                 <a href="#" class="switcher__on">开启</a>
                 <a href="#" class="switcher__off">关闭</a>
             </div>
         </li>
         <li>
             <div class="nav__title">实时讨论</div>
-            <div class="nav__content switcher">
+            <div class="nav__content switcher" id="chat-state">
                 <a href="#" class="switcher__on">开启</a>
                 <a href="#" class="switcher__off">关闭</a>
             </div>
@@ -80,7 +80,7 @@
     </ul>
 </nav>
 <section class="main" id="main">
-    <div class="page-1" style="display: none">
+    <div class="page-1">
         <div class="row1">
             <div class="tab-switcher left">
                 <ul class="tab-switcher__title">
@@ -135,7 +135,7 @@
         <div class="row2">
             <div class="chat-area">
                 <div class="arrow-left"></div>
-                <div class="message-block">
+                <div class="message-block" id="message-block">
                     <div class="person-message">
                         <div class="person-message__info">
                             <img src="image/portrait.png" class="portrait">
@@ -168,7 +168,7 @@
             </div>
         </div>
     </div>
-    <div style="" id="perinfo_out">
+    <div style="display: none" id="perinfo_out">
         <div id="perinfo_middle">
             <div id="perinfo_in_up">
                 <div id="perinfo_little_name" class="perInfo_little_div">
@@ -216,6 +216,10 @@
 <section class="bottom-bar" id="bottom-bar">
     <div class="bottom-bar__left active">学生管理 视频直播 课程介绍 实时讨论</div>
     <div class="bottom-bar__right">课程问题 课程公告 课程资料</div>
+    <div class="send-message" id="send-message">
+        <img src="image/icon_moutain.png">
+        <a href="javascript:void(0)">发言</a>
+    </div>
 </section>
 <script>
 
@@ -248,5 +252,6 @@
     }
     
 </script>
+<script src="script/require.js" data-main="script/index-main"></script>
 </body>
 </html>

@@ -24,5 +24,5 @@ public interface UserDao {
 
     void giveAuthority(@Param("username") String username,@Param("role") String role);
 
-    void updateUserName(User u);
+    void updateUserInfo(User u);
 }

@@ -96,10 +96,8 @@ public class CommonController {
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public Result modifyName(User user) {
-        if(StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getName()))
+        if(StringUtils.isEmpty(user.getPassword()) || !StringUtils.isEmpty(user.getName()))
             return ResultCache.getFailureDetail("昵称 或 密码 为空");
-        return userService.modifyName(user);
+        return userService.modifyInfo(user);
     }
-
-
 }

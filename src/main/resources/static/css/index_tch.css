@@ -44,3 +44,8 @@ ul.tab-switcher__title>li {
 .bottom-bar__left:hover+.bottom-bar__right:before{
     border-right: 1em solid rgb(243,112,66);
 }
+
+
+#send-message{
+    display: none;
+}

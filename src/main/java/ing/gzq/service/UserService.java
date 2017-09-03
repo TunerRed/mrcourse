@@ -65,14 +65,16 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public Result modifyName(User user) {
+    public Result modifyInfo(User user) {
         User u = getUserInSecurityContext();
-        if(!checkPassword(user.getPassword(),u.getPassword())){
-            return ResultCache.getFailureDetail("密码输入错误");
+        if(user.getName()!=null){
+            u.setName(user.getName());
         }
-        u.setName(user.getName());
+        if(user.getPassword()!= null){
+            u.setPassword(bcryptEncoder.encode(user.getPassword()));
+        }
         try{
-            userDao.updateUserName(u);
+            userDao.updateUserInfo(u);
             return ResultCache.OK;
         }catch (Exception ex){
             ex.printStackTrace();

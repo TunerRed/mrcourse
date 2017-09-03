@@ -1,18 +1,30 @@
 package ing.gzq.config;
 
 import ing.gzq.websocket.WebSocket;
-import ing.gzq.websocket.WebSocketInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+import org.springframework.web.socket.server.standard.ServerEndpointRegistration;
 
 @Configuration
-public class WebSocketConfig implements WebSocketConfigurer {
+public class WebSocketConfig {
 
-
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
-        webSocketHandlerRegistry.addHandler(new WebSocket(), "/websocket").addInterceptors(new WebSocketInterceptor());
+//    @Autowired
+//    WebSocketHandler webSocketHandler;
+//
+//    @Override
+//    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+//        registry.addHandler(webSocketHandler,"/websocket");
+//    }
+    @Bean
+    public ServerEndpointExporter serverEndpointExporter() {
+        return new ServerEndpointExporter();
     }
+
+    @Bean
+    public ServerEndpointRegistration echoEndpoint() {
+        return new ServerEndpointRegistration("/echo", WebSocket.class);
+    }
+
 
 }

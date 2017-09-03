@@ -2,96 +2,127 @@ package ing.gzq.websocket;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import ing.gzq.model.Message;
 import ing.gzq.model.Room;
-import org.springframework.web.socket.*;
+import ing.gzq.model.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
+import javax.websocket.*;
+import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class WebSocket implements WebSocketHandler {
+import static ing.gzq.websocket.WebsocketContainer.*;
 
-    static Map<String, Room> roomMap = new ConcurrentHashMap<>();
+
+@Component
+@ServerEndpoint(value = "/websocket")
+public class WebSocket{
 
     String username;
     String type;
     String roomId;
     Room room;
+    Session session;
 
-    @Override
-    public void afterConnectionEstablished(WebSocketSession webSocketSession) throws Exception {
-        Map<String, Object> attributes = webSocketSession.getAttributes();
-        username = (String) attributes.get("username");
-        type = (String) attributes.get("type");
-        roomId = (String) attributes.get("room");
+    @OnOpen
+    public void handleAfterOpen(Session session,EndpointConfig config) throws Exception {
+        this.session = session;
+        Authentication anth = (Authentication) session.getUserPrincipal();
+        if(anth == null) {
+            sendMessage(getErrorMessage("not login"));
+            session.close();
+        }
+        User user = (User) anth.getPrincipal();
+        System.out.println("user = " + user);
+        username = user.getUsername();
+
+        type = user.getType();
+        roomId = session.getRequestParameterMap().get("room").get(0);
+        if(roomId == null){
+            sendMessage(getErrorMessage("no roomId"));
+            session.close();
+        }
         if ("student".equals(type)) {
-            if (roomMap.containsKey(roomId)) {
-                room = roomMap.get(roomId);
-                room.addStudent(username, webSocketSession);
+            if (containsRoom(roomId)) {
+                room = getRoomById(roomId);
+                room.addStudent(username, this);
             } else {
-                room = new Room(roomId, null, null);
-                roomMap.put(roomId, room);
-                room.addStudent(username,webSocketSession);
+                createNewRoomByStudent(roomId,username,this);
             }
         } else if ("teacher".equals(type)) {
-            if (roomMap.containsKey(roomId)) {
-                room = roomMap.get(roomId);
+            if (containsRoom(roomId)) {
+                room = getRoomById(roomId);
                 room.setTeacherId(username);
-                room.setTeacherSession(webSocketSession);
+                room.setTeacherWebSocket(this);
                 Message<String> message = new Message<>();
                 message.setType("inform-open");
                 room.sendToStudents(JSON.toJSONString(message));
             } else {
-                room = new Room(roomId, username, webSocketSession);
-                roomMap.put(roomId, room);
+                createNewRoomByTeacher(roomId,username,this);
             }
         }
         System.out.println(username + " connect ");
     }
 
-    private void handleTextMessage(WebSocketSession webSocketSession, TextMessage webSocketMessage) throws IOException {
-        String jsonStr = webSocketMessage.getPayload();
-        JSONObject jb = JSON.parseObject(jsonStr);
+    @OnMessage
+    public void handleTextMessage(String message,Session session) throws IOException {
+        JSONObject jb;
+        try {
+             jb = JSON.parseObject(message);
+             sendMessage(getErrorMessage("无法解析字符串为jsonObject"));
+        }catch (JSONException ex){
+            return;
+        }
         if ("new-ice-candidate".equals(jb.getString("type"))) {
-            if (room.getTeacherId().equals(jb.getString("target"))) {
-                room.sendToTeacher(jsonStr);
-            } else {
-                room.sendToStudent(jb.getString("target"), jsonStr);
-            }
-        } else if ("video-offer".equals(jb.getString("type")) && "student".equals(type)) {
-            room.sendToTeacher(jsonStr);
-        } else if ("video-answer".equals(jb.getString("type")) && "teacher".equals(type)) {
-            room.sendToStudent(jb.getString("target"), jsonStr);
+            room.sendToTarget(jb.getString("target"),message);
+        } else if ("video-offer".equals(jb.getString("type")) && isStudent()) {
+            room.sendToTeacher(message);
+        } else if ("video-answer".equals(jb.getString("type")) && isTeacher()) {
+            room.sendToStudent(jb.getString("target"), message);
         } else if ("send-message".equals(jb.getString("type"))) {
-            room.sendToAll(jsonStr);
-        } else if ("send-vote".equals(jb.getString("type")) && "student".equals(type)) {
-            room.sendToAll(jsonStr);
-        } else if ("open-chat".equals(jb.getString("type")) && "teacher".equals(type)) {
-            room.sendToAll(jsonStr);
-        } else if ("close-chat".equals(jb.getString("type")) && "teacher".equals(type)) {
-            room.sendToAll(jsonStr);
-        } else if ("open-vote".equals(jb.getString("type")) && "teacher".equals(type)) {
-            room.sendToAll(jsonStr);
-        } else if ("close-vote".equals(jb.getString("type")) && "teacher".equals(type)) {
-            room.sendToAll(jsonStr);
+            room.sendToAll(message);
+        } else if ("send-vote".equals(jb.getString("type")) && isStudent()) {
+            room.sendToAll(message);
+        } else if ("open-chat".equals(jb.getString("type")) && isTeacher()) {
+            room.sendToAll(message);
+        } else if ("close-chat".equals(jb.getString("type")) && isTeacher()) {
+            room.sendToAll(message);
+        } else if ("open-vote".equals(jb.getString("type")) && isTeacher()) {
+            room.sendToAll(message);
+        } else if ("close-vote".equals(jb.getString("type")) && isTeacher()) {
+            room.sendToAll(message);
+        }else if("new-check-in".equals(jb.getString("type")) && isStudent()){
+            room.sendToTeacher(message);
+        }else if ("new-check-out".equals(jb.getString("type")) && isStudent()) {
+            room.sendToTeacher(message);
         }
     }
 
-    @Override
-    public void handleTransportError(WebSocketSession webSocketSession, Throwable throwable) throws Exception {
+    @OnError
+    public void handleTransportError(Session session, Throwable throwable) throws Exception {
+        sendMessage(getErrorMessage("on error"));
         throwable.printStackTrace();
         handleLogout();
-        webSocketSession.close();
         System.err.println(username + " disconnect  error");
+    }
+
+
+
+    @OnClose
+    public void afterConnectionClosed() throws Exception {
+        handleLogout();
+        session.close();
+        System.out.println(username + " disconnect ");
     }
 
     private void handleLogout() throws IOException {
         if ("teacher".equals(type)) {
             room.setTeacherId(null);
-            room.setTeacherSession(null);
+            room.setTeacherWebSocket(null);
             Message<String> message = new Message();
             message.setType("inform-close");
             room.sendToStudents(JSON.toJSONString(message));
@@ -100,32 +131,23 @@ public class WebSocket implements WebSocketHandler {
         }
     }
 
-
-    @Override
-    public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
-        handleLogout();
-        webSocketSession.close();
-        System.out.println(username + " disconnect ");
-    }
-
-    @Override
-    public boolean supportsPartialMessages() {
-        return false;
-    }
-
-    @Override
-    public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) throws Exception {
-        if (webSocketMessage instanceof TextMessage) {
-            handleTextMessage(webSocketSession, (TextMessage) webSocketMessage);
-        } else {
-            System.err.println(" not text message ");
-        }
-    }
-
-    private TextMessage getErrorMessage(String cause) {
+    private String getErrorMessage(String cause) {
         Message<String> errorMessage = new Message<>();
         errorMessage.setType("error");
         errorMessage.setData(cause);
-        return new TextMessage(JSON.toJSONString(errorMessage));
+        return JSON.toJSONString(errorMessage);
     }
+
+    public void sendMessage(String message) throws IOException {
+        session.getBasicRemote().sendText(message);
+    }
+
+    private boolean isStudent(){
+        return "student".equals(type);
+    }
+
+    private boolean isTeacher(){
+        return "teacher".equals(type);
+    }
+
 }

@@ -37,7 +37,7 @@
         <img class="icon" style="width: 3rem" src="image/question-icon.png" alt="点击添加问题" title="点击添加问题">
     </div>
     <div>资料库
-        <img class="icon" src="image/material-icon.png" alt="点击添加资料" title="点击添加资料" >
+        <img id="icon-3" class="icon" src="image/material-icon.png" alt="点击添加资料" title="点击添加资料" >
     </div>
 
 </div>
@@ -162,6 +162,24 @@
     for(var i = 0 ;i<list_column.length;i++){
         list_column[i].style.height = h-bar_h-header_h-b_bar_h+'px';
     }
+    function closeMode() {
+        var mode = document.getElementsByClassName('mode');
+        for(var j = 0;j<mode.length;j++){
+            mode[j].remove();
+        }
+    }
+    function F_Open_dialog() {
+        document.getElementById("btn_file").click();
+    }
+    function showFileDetial() {
+        console.log(document.getElementById("btn_file").files[0].name);
+        document.getElementById('fileShow').style.display = 'block';
+        document.getElementById('file-name').style.display = 'block';
+        document.getElementById('fileUnshow').style.display = 'none';
+        document.getElementById('file-name').innerText = document.getElementById("btn_file").files[0].name;
+    }
 
 </script>
+<script src="script/require.js" defer async="true" ></script>
+<script src="script/require.js" data-main="script/question-main.js"></script>
 </html>

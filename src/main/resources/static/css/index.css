@@ -110,6 +110,9 @@ nav>ul>li{
 .nav__content{
     padding-left: 1em;
 }
+.switcher.disabled .switcher__on,.switcher.disabled .switcher__off{
+    pointer-events: none;
+}
 .nav__content.switcher.on .switcher__on{
     color: #5ccbbb;
 }
@@ -238,6 +241,9 @@ nav>ul>li{
     opacity: 1;
     display: block;
     pointer-events: initial;
+}
+.drag-box.disabled{
+    pointer-events: none;
 }
 
 .drag-box__item.on{

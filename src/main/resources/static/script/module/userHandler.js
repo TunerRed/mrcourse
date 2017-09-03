@@ -418,7 +418,7 @@ define(function (require) {
 
                     if (response.status === 200) {
                         console.log("success startCourse");
-                        success(response.data);
+                        success();
                     } else {
                         console.log("failed startCourse");
                         failed(response.message);
@@ -442,6 +442,132 @@ define(function (require) {
                         success();
                     } else {
                         console.log("failed endleson");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        teacherHandler.prototype.startLive = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
+
+            var request = new Ajax("POST",API.startLive(courseId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success startLive");
+                        success();
+                    } else {
+                        console.log("failed startLive");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        teacherHandler.prototype.endLive = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
+
+            var request = new Ajax("POST",API.endLive(courseId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success endLive");
+                        success();
+                    } else {
+                        console.log("failed endLive");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        teacherHandler.prototype.startChat = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
+
+            var request = new Ajax("POST",API.startChat(courseId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success startChat");
+                        success();
+                    } else {
+                        console.log("failed startChat");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        teacherHandler.prototype.endChat = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
+
+            var request = new Ajax("POST",API.endChat(courseId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success endChat");
+                        success();
+                    } else {
+                        console.log("failed endChat");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        teacherHandler.prototype.startVote = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
+
+            var request = new Ajax("POST",API.startVote(courseId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success startVote");
+                        success();
+                    } else {
+                        console.log("failed startVote");
+                        failed(response.message);
+                    }
+
+                });
+
+        };
+
+        teacherHandler.prototype.endVote = function (courseId,success,failed) {
+            success = typeof success === "function"?success:new Function();
+            failed = typeof failed === "function"?failed:new Function();
+
+            var request = new Ajax("POST",API.endVote(courseId));
+            request.send()
+                .then(function (response) {
+                    response = JSON.parse(response);
+
+                    if (response.status === 200) {
+                        console.log("success endVote");
+                        success();
+                    } else {
+                        console.log("failed endVote");
                         failed(response.message);
                     }
 
@@ -591,6 +717,7 @@ define(function (require) {
         return res;
     }
     return {
+        UserHandler:UserHandler,
         TeacherHandler: TeacherHandler,
         StudentHandler: StudentHandler,
         UserHandler:UserHandler
