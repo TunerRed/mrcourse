@@ -1,3 +1,6 @@
+/**
+ * 讨论
+ */
 define(function (require) {
 
 
@@ -30,6 +33,7 @@ define(function (require) {
 
 
     var webSocket = require("webSocketChannel");
+    var isOpen = false;
 
     function ChatHandler() {
         var that = this;
@@ -64,11 +68,26 @@ define(function (require) {
     }
 
 
+    function init() {
+
+
+        // 获取初始chat状态
+        var $ = require("jquery");
+        require("jquery.cookie");
+        var userHandler = new require("userHandler").UserHandler();
+
+        if ($.cookie("courseId")){
+            userHandler.getCourse($.cookie("courseId"),function (data) {
+                isOpen = data.chat;
+            });
+        }
+
+
+    }
 
 
 
-
-
+    init();
     return new ChatHandler();
 
 
