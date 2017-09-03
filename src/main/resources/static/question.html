@@ -153,12 +153,12 @@
 
 
         </div>
-        <div class="right-side list">
+        <div class="right-side list" id="right-side">
             <div class="card">
                 <div class="card-head">js权威指南 <span class="gray-word">13.3M</span></div>
                 <div class="card-btn">
-                    <img src="image/cancel.png" alt="">
-                    <img src="image/upload.png" alt="">
+                    <!--<img src="image/cancel.png" alt="">-->
+                    <img src="image/download.png" alt="">
                 </div>
             </div>
             <div></div>
@@ -219,6 +219,17 @@
             mode[j].remove();
         }
     }
+    function F_Open_dialog() {
+        document.getElementById("btn_file").click();
+    }
+    function showFileDetial() {
+        console.log(document.getElementById("btn_file").files[0].name);
+        document.getElementById('fileShow').style.display = 'block';
+        document.getElementById('file-name').style.display = 'block';
+        document.getElementById('fileUnshow').style.display = 'none';
+        document.getElementById('file-name').innerText = document.getElementById("btn_file").files[0].name;
+    }
+
 
 </script>
 <script src="script/require.js" defer async="true" ></script>

@@ -8,14 +8,20 @@ require.config({
 require(['courseViewController'],function (viewControl) {
     var courseId = 1;
     viewControl.showNotice(courseId);
+
+
     //event binding
-    document.getElementById('icon-1').addEventListener('click',function () {
-        showMode('bulletin');
-    })
-    document.getElementById('icon-2').addEventListener('click',function () {
-        showMode('question');
-    })
+    if(document.getElementById('icon-1')){
+        document.getElementById('icon-1').addEventListener('click',function () {
+            showMode('bulletin');
+        })
+        document.getElementById('icon-2').addEventListener('click',function () {
+            showMode('question');
+        })
+    }
+
     document.getElementById('icon-3').addEventListener('click',function () {
+        console.log(11)
         showMode('material');
     })
 
@@ -56,9 +62,10 @@ require(['courseViewController'],function (viewControl) {
         }else{
             div.innerHTML = `<img class="mode-icon" src="image/material-icon.png" alt="">
         <div class="mode-head">发布资料</div>
-        <div class="mode-name">js权威指南 <span class="gray-word">13.3M</span></div>
-        <div class="mode-state"><img src="image/material-a.png" alt="">上传成功！</div>
-        <div class="mode-state" style="color: #7c7c7c"><img src="image/material.png" alt="">点击上传</div>
+        <div class="mode-name" id="file-name" style="display: none"> <span class="gray-word"></span></div>
+        <input type="file" id="btn_file" style="display:none" onchange="showFileDetial()">
+        <div class="mode-state" id="fileShow" style="display: none"><img src="image/material-a.png" alt="">加载成功！</div>
+        <div class="mode-state" id="fileUnshow" onclick="F_Open_dialog()" style="color: #7c7c7c"><img src="image/material.png"  alt="">点击上传</div>
         <div class="mode-btn">
             <img src="image/cancel.png" alt="" onclick="closeMode()">
             <img src="image/upload.png" alt="" id="post-btn3">
@@ -66,8 +73,8 @@ require(['courseViewController'],function (viewControl) {
             body.appendChild(div);
 
             document.getElementById('post-btn3').addEventListener('click',function () {
-                viewControl.postFile(courseId);
-                closeMode();
+                viewControl.uploadFile(courseId);
+                // closeMode();
             })
         }
 
