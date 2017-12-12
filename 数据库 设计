@@ -5,6 +5,7 @@ password
 introduce
 type(student|teacher)
 
+
 user_role
 uid
 role(ROLE_STUDENT|ROLE_TEACHER)
